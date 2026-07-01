@@ -3,15 +3,15 @@ package com.example.wallpapersapp.model
 object CategoryRepository {
 
     val categories = listOf(
-        Category("All"),
-        Category("Animals"),
-        Category("Nature"),
-        Category("Space"),
-        Category("Cars"),
-        Category("Gaming"),
-        Category("AMOLED"),
-        Category("Abstract"),
-        Category("Love")
+        Category(name = "✨ All"),
+        Category(name = "🐱 Animals"),
+        Category(name = "🌿 Nature"),
+        Category(name = "🌌 Space"),
+        Category(name = "🚗 Cars"),
+        Category(name = "🎮 Gaming"),
+        Category(name = "🖤 AMOLED"),
+        Category(name = "🎨 Abstract"),
+        Category(name = "❤️ Love")
     )
 
 }

@@ -143,9 +143,9 @@ fun HomeScreen(
     onWallpaperClick: (Wallpaper) -> Unit
 ) {
     GalleryContent(
-        title = "Wallpaper Pro",
-        subtitle = "$allWallpapersCount wallpapers available",
-        favoriteInfo = "❤️ Favorites: ${favoriteNames.size}",
+        title = "✦ Wallora",
+        subtitle = "$allWallpapersCount Premium Wallpapers",
+        favoriteInfo = "❤ ${favoriteNames.size} Favorite",
         wallpapers = wallpapers,
         favoriteNames = favoriteNames,
         searchText = searchText,
@@ -324,8 +324,9 @@ fun GalleryContent(
         } else {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
-                verticalArrangement = Arrangement.spacedBy(14.dp),
-                horizontalArrangement = Arrangement.spacedBy(14.dp)
+                verticalArrangement = Arrangement.spacedBy(18.dp),
+                horizontalArrangement = Arrangement.spacedBy(18.dp),
+                modifier = Modifier.padding(top = 18.dp),
             ) {
                 items(wallpapers) { wallpaper ->
                     WallpaperCard(
@@ -370,26 +371,41 @@ fun WallpaperCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(230.dp)
+            .height(250.dp)
             .clickable { onClick() },
-        shape = RoundedCornerShape(22.dp)
+        shape = RoundedCornerShape(26.dp)
     ) {
         Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.BottomCenter
+            modifier = Modifier.fillMaxSize()
         ) {
             Image(
-                painter = painterResource(wallpaper.image),
+                painter = painterResource(id = wallpaper.image),
                 contentDescription = wallpaper.name,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(22.dp)),
+                modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
 
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(10.dp)
+                    .background(
+                        Color.Black.copy(alpha = 0.55f),
+                        RoundedCornerShape(50.dp)
+                    )
+                    .padding(horizontal = 10.dp, vertical = 5.dp)
+            ) {
+                Text(
+                    text = "4K",
+                    color = Color.White,
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
             if (isFavorite) {
                 Text(
-                    text = "❤️",
+                    text = "❤",
                     fontSize = 28.sp,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
@@ -400,16 +416,17 @@ fun WallpaperCard(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.Black.copy(alpha = 0.55f))
+                    .align(Alignment.BottomCenter)
+                    .background(Color.Black.copy(alpha = 0.65f))
                     .padding(12.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = wallpaper.name,
                     color = Color.White,
-                    fontSize = 17.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
-                )
+                   )
             }
         }
     }
