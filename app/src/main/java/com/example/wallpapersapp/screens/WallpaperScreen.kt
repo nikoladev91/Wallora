@@ -34,6 +34,7 @@ import com.example.wallpapersapp.model.CategoryRepository
 import com.example.wallpapersapp.model.Wallpaper
 import com.example.wallpapersapp.model.WallpaperRepository
 import com.example.wallpapersapp.storage.FavoritesStorage
+import androidx.compose.ui.graphics.Brush
 
 @Composable
 fun WallpaperScreen() {
@@ -144,8 +145,8 @@ fun HomeScreen(
 ) {
     GalleryContent(
         title = "✦ Wallora",
-        subtitle = "$allWallpapersCount Premium Wallpapers",
-        favoriteInfo = "❤ ${favoriteNames.size} Favorite",
+        subtitle = "AI • 4K • AMOLED",
+        favoriteInfo = "🔥 New wallpapers every week",
         wallpapers = wallpapers,
         favoriteNames = favoriteNames,
         searchText = searchText,
@@ -304,6 +305,62 @@ fun GalleryContent(
 
             TrendingChip("⭐ Editor's Choice")
         }
+        Spacer(modifier = Modifier.height(18.dp))
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(220.dp),
+            shape = RoundedCornerShape(26.dp)
+        ) {
+            Box {
+
+                Image(
+                    painter = painterResource(id = wallpapers.first().image),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(
+                            Brush.verticalGradient(
+                                listOf(
+                                    Color.Transparent,
+                                    Color.Black.copy(alpha = 0.85f)
+                                )
+                            )
+                        )
+                )
+
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(18.dp)
+                ) {
+
+                    Text(
+                        "⭐ Wallpaper of the Day",
+                        color = Color(0xFFFFD54F),
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+
+                    Spacer(modifier = Modifier.height(6.dp))
+
+                    Text(
+                        wallpapers.first().name,
+                        color = Color.White,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
         if (showSearch) {
             TextField(
                 value = searchText,
@@ -346,6 +403,15 @@ fun GalleryContent(
                 )
             }
         } else {
+
+            Text(
+                text = "🔥 Today's Trending",
+                color = Color.White,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(top = 18.dp, bottom = 12.dp)
+            )
+
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 verticalArrangement = Arrangement.spacedBy(18.dp),
@@ -419,7 +485,7 @@ fun WallpaperCard(
                     .padding(horizontal = 8.dp, vertical = 4.dp)
             ) {
                 Text(
-                    text = "4K",
+                    text = "✨ 4K",
                     color = Color.White,
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold
@@ -436,7 +502,7 @@ fun WallpaperCard(
                     .padding(horizontal = 10.dp, vertical = 5.dp)
             ) {
                 Text(
-                    text = "4K",
+                    text = "AI",
                     color = Color.White,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold
