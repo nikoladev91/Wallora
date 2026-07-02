@@ -594,7 +594,7 @@ fun FullScreenWallpaper(
             )
 
             Text(
-                text = "⬇ Pobierz tapetę",
+                text = "⬇ Download Wallpaper",
                 color = Color.White,
                 fontSize = 20.sp,
                 modifier = Modifier
@@ -603,7 +603,7 @@ fun FullScreenWallpaper(
             )
 
             Text(
-                text = "📱 Ustaw jako tapetę",
+                text = "Set as Wallpaper",
                 color = Color.White,
                 fontSize = 20.sp,
                 modifier = Modifier.padding(8.dp)
@@ -612,7 +612,7 @@ fun FullScreenWallpaper(
             Spacer(modifier = Modifier.height(14.dp))
 
             Text(
-                text = "⬅ Powrót",
+                text = "← Back",
                 color = Color(0xFF64B5F6),
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
