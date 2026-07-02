@@ -279,7 +279,31 @@ fun GalleryContent(
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 4.dp, bottom = 14.dp)
         )
+        Spacer(modifier = Modifier.height(18.dp))
 
+        Text(
+            text = "🔥 Trending",
+            color = Color.White,
+            fontSize = 22.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .horizontalScroll(rememberScrollState())
+        ) {
+
+            TrendingChip("🔥 Popular")
+            Spacer(modifier = Modifier.width(8.dp))
+
+            TrendingChip("🆕 New")
+            Spacer(modifier = Modifier.width(8.dp))
+
+            TrendingChip("⭐ Editor's Choice")
+        }
         if (showSearch) {
             TextField(
                 value = searchText,
@@ -384,7 +408,23 @@ fun WallpaperCard(
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
-
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(10.dp)
+                    .background(
+                        Color(0xAA000000),
+                        RoundedCornerShape(12.dp)
+                    )
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
+            ) {
+                Text(
+                    text = "4K",
+                    color = Color.White,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
             Box(
                 modifier = Modifier
                     .align(Alignment.TopStart)
@@ -404,13 +444,22 @@ fun WallpaperCard(
             }
 
             if (isFavorite) {
-                Text(
-                    text = "❤",
-                    fontSize = 28.sp,
+                Box(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(10.dp)
-                )
+                        .background(
+                            Color.Black.copy(alpha = 0.55f),
+                            RoundedCornerShape(50.dp)
+                        )
+                        .padding(8.dp)
+                ) {
+                    Text(
+                        text = "❤",
+                        color = Color.Red,
+                        fontSize = 16.sp
+                    )
+                }
             }
 
             Box(
@@ -593,5 +642,23 @@ fun saveWallpaperToGallery(context: Context, wallpaper: Wallpaper): Boolean {
     } catch (exception: Exception) {
         exception.printStackTrace()
         false
+    }
+}
+@Composable
+fun TrendingChip(text: String) {
+    Box(
+        modifier = Modifier
+            .background(
+                Color(0xFF1E1E1E),
+                RoundedCornerShape(50.dp)
+            )
+            .padding(horizontal = 16.dp, vertical = 10.dp)
+    ) {
+        Text(
+            text = text,
+            color = Color.White,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
