@@ -6,12 +6,12 @@ object WallpaperRepository {
 
     val wallpapers = listOf(
         Wallpaper(
-            name = "Cute Cat",
-            image = R.drawable.wallpaper_1,
+            name = "Neon Heart Cat",
+            image = R.drawable.wallpaper_neon_cat_1,
             category = "Animals",
             rating = 4.9,
-            downloads = "286K",
-            badge = "AI",
+            downloads = "0",
+            badge = "AMOLED",
             isTopPick = true
         ),
         Wallpaper(
