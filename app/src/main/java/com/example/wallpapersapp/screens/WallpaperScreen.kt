@@ -4,7 +4,9 @@ import android.content.ContentValues
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.provider.MediaStore
+import android.view.MotionEvent
 import android.widget.Toast
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,6 +25,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -35,6 +38,7 @@ import com.example.wallpapersapp.model.Wallpaper
 import com.example.wallpapersapp.model.WallpaperRepository
 import com.example.wallpapersapp.storage.FavoritesStorage
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.input.pointer.pointerInteropFilter
 
 @Composable
 fun WallpaperScreen() {
@@ -458,12 +462,28 @@ fun WallpaperCard(
     isFavorite: Boolean,
     onClick: () -> Unit
 ) {
+    var pressed by remember { mutableStateOf(false) }
+
+    val scale by animateFloatAsState(
+        targetValue = if (pressed) 0.97f else 1f,
+        label = "cardScale"
+    )
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(250.dp)
-            .clickable { onClick() },
-        shape = RoundedCornerShape(26.dp)
+            .scale(scale)
+            .pointerInteropFilter { event ->
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> pressed = true
+                    MotionEvent.ACTION_UP,
+                    MotionEvent.ACTION_CANCEL -> {
+                        pressed = false
+                        onClick()
+                    }
+                }
+                true
+            }
     ) {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -502,7 +522,7 @@ fun WallpaperCard(
                     .padding(horizontal = 10.dp, vertical = 5.dp)
             ) {
                 Text(
-                    text = "AI",
+                    text = if (wallpaper.isTopPick) "👑 TOP PICK" else wallpaper.badge,
                     color = Color.White,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold
@@ -539,9 +559,17 @@ fun WallpaperCard(
                 Text(
                     text = wallpaper.name,
                     color = Color.White,
-                    fontSize = 16.sp,
+                    fontSize = 17.sp,
                     fontWeight = FontWeight.Bold
                    )
+                Spacer(modifier = Modifier.height(4.dp))
+
+                Text(
+                    text = "★ ${wallpaper.rating} • ${wallpaper.downloads} downloads",
+                    color = Color(0xFFD0D0D0),
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold
+                )
             }
         }
     }
