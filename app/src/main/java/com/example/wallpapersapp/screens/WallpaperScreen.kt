@@ -39,6 +39,11 @@ import com.example.wallpapersapp.model.WallpaperRepository
 import com.example.wallpapersapp.storage.FavoritesStorage
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.input.pointer.pointerInteropFilter
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 
 @Composable
 fun WallpaperScreen() {
@@ -360,6 +365,33 @@ fun GalleryContent(
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold
                     )
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Text(
+                        text = "⭐ ${wallpapers.first().rating} • ${wallpapers.first().downloads} downloads",
+                        color = Color.White.copy(alpha = 0.9f),
+                        fontSize = 14.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(14.dp))
+
+                    Button(
+                        onClick = { onWallpaperClick(wallpapers.first()) },
+                        shape = RoundedCornerShape(50.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.White
+                        )
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowForward,
+                            contentDescription = null
+                        )
+
+                        Spacer(modifier = Modifier.width(6.dp))
+
+                        Text("Explore")
+                    }
+                    }
                 }
             }
         }
@@ -432,7 +464,6 @@ fun GalleryContent(
             }
         }
     }
-}
 
 @Composable
 fun CategoryButton(
