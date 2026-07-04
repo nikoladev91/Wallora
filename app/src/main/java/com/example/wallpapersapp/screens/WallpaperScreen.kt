@@ -301,32 +301,20 @@ fun GalleryContent(
 
         if (showSearch) {
             item {
-                TextField(
-                    value = searchText,
-                    onValueChange = onSearchChange,
-                    placeholder = {
-                        Text(text = "Search wallpapers...")
-                    },
-                    modifier = Modifier.fillMaxWidth()
+                SearchSection(
+                    searchText = searchText,
+                    onSearchChange = onSearchChange
                 )
             }
         }
 
         if (showCategories) {
             item {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .horizontalScroll(rememberScrollState())
-                ) {
-                    categories.forEach { category ->
-                        CategoryButton(
-                            name = category,
-                            selected = category == selectedCategory,
-                            onClick = { onCategoryClick(category) }
-                        )
-                    }
-                }
+                CategorySection(
+                    categories = categories,
+                    selectedCategory = selectedCategory,
+                    onCategoryClick = onCategoryClick
+                )
             }
         }
 
@@ -339,48 +327,12 @@ fun GalleryContent(
             )
         }
 
-        if (wallpapers.isEmpty()) {
-            item {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "No wallpapers found",
-                        color = Color.LightGray,
-                        fontSize = 20.sp
-                    )
-                }
-            }
-        } else {
-            item {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(18.dp)
-                ) {
-                    wallpapers.chunked(2).forEach { rowWallpapers ->
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(18.dp),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            rowWallpapers.forEach { wallpaper ->
-                                Box(modifier = Modifier.weight(1f)) {
-                                    WallpaperCard(
-                                        wallpaper = wallpaper,
-                                        isFavorite = favoriteNames.contains(wallpaper.name),
-                                        onClick = { onWallpaperClick(wallpaper) }
-                                    )
-                                }
-                            }
-
-                            if (rowWallpapers.size == 1) {
-                                Spacer(modifier = Modifier.weight(1f))
-                            }
-                        }
-                    }
-                }
-            }
+        item {
+            WallpaperGrid(
+                wallpapers = wallpapers,
+                favoriteNames = favoriteNames,
+                onWallpaperClick = onWallpaperClick
+            )
         }
     }
 }
