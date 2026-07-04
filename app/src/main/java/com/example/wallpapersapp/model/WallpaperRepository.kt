@@ -96,4 +96,45 @@ object WallpaperRepository {
             badge = "4K"
         ),
     )
+    fun getAllWallpapers(): List<Wallpaper> {
+        return wallpapers
+    }
+
+    fun getTopPicks(): List<Wallpaper> {
+        return wallpapers.filter { it.isTopPick }
+    }
+
+    fun getByCategory(category: String): List<Wallpaper> {
+        return if (category == "All") {
+            wallpapers
+        } else {
+            wallpapers.filter { it.category == category }
+        }
+    }
+
+    fun searchWallpapers(query: String): List<Wallpaper> {
+        return wallpapers.filter {
+            it.name.contains(query, ignoreCase = true)
+        }
+    }
+
+    fun getWallpaperOfTheDay(): Wallpaper {
+        return wallpapers.firstOrNull { it.isTopPick } ?: wallpapers.first()
+    }
+    fun getFilteredWallpapers(
+        searchQuery: String,
+        category: String
+    ): List<Wallpaper> {
+
+        return wallpapers.filter { wallpaper ->
+
+            val matchesSearch =
+                wallpaper.name.contains(searchQuery, ignoreCase = true)
+
+            val matchesCategory =
+                category == "All" || wallpaper.category == category
+
+            matchesSearch && matchesCategory
+        }
+    }
 }

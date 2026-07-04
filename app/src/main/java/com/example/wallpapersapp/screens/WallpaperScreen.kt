@@ -44,6 +44,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.foundation.lazy.LazyColumn
 
 @Composable
 fun WallpaperScreen() {
@@ -63,8 +64,13 @@ fun WallpaperScreen() {
     }
 
     val filteredWallpapers = wallpapers.filter { wallpaper ->
+        val cleanCategory = selectedCategory.substringAfter(" ").trim()
+
         val matchesSearch = wallpaper.name.contains(searchText, ignoreCase = true)
-        val matchesCategory = selectedCategory == "All" || wallpaper.category == selectedCategory
+
+        val matchesCategory =
+            cleanCategory == "All" || wallpaper.category == cleanCategory
+
         matchesSearch && matchesCategory
     }
 
@@ -262,208 +268,227 @@ fun GalleryContent(
     onCategoryClick: (String) -> Unit,
     onWallpaperClick: (Wallpaper) -> Unit
 ) {
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
-            .padding(16.dp)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text(
-            text = title,
-            color = Color.White,
-            fontSize = 34.sp,
-            fontWeight = FontWeight.Bold
-        )
+        item {
+            Text(
+                text = title,
+                color = Color.White,
+                fontSize = 34.sp,
+                fontWeight = FontWeight.Bold
+            )
 
-        Text(
-            text = subtitle,
-            color = Color.LightGray,
-            fontSize = 16.sp,
-            modifier = Modifier.padding(top = 4.dp)
-        )
+            Text(
+                text = subtitle,
+                color = Color.LightGray,
+                fontSize = 16.sp,
+                modifier = Modifier.padding(top = 4.dp)
+            )
 
-        Text(
-            text = favoriteInfo,
-            color = Color(0xFFFF6B81),
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(top = 4.dp, bottom = 14.dp)
-        )
-        Spacer(modifier = Modifier.height(18.dp))
-
-        Text(
-            text = "🔥 Trending",
-            color = Color.White,
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Bold
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .horizontalScroll(rememberScrollState())
-        ) {
-
-            TrendingChip("🔥 Popular")
-            Spacer(modifier = Modifier.width(8.dp))
-
-            TrendingChip("🆕 New")
-            Spacer(modifier = Modifier.width(8.dp))
-
-            TrendingChip("⭐ Editor's Choice")
-        }
-        Spacer(modifier = Modifier.height(18.dp))
-
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(220.dp),
-            shape = RoundedCornerShape(26.dp)
-        ) {
-            Box {
-
-                Image(
-                    painter = painterResource(id = wallpapers.first().image),
-                    contentDescription = null,
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
-                )
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(
-                            Brush.verticalGradient(
-                                listOf(
-                                    Color.Transparent,
-                                    Color.Black.copy(alpha = 0.85f)
-                                )
-                            )
-                        )
-                )
-
-                Column(
-                    modifier = Modifier
-                        .align(Alignment.BottomStart)
-                        .padding(18.dp)
-                ) {
-
-                    Text(
-                        "⭐ Wallpaper of the Day",
-                        color = Color(0xFFFFD54F),
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-
-                    Spacer(modifier = Modifier.height(6.dp))
-
-                    Text(
-                        wallpapers.first().name,
-                        color = Color.White,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    Text(
-                        text = "⭐ ${wallpapers.first().rating} • ${wallpapers.first().downloads} downloads",
-                        color = Color.White.copy(alpha = 0.9f),
-                        fontSize = 14.sp
-                    )
-
-                    Spacer(modifier = Modifier.height(14.dp))
-
-                    Button(
-                        onClick = { onWallpaperClick(wallpapers.first()) },
-                        shape = RoundedCornerShape(50.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.White
-                        )
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowForward,
-                            contentDescription = null
-                        )
-
-                        Spacer(modifier = Modifier.width(6.dp))
-
-                        Text("Explore")
-                    }
-                    }
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
-        if (showSearch) {
-            TextField(
-                value = searchText,
-                onValueChange = onSearchChange,
-                placeholder = {
-                    Text(text = "Search wallpapers...")
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 12.dp)
+            Text(
+                text = favoriteInfo,
+                color = Color(0xFFFF6B81),
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(top = 4.dp)
             )
         }
 
-        if (showCategories) {
+        item {
+            Text(
+                text = "🔥 Trending",
+                color = Color.White,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .horizontalScroll(rememberScrollState())
-                    .padding(bottom = 16.dp)
             ) {
-                categories.forEach { category ->
-                    CategoryButton(
-                        name = category,
-                        selected = category == selectedCategory,
-                        onClick = { onCategoryClick(category) }
-                    )
+                TrendingChip("🔥 Popular")
+                Spacer(modifier = Modifier.width(8.dp))
+                TrendingChip("🆕 New")
+                Spacer(modifier = Modifier.width(8.dp))
+                TrendingChip("⭐ Editor's Choice")
+            }
+        }
+
+        if (wallpapers.isNotEmpty()) {
+            item {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(220.dp),
+                    shape = RoundedCornerShape(26.dp)
+                ) {
+                    Box {
+                        Image(
+                            painter = painterResource(id = wallpapers.first().image),
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Crop
+                        )
+
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(
+                                    Brush.verticalGradient(
+                                        listOf(
+                                            Color.Transparent,
+                                            Color.Black.copy(alpha = 0.85f)
+                                        )
+                                    )
+                                )
+                        )
+
+                        Column(
+                            modifier = Modifier
+                                .align(Alignment.BottomStart)
+                                .padding(18.dp)
+                        ) {
+                            Text(
+                                "⭐ Wallpaper of the Day",
+                                color = Color(0xFFFFD54F),
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Spacer(modifier = Modifier.height(6.dp))
+
+                            Text(
+                                wallpapers.first().name,
+                                color = Color.White,
+                                fontSize = 24.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            Text(
+                                text = "⭐ ${wallpapers.first().rating} • ${wallpapers.first().downloads} downloads",
+                                color = Color.White.copy(alpha = 0.9f),
+                                fontSize = 14.sp
+                            )
+
+                            Spacer(modifier = Modifier.height(14.dp))
+
+                            Button(
+                                onClick = { onWallpaperClick(wallpapers.first()) },
+                                shape = RoundedCornerShape(50.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = Color.White
+                                )
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.ArrowForward,
+                                    contentDescription = null
+                                )
+
+                                Spacer(modifier = Modifier.width(6.dp))
+
+                                Text("Explore")
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        if (wallpapers.isEmpty()) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "No wallpapers found",
-                    color = Color.LightGray,
-                    fontSize = 20.sp
+        if (showSearch) {
+            item {
+                TextField(
+                    value = searchText,
+                    onValueChange = onSearchChange,
+                    placeholder = {
+                        Text(text = "Search wallpapers...")
+                    },
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
-        } else {
+        }
 
+        if (showCategories) {
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState())
+                ) {
+                    categories.forEach { category ->
+                        CategoryButton(
+                            name = category,
+                            selected = category == selectedCategory,
+                            onClick = { onCategoryClick(category) }
+                        )
+                    }
+                }
+            }
+        }
+
+        item {
             Text(
                 text = "🔥 Today's Trending",
                 color = Color.White,
                 fontSize = 22.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 18.dp, bottom = 12.dp)
+                fontWeight = FontWeight.Bold
             )
+        }
 
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                verticalArrangement = Arrangement.spacedBy(18.dp),
-                horizontalArrangement = Arrangement.spacedBy(18.dp),
-                modifier = Modifier.padding(top = 18.dp),
-            ) {
-                items(wallpapers) { wallpaper ->
-                    WallpaperCard(
-                        wallpaper = wallpaper,
-                        isFavorite = favoriteNames.contains(wallpaper.name),
-                        onClick = { onWallpaperClick(wallpaper) }
+        if (wallpapers.isEmpty()) {
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "No wallpapers found",
+                        color = Color.LightGray,
+                        fontSize = 20.sp
                     )
+                }
+            }
+        } else {
+            item {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(18.dp)
+                ) {
+                    wallpapers.chunked(2).forEach { rowWallpapers ->
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(18.dp),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            rowWallpapers.forEach { wallpaper ->
+                                Box(modifier = Modifier.weight(1f)) {
+                                    WallpaperCard(
+                                        wallpaper = wallpaper,
+                                        isFavorite = favoriteNames.contains(wallpaper.name),
+                                        onClick = { onWallpaperClick(wallpaper) }
+                                    )
+                                }
+                            }
+
+                            if (rowWallpapers.size == 1) {
+                                Spacer(modifier = Modifier.weight(1f))
+                            }
+                        }
+                    }
                 }
             }
         }
     }
+}
 
 @Composable
 fun CategoryButton(
