@@ -45,6 +45,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.foundation.lazy.LazyColumn
+import com.example.wallpapersapp.screens.HomeHeader
 
 @Composable
 fun WallpaperScreen() {
@@ -276,26 +277,10 @@ fun GalleryContent(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
-            Text(
-                text = title,
-                color = Color.White,
-                fontSize = 34.sp,
-                fontWeight = FontWeight.Bold
-            )
-
-            Text(
-                text = subtitle,
-                color = Color.LightGray,
-                fontSize = 16.sp,
-                modifier = Modifier.padding(top = 4.dp)
-            )
-
-            Text(
-                text = favoriteInfo,
-                color = Color(0xFFFF6B81),
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 4.dp)
+            HomeHeader(
+                title = title,
+                subtitle = subtitle,
+                favoriteInfo = favoriteInfo
             )
         }
 
