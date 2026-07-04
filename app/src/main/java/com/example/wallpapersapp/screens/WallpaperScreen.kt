@@ -285,107 +285,17 @@ fun GalleryContent(
         }
 
         item {
-            Text(
-                text = "🔥 Trending",
-                color = Color.White,
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
-            ) {
-                TrendingChip("🔥 Popular")
-                Spacer(modifier = Modifier.width(8.dp))
-                TrendingChip("🆕 New")
-                Spacer(modifier = Modifier.width(8.dp))
-                TrendingChip("⭐ Editor's Choice")
-            }
+            TrendingSection()
         }
 
         if (wallpapers.isNotEmpty()) {
             item {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(220.dp),
-                    shape = RoundedCornerShape(26.dp)
-                ) {
-                    Box {
-                        Image(
-                            painter = painterResource(id = wallpapers.first().image),
-                            contentDescription = null,
-                            modifier = Modifier.fillMaxSize(),
-                            contentScale = ContentScale.Crop
-                        )
-
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .background(
-                                    Brush.verticalGradient(
-                                        listOf(
-                                            Color.Transparent,
-                                            Color.Black.copy(alpha = 0.85f)
-                                        )
-                                    )
-                                )
-                        )
-
-                        Column(
-                            modifier = Modifier
-                                .align(Alignment.BottomStart)
-                                .padding(18.dp)
-                        ) {
-                            Text(
-                                "⭐ Wallpaper of the Day",
-                                color = Color(0xFFFFD54F),
-                                fontSize = 15.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-
-                            Spacer(modifier = Modifier.height(6.dp))
-
-                            Text(
-                                wallpapers.first().name,
-                                color = Color.White,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-
-                            Spacer(modifier = Modifier.height(8.dp))
-
-                            Text(
-                                text = "⭐ ${wallpapers.first().rating} • ${wallpapers.first().downloads} downloads",
-                                color = Color.White.copy(alpha = 0.9f),
-                                fontSize = 14.sp
-                            )
-
-                            Spacer(modifier = Modifier.height(14.dp))
-
-                            Button(
-                                onClick = { onWallpaperClick(wallpapers.first()) },
-                                shape = RoundedCornerShape(50.dp),
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color.White
-                                )
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.ArrowForward,
-                                    contentDescription = null
-                                )
-
-                                Spacer(modifier = Modifier.width(6.dp))
-
-                                Text("Explore")
-                            }
-                        }
+                HeroBanner(
+                    wallpaper = wallpapers.first(),
+                    onExploreClick = {
+                        onWallpaperClick(wallpapers.first())
                     }
-                }
+                )
             }
         }
 
