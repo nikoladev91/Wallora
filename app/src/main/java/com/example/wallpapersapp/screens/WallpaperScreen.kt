@@ -530,13 +530,23 @@ fun FullScreenWallpaper(
 
             Spacer(modifier = Modifier.height(18.dp))
 
+            val heartScale by animateFloatAsState(
+                targetValue = if (isFavorite) 1.04f else 1f,
+                label = "heartScale"
+            )
+
             Text(
-                text = if (isFavorite) "❤️ Dodano do ulubionych" else "🤍 Dodaj do ulubionych",
-                color = Color.White,
+                text = if (isFavorite)
+                    "❤️ Dodano do ulubionych"
+                else
+                    "🤍 Dodaj do ulubionych",
+                color = if (isFavorite) Color(0xFFFF5A7A) else Color.White,
                 fontSize = 20.sp,
+                fontWeight = FontWeight.SemiBold,
                 modifier = Modifier
-                    .padding(8.dp)
+                    .scale(heartScale)
                     .clickable { onFavoriteClick() }
+                    .padding(8.dp)
             )
 
             Text(
