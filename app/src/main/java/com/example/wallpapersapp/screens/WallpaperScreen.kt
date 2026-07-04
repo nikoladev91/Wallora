@@ -49,6 +49,9 @@ import com.example.wallpapersapp.screens.HomeHeader
 import android.app.WallpaperManager
 import androidx.compose.ui.draw.alpha
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.filled.Download
 @Composable
 fun WallpaperScreen() {
     val wallpapers = WallpaperRepository.wallpapers
@@ -105,7 +108,18 @@ fun WallpaperScreen() {
                     Toast.LENGTH_SHORT
                 ).show()
             },
-            onSetWallpaperClick = {},
+            onSetWallpaperClick = {
+                val success = setWallpaper(
+                    context = context,
+                    wallpaper = selectedWallpaper!!
+                )
+
+                Toast.makeText(
+                    context,
+                    if (success) "Wallpaper set successfully" else "Could not set wallpaper",
+                    Toast.LENGTH_SHORT
+                ).show()
+            },
             onBack = { selectedWallpaper = null }
         )
     } else {
@@ -241,21 +255,71 @@ fun SettingsScreen() {
             .padding(24.dp)
     ) {
         Text(
-            text = "Settings",
+            text = "⚙ Settings",
             color = Color.White,
             fontSize = 34.sp,
             fontWeight = FontWeight.Bold
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
-        Text(text = "🌙 Dark mode: ON", color = Color.White, fontSize = 20.sp, modifier = Modifier.padding(vertical = 8.dp))
-        Text(text = "🔔 Daily wallpaper: Coming soon", color = Color.White, fontSize = 20.sp, modifier = Modifier.padding(vertical = 8.dp))
-        Text(text = "👑 Premium: Coming soon", color = Color.White, fontSize = 20.sp, modifier = Modifier.padding(vertical = 8.dp))
-        Text(text = "💰 Ads: Coming soon", color = Color.White, fontSize = 20.sp, modifier = Modifier.padding(vertical = 8.dp))
+        SettingItem(
+            title = "🌙 Dark Theme",
+            subtitle = "Enabled"
+        )
+
+        SettingItem(
+            title = "⭐ Rate Wallora",
+            subtitle = "Coming soon"
+        )
+
+        SettingItem(
+            title = "📤 Share Wallora",
+            subtitle = "Coming soon"
+        )
+
+        SettingItem(
+            title = "📧 Contact Developer",
+            subtitle = "Coming soon"
+        )
+
+        SettingItem(
+            title = "ℹ Version",
+            subtitle = "0.1.0"
+        )
     }
 }
+@Composable
+fun SettingItem(
+    title: String,
+    subtitle: String
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 10.dp)
+            .background(
+                color = Color(0xFF171717),
+                shape = RoundedCornerShape(18.dp)
+            )
+            .padding(16.dp)
+    ) {
+        Text(
+            text = title,
+            color = Color.White,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold
+        )
 
+        Spacer(modifier = Modifier.height(4.dp))
+
+        Text(
+            text = subtitle,
+            color = Color.LightGray,
+            fontSize = 14.sp
+        )
+    }
+}
 @Composable
 fun GalleryContent(
     title: String,
@@ -528,49 +592,75 @@ fun FullScreenWallpaper(
                 fontWeight = FontWeight.Bold
             )
 
-            Spacer(modifier = Modifier.height(18.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-            val heartScale by animateFloatAsState(
-                targetValue = if (isFavorite) 1.04f else 1f,
-                label = "heartScale"
-            )
-
-            Text(
-                text = if (isFavorite)
-                    "❤️ Dodano do ulubionych"
-                else
-                    "🤍 Dodaj do ulubionych",
-                color = if (isFavorite) Color(0xFFFF5A7A) else Color.White,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.SemiBold,
+            Button(
+                onClick = onFavoriteClick,
                 modifier = Modifier
-                    .scale(heartScale)
-                    .clickable { onFavoriteClick() }
-                    .padding(8.dp)
-            )
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .padding(horizontal = 28.dp),
+                shape = RoundedCornerShape(14.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF2A2A2A),
+                    contentColor = Color.White
+                )
+            ) {
+                Text(
+                    text = if (isFavorite) "❤️ Favorited" else "🤍 Favorite",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
 
-            Text(
-                text = "⬇ Download Wallpaper",
-                color = Color.White,
-                fontSize = 20.sp,
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Button(
+                onClick = onDownloadClick,
                 modifier = Modifier
-                    .padding(8.dp)
-                    .clickable { onDownloadClick() }
-            )
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .padding(horizontal = 28.dp),
+                shape = RoundedCornerShape(14.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF2A2A2A),
+                    contentColor = Color.White
+                )
+            ) {
+                Text(
+                    text = "⬇ Download",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Button(
+                onClick = onSetWallpaperClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .padding(horizontal = 28.dp),
+                shape = RoundedCornerShape(14.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF2A2A2A),
+                    contentColor = Color.White
+                )
+            ) {
+                Text(
+                    text = "🖼 Set Wallpaper",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                text = "Set as Wallpaper",
-                color = Color.White,
-                fontSize = 20.sp,
-                modifier = Modifier.padding(8.dp)
-            )
-
-            Spacer(modifier = Modifier.height(14.dp))
-
-            Text(
-                text = "← Back",
+                text = "Close",
                 color = Color(0xFF64B5F6),
-                fontSize = 22.sp,
+                fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .padding(8.dp)
@@ -659,6 +749,20 @@ fun saveWallpaperToGallery(context: Context, wallpaper: Wallpaper): Boolean {
         values.clear()
         values.put(MediaStore.Images.Media.IS_PENDING, 0)
         resolver.update(uri, values, null, null)
+
+        true
+    } catch (exception: Exception) {
+        exception.printStackTrace()
+        false
+    }
+}
+fun setWallpaper(context: Context, wallpaper: Wallpaper): Boolean {
+    return try {
+        val bitmap = BitmapFactory.decodeResource(context.resources, wallpaper.image)
+            ?: return false
+
+        val wallpaperManager = WallpaperManager.getInstance(context)
+        wallpaperManager.setBitmap(bitmap)
 
         true
     } catch (exception: Exception) {
