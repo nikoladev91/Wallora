@@ -46,7 +46,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.foundation.lazy.LazyColumn
 import com.example.wallpapersapp.screens.HomeHeader
-
+import android.app.WallpaperManager
+import androidx.compose.ui.draw.alpha
+import androidx.compose.animation.core.animateDpAsState
 @Composable
 fun WallpaperScreen() {
     val wallpapers = WallpaperRepository.wallpapers
@@ -103,6 +105,7 @@ fun WallpaperScreen() {
                     Toast.LENGTH_SHORT
                 ).show()
             },
+            onSetWallpaperClick = {},
             onBack = { selectedWallpaper = null }
         )
     } else {
@@ -368,14 +371,25 @@ fun WallpaperCard(
     var pressed by remember { mutableStateOf(false) }
 
     val scale by animateFloatAsState(
-        targetValue = if (pressed) 0.97f else 1f,
+        targetValue = if (pressed) 0.94f else 1f,
         label = "cardScale"
+    )
+
+    val cardAlpha by animateFloatAsState(
+        targetValue = if (pressed) 0.88f else 1f,
+        label = "cardAlpha"
+    )
+
+    val elevation by animateDpAsState(
+        targetValue = if (pressed) 2.dp else 8.dp,
+        label = "cardElevation"
     )
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(250.dp)
             .scale(scale)
+            .alpha(cardAlpha)
             .pointerInteropFilter { event ->
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> pressed = true
@@ -484,6 +498,7 @@ fun FullScreenWallpaper(
     isFavorite: Boolean,
     onFavoriteClick: () -> Unit,
     onDownloadClick: () -> Unit,
+    onSetWallpaperClick: () -> Unit,
     onBack: () -> Unit
 ) {
     Box(
