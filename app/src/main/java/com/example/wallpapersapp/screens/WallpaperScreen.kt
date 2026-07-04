@@ -62,6 +62,7 @@ fun WallpaperScreen() {
     var selectedTab by remember { mutableStateOf("home") }
     var searchText by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf("All") }
+    var selectedTrending by remember { mutableStateOf("Popular") }
 
     val favoriteNames = remember {
         mutableStateListOf<String>().apply {
@@ -78,6 +79,11 @@ fun WallpaperScreen() {
             cleanCategory == "All" || wallpaper.category == cleanCategory
 
         matchesSearch && matchesCategory
+    }
+    val displayedWallpapers = when (selectedTrending) {
+        "New" -> filteredWallpapers.reversed()
+        "Editor’s Choice" -> filteredWallpapers.filter { it.isTopPick }
+        else -> filteredWallpapers
     }
 
     if (selectedWallpaper != null) {
@@ -135,15 +141,17 @@ fun WallpaperScreen() {
             ) {
                 when (selectedTab) {
                     "home" -> HomeScreen(
-                        wallpapers = filteredWallpapers,
+                        wallpapers = displayedWallpapers,
                         allWallpapersCount = wallpapers.size,
                         favoriteNames = favoriteNames,
                         searchText = searchText,
                         selectedCategory = selectedCategory,
+                        selectedTrending = selectedTrending,
                         categories = categories.map { it.name },
                         onSearchChange = { searchText = it },
                         onCategoryClick = { selectedCategory = it },
-                        onWallpaperClick = { selectedWallpaper = it }
+                        onTrendingSelected = { selectedTrending = it },
+                        onWallpaperClick = { selectedWallpaper = it },
                     )
 
                     "favorites" -> FavoritesScreen(
@@ -171,9 +179,11 @@ fun HomeScreen(
     favoriteNames: List<String>,
     searchText: String,
     selectedCategory: String,
+    selectedTrending: String,
     categories: List<String>,
     onSearchChange: (String) -> Unit,
     onCategoryClick: (String) -> Unit,
+    onTrendingSelected: (String) -> Unit,
     onWallpaperClick: (Wallpaper) -> Unit
 ) {
     GalleryContent(
@@ -184,11 +194,13 @@ fun HomeScreen(
         favoriteNames = favoriteNames,
         searchText = searchText,
         selectedCategory = selectedCategory,
+        selectedTrending = selectedTrending,
         categories = categories,
         showSearch = true,
         showCategories = true,
         onSearchChange = onSearchChange,
         onCategoryClick = onCategoryClick,
+        onTrendingSelected = onTrendingSelected,
         onWallpaperClick = onWallpaperClick
     )
 }
@@ -236,16 +248,17 @@ fun FavoritesScreen(
             favoriteNames = favoriteNames,
             searchText = "",
             selectedCategory = "All",
-            categories = emptyList(),
+            selectedTrending = "Popular",
+            categories = emptyList<String>(),
             showSearch = false,
             showCategories = false,
             onSearchChange = {},
             onCategoryClick = {},
+            onTrendingSelected = {},
             onWallpaperClick = onWallpaperClick
         )
-    }
 }
-
+}
 @Composable
 fun SettingsScreen() {
     Column(
@@ -329,11 +342,13 @@ fun GalleryContent(
     favoriteNames: List<String>,
     searchText: String,
     selectedCategory: String,
+    selectedTrending: String,
     categories: List<String>,
     showSearch: Boolean,
     showCategories: Boolean,
     onSearchChange: (String) -> Unit,
     onCategoryClick: (String) -> Unit,
+    onTrendingSelected: (String) -> Unit,
     onWallpaperClick: (Wallpaper) -> Unit
 ) {
     LazyColumn(
@@ -352,7 +367,10 @@ fun GalleryContent(
         }
 
         item {
-            TrendingSection()
+            TrendingSection(
+                selectedTrending = selectedTrending,
+                onTrendingSelected = onTrendingSelected
+            )
         }
 
         if (wallpapers.isNotEmpty()) {
@@ -454,16 +472,8 @@ fun WallpaperCard(
             .height(250.dp)
             .scale(scale)
             .alpha(cardAlpha)
-            .pointerInteropFilter { event ->
-                when (event.action) {
-                    MotionEvent.ACTION_DOWN -> pressed = true
-                    MotionEvent.ACTION_UP,
-                    MotionEvent.ACTION_CANCEL -> {
-                        pressed = false
-                        onClick()
-                    }
-                }
-                true
+            .clickable {
+                onClick()
             }
     ) {
         Box(
