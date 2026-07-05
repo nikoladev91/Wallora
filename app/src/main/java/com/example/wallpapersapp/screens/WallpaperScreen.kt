@@ -49,6 +49,8 @@ import com.example.wallpapersapp.screens.HomeHeader
 import android.app.WallpaperManager
 import androidx.compose.ui.draw.alpha
 import androidx.compose.animation.core.animateDpAsState
+import com.example.wallpapersapp.model.CollectionRepository
+import com.example.wallpapersapp.model.WallpaperCollection
 @Composable
 fun WallpaperScreen() {
     val wallpapers = WallpaperRepository.wallpapers
@@ -57,6 +59,9 @@ fun WallpaperScreen() {
 
     var selectedWallpaper by remember { mutableStateOf<Wallpaper?>(null) }
     var showCollectionScreen by remember { mutableStateOf(false) }
+    var selectedCollection by remember {
+        mutableStateOf(CollectionRepository.collections.first())
+    }
     var selectedTab by remember { mutableStateOf("home") }
     var searchText by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf("All") }
@@ -86,12 +91,17 @@ fun WallpaperScreen() {
 
     if (showCollectionScreen) {
         CollectionScreen(
+            collection = selectedCollection,
             favoriteNames = favoriteNames,
             onWallpaperClick = {
                 selectedWallpaper = it
                 showCollectionScreen = false
             },
-            onBackClick = { showCollectionScreen = false }
+            onBackClick = {
+                selectedWallpaper = null
+                showCollectionScreen = false
+                selectedTab = "home"
+            }
         )
     } else if (selectedWallpaper != null) {
         FullScreenWallpaper(
@@ -163,9 +173,11 @@ fun WallpaperScreen() {
                         onTrendingSelected = { selectedTrending = it },
                         onWallpaperClick = { selectedWallpaper = it },
                         onFeaturedCollectionClick = {
+                            selectedCollection = CollectionRepository.collections.first()
                             showCollectionScreen = true
                         }
                     )
+
 
                     "favorites" -> FavoritesScreen(
                         wallpapers = wallpapers.filter { favoriteNames.contains(it.name) },
