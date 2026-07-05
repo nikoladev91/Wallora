@@ -351,6 +351,12 @@ fun GalleryContent(
     onTrendingSelected: (String) -> Unit,
     onWallpaperClick: (Wallpaper) -> Unit
 ) {
+    val heroWallpaper = remember(wallpapers) {
+        wallpapers
+            .filter { it.isTopPick }
+            .ifEmpty { wallpapers }
+            .randomOrNull()
+    }
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -366,22 +372,27 @@ fun GalleryContent(
             )
         }
 
-        item {
-            TrendingSection(
-                selectedTrending = selectedTrending,
-                onTrendingSelected = onTrendingSelected
-            )
-        }
 
-        if (wallpapers.isNotEmpty()) {
+
+        if (heroWallpaper != null) {
             item {
                 HeroBanner(
-                    wallpaper = wallpapers.first(),
+                    wallpaper = heroWallpaper,
                     onExploreClick = {
-                        onWallpaperClick(wallpapers.first())
+                        onWallpaperClick(heroWallpaper)
                     }
                 )
             }
+        }
+
+        item {
+            FeaturedCollection(
+                onClick = {
+                    if (wallpapers.isNotEmpty()) {
+                        onWallpaperClick(wallpapers.first())
+                    }
+                }
+            )
         }
 
         if (showSearch) {
@@ -409,6 +420,12 @@ fun GalleryContent(
                 color = Color.White,
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold
+            )
+        }
+        item {
+            TrendingSection(
+                selectedTrending = selectedTrending,
+                onTrendingSelected = onTrendingSelected
             )
         }
 
