@@ -86,9 +86,11 @@ fun WallpaperScreen() {
 
     if (showCollectionScreen) {
         CollectionScreen(
-            wallpapers = wallpapers,
             favoriteNames = favoriteNames,
-            onWallpaperClick = { selectedWallpaper = it },
+            onWallpaperClick = {
+                selectedWallpaper = it
+                showCollectionScreen = false
+            },
             onBackClick = { showCollectionScreen = false }
         )
     } else if (selectedWallpaper != null) {
