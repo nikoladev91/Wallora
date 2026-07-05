@@ -1,5 +1,6 @@
 package com.example.wallpapersapp.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,18 +15,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.foundation.Image
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import com.example.wallpapersapp.R
+import com.example.wallpapersapp.model.CollectionRepository
 
 @Composable
 fun FeaturedCollection(
     onClick: () -> Unit
 ) {
+    val collection = CollectionRepository.collections.first()
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -52,8 +54,8 @@ fun FeaturedCollection(
             Spacer(modifier = Modifier.height(12.dp))
 
             Image(
-                painter = painterResource(id = R.drawable.neon_dragon),
-                contentDescription = "Neon Animals Vol.1",
+                painter = painterResource(id = collection.coverImage),
+                contentDescription = collection.title,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(160.dp)
@@ -64,7 +66,7 @@ fun FeaturedCollection(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Neon Animals Vol.1",
+                text = collection.title,
                 color = Color.White,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
@@ -73,7 +75,7 @@ fun FeaturedCollection(
             Spacer(modifier = Modifier.height(4.dp))
 
             Text(
-                text = "12 Exclusive AMOLED Wallpapers",
+                text = collection.subtitle,
                 color = Color.White.copy(alpha = 0.75f),
                 fontSize = 14.sp
             )
