@@ -565,14 +565,13 @@ fun WallpaperCard(
                     )
                 }
             }
-
-            Box(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.BottomCenter)
                     .background(Color.Black.copy(alpha = 0.65f))
                     .padding(12.dp),
-                contentAlignment = Alignment.Center
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = wallpaper.name,
@@ -580,6 +579,7 @@ fun WallpaperCard(
                     fontSize = 17.sp,
                     fontWeight = FontWeight.Bold
                 )
+
                 Spacer(modifier = Modifier.height(4.dp))
 
                 Text(
@@ -593,56 +593,6 @@ fun WallpaperCard(
     }
 }
 
-
-@Composable
-fun BottomMenu(
-    selectedTab: String,
-    onTabSelected: (String) -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color(0xFF111111))
-            .padding(vertical = 12.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        MenuItem(
-            text = "🏠 Home",
-            selected = selectedTab == "home",
-            onClick = { onTabSelected("home") }
-        )
-
-        MenuItem(
-            text = "❤️ Favorites",
-            selected = selectedTab == "favorites",
-            onClick = { onTabSelected("favorites") }
-        )
-
-        MenuItem(
-            text = "⚙️ Settings",
-            selected = selectedTab == "settings",
-            onClick = { onTabSelected("settings") }
-        )
-    }
-}
-
-@Composable
-fun MenuItem(
-    text: String,
-    selected: Boolean,
-    onClick: () -> Unit
-) {
-    Text(
-        text = text,
-        color = if (selected) Color(0xFF64B5F6) else Color.White,
-        fontSize = if (selected) 17.sp else 15.sp,
-        fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
-        modifier = Modifier
-            .clickable { onClick() }
-            .padding(8.dp)
-    )
-}
 
 fun saveWallpaperToGallery(context: Context, wallpaper: Wallpaper): Boolean {
     return try {
