@@ -114,6 +114,106 @@ object WallpaperRepository {
             isTopPick = true
         ),
         Wallpaper(
+            name = "Black Hole",
+            image = R.drawable.cosmic_black_hole,
+            category = "Space",
+            rating = 5.0,
+            downloads = "42K",
+            badge = "AMOLED",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Purple Galaxy",
+            image = R.drawable.cosmic_purple_galaxy,
+            category = "Space",
+            rating = 4.9,
+            downloads = "38K",
+            badge = "AMOLED",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Cosmic Nebula",
+            image = R.drawable.cosmic_nebula,
+            category = "Space",
+            rating = 4.9,
+            downloads = "35K",
+            badge = "AMOLED"
+        ),
+        Wallpaper(
+            name = "Saturn",
+            image = R.drawable.cosmic_saturn,
+            category = "Space",
+            rating = 4.9,
+            downloads = "31K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Moon",
+            image = R.drawable.cosmic_moon,
+            category = "Space",
+            rating = 4.8,
+            downloads = "29K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Blue Planet",
+            image = R.drawable.cosmic_blue_planet,
+            category = "Space",
+            rating = 4.9,
+            downloads = "33K",
+            badge = "AMOLED"
+        ),
+        Wallpaper(
+            name = "Red Planet",
+            image = R.drawable.cosmic_red_planet,
+            category = "Space",
+            rating = 4.8,
+            downloads = "27K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Astronaut",
+            image = R.drawable.cosmic_astronaut,
+            category = "Space",
+            rating = 5.0,
+            downloads = "45K",
+            badge = "TOP"
+        ),
+        Wallpaper(
+            name = "Cosmic Whale",
+            image = R.drawable.cosmic_whale,
+            category = "Space",
+            rating = 5.0,
+            downloads = "41K",
+            badge = "AMOLED",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Space Portal",
+            image = R.drawable.cosmic_space_portal,
+            category = "Space",
+            rating = 4.9,
+            downloads = "36K",
+            badge = "AI"
+        ),
+        Wallpaper(
+            name = "Shooting Star",
+            image = R.drawable.cosmic_shooting_star,
+            category = "Space",
+            rating = 4.8,
+            downloads = "25K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Solar Eclipse",
+            image = R.drawable.cosmic_solar_eclipse,
+            category = "Space",
+            rating = 5.0,
+            downloads = "44K",
+            badge = "AMOLED",
+            isTopPick = true
+        ),
+        Wallpaper(
             name = "Blue Beach",
             image = R.drawable.wallpaper_2,
             category = "Nature",

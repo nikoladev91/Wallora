@@ -133,7 +133,10 @@ fun WallpaperScreen() {
                     Toast.LENGTH_SHORT
                 ).show()
             },
-            onBack = { selectedWallpaper = null }
+            onBack = {
+                selectedWallpaper = null
+                showCollectionScreen = true
+            }
         )
     } else {
         Column(
