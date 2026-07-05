@@ -215,63 +215,72 @@ fun HomeScreen(
     )
 }
 
+
 @Composable
 fun FavoritesScreen(
     wallpapers: List<Wallpaper>,
     favoriteNames: List<String>,
     onWallpaperClick: (Wallpaper) -> Unit
-
 ) {
-    if (wallpapers.isEmpty()) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black)
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(text = "❤️", fontSize = 56.sp)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black)
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "❤️ Favorites",
+            color = Color.White,
+            fontSize = 34.sp,
+            fontWeight = FontWeight.Bold
+        )
 
-            Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(6.dp))
 
-            Text(
-                text = "Brak ulubionych tapet",
-                color = Color.White,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold
-            )
+        Text(
+            text = "${wallpapers.size} saved wallpapers",
+            color = Color.LightGray,
+            fontSize = 14.sp
+        )
 
-            Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
-            Text(
-                text = "Dodaj tapetę do ulubionych, a pojawi się tutaj.",
-                color = Color.LightGray,
-                fontSize = 16.sp
+        if (wallpapers.isEmpty()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(text = "❤️", fontSize = 56.sp)
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text(
+                    text = "No favorites yet",
+                    color = Color.White,
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = "Add wallpapers to favorites and they will appear here.",
+                    color = Color.LightGray,
+                    fontSize = 16.sp
+                )
+            }
+        } else {
+            WallpaperGrid(
+                wallpapers = wallpapers,
+                favoriteNames = favoriteNames,
+                onWallpaperClick = onWallpaperClick
             )
         }
-    } else {
-        GalleryContent(
-            title = "Favorites",
-            subtitle = "${wallpapers.size} favorite wallpapers",
-            favoriteInfo = "❤️ Saved wallpapers",
-            wallpapers = wallpapers,
-            favoriteNames = favoriteNames,
-            searchText = "",
-            selectedCategory = "All",
-            selectedTrending = "Popular",
-            categories = emptyList<String>(),
-            showSearch = false,
-            showCategories = false,
-            onSearchChange = {},
-            onCategoryClick = {},
-            onTrendingSelected = {},
-            onWallpaperClick = onWallpaperClick,
-            onFeaturedCollectionClick = {}
-        )
     }
 }
-
 @Composable
 fun SettingsScreen() {
     Column(
