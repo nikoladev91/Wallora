@@ -49,9 +49,6 @@ import com.example.wallpapersapp.screens.HomeHeader
 import android.app.WallpaperManager
 import androidx.compose.ui.draw.alpha
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.material3.Button
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.icons.filled.Download
 @Composable
 fun WallpaperScreen() {
     val wallpapers = WallpaperRepository.wallpapers
@@ -59,6 +56,7 @@ fun WallpaperScreen() {
     val context = LocalContext.current
 
     var selectedWallpaper by remember { mutableStateOf<Wallpaper?>(null) }
+    var showCollectionScreen by remember { mutableStateOf(false) }
     var selectedTab by remember { mutableStateOf("home") }
     var searchText by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf("All") }
@@ -86,7 +84,14 @@ fun WallpaperScreen() {
         else -> filteredWallpapers
     }
 
-    if (selectedWallpaper != null) {
+    if (showCollectionScreen) {
+        CollectionScreen(
+            wallpapers = wallpapers,
+            favoriteNames = favoriteNames,
+            onWallpaperClick = { selectedWallpaper = it },
+            onBackClick = { showCollectionScreen = false }
+        )
+    } else if (selectedWallpaper != null) {
         FullScreenWallpaper(
             wallpaper = selectedWallpaper!!,
             isFavorite = favoriteNames.contains(selectedWallpaper!!.name),
@@ -152,6 +157,9 @@ fun WallpaperScreen() {
                         onCategoryClick = { selectedCategory = it },
                         onTrendingSelected = { selectedTrending = it },
                         onWallpaperClick = { selectedWallpaper = it },
+                        onFeaturedCollectionClick = {
+                            showCollectionScreen = true
+                        }
                     )
 
                     "favorites" -> FavoritesScreen(
@@ -184,7 +192,8 @@ fun HomeScreen(
     onSearchChange: (String) -> Unit,
     onCategoryClick: (String) -> Unit,
     onTrendingSelected: (String) -> Unit,
-    onWallpaperClick: (Wallpaper) -> Unit
+    onWallpaperClick: (Wallpaper) -> Unit,
+    onFeaturedCollectionClick: () -> Unit
 ) {
     GalleryContent(
         title = "✦ Wallora",
@@ -201,7 +210,8 @@ fun HomeScreen(
         onSearchChange = onSearchChange,
         onCategoryClick = onCategoryClick,
         onTrendingSelected = onTrendingSelected,
-        onWallpaperClick = onWallpaperClick
+        onWallpaperClick = onWallpaperClick,
+        onFeaturedCollectionClick = onFeaturedCollectionClick
     )
 }
 
@@ -210,6 +220,7 @@ fun FavoritesScreen(
     wallpapers: List<Wallpaper>,
     favoriteNames: List<String>,
     onWallpaperClick: (Wallpaper) -> Unit
+
 ) {
     if (wallpapers.isEmpty()) {
         Column(
@@ -255,10 +266,12 @@ fun FavoritesScreen(
             onSearchChange = {},
             onCategoryClick = {},
             onTrendingSelected = {},
-            onWallpaperClick = onWallpaperClick
+            onWallpaperClick = onWallpaperClick,
+            onFeaturedCollectionClick = {}
         )
+    }
 }
-}
+
 @Composable
 fun SettingsScreen() {
     Column(
@@ -349,7 +362,8 @@ fun GalleryContent(
     onSearchChange: (String) -> Unit,
     onCategoryClick: (String) -> Unit,
     onTrendingSelected: (String) -> Unit,
-    onWallpaperClick: (Wallpaper) -> Unit
+    onWallpaperClick: (Wallpaper) -> Unit,
+    onFeaturedCollectionClick: () -> Unit
 ) {
     val heroWallpaper = remember(wallpapers) {
         wallpapers
@@ -387,11 +401,7 @@ fun GalleryContent(
 
         item {
             FeaturedCollection(
-                onClick = {
-                    if (wallpapers.isNotEmpty()) {
-                        onWallpaperClick(wallpapers.first())
-                    }
-                }
+                onClick = onFeaturedCollectionClick
             )
         }
 
@@ -569,7 +579,7 @@ fun WallpaperCard(
                     color = Color.White,
                     fontSize = 17.sp,
                     fontWeight = FontWeight.Bold
-                   )
+                )
                 Spacer(modifier = Modifier.height(4.dp))
 
                 Text(
