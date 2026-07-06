@@ -43,14 +43,6 @@ fun FeaturedCollection(
             .padding(20.dp)
     ) {
         Column {
-            Text(
-                text = "⭐ Featured Collection",
-                color = Color.White,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
 
             Image(
                 painter = painterResource(id = collection.coverImage),

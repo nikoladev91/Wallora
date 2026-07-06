@@ -426,22 +426,36 @@ fun GalleryContent(
             }
         }
 
+
+
         item {
             Text(
-                text = "⭐ Featured Collections",
+                text = "⭐ Collections",
                 color = Color.White,
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold
             )
         }
-
-        items(CollectionRepository.collections) { collection ->
-            FeaturedCollection(
-                collection = collection,
-                onClick = {
-                    onFeaturedCollectionClick(collection)
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(14.dp)
+            ) {
+                CollectionRepository.collections.forEach { collection ->
+                    Box(
+                        modifier = Modifier.width(280.dp)
+                    ) {
+                        FeaturedCollection(
+                            collection = collection,
+                            onClick = {
+                                onFeaturedCollectionClick(collection)
+                            }
+                        )
+                    }
                 }
-            )
+            }
         }
 
         if (showSearch) {
