@@ -20,14 +20,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.wallpapersapp.model.CollectionRepository
+import com.example.wallpapersapp.model.WallpaperCollection
 
 @Composable
 fun FeaturedCollection(
+    collection: WallpaperCollection,
     onClick: () -> Unit
 ) {
-    val collection = CollectionRepository.collections.first()
-
     Box(
         modifier = Modifier
             .fillMaxWidth()

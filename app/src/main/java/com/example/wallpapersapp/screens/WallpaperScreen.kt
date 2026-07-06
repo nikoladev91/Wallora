@@ -51,6 +51,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.animation.core.animateDpAsState
 import com.example.wallpapersapp.model.CollectionRepository
 import com.example.wallpapersapp.model.WallpaperCollection
+import androidx.compose.foundation.lazy.items
 @Composable
 fun WallpaperScreen() {
     val wallpapers = WallpaperRepository.wallpapers
@@ -172,8 +173,8 @@ fun WallpaperScreen() {
                         onCategoryClick = { selectedCategory = it },
                         onTrendingSelected = { selectedTrending = it },
                         onWallpaperClick = { selectedWallpaper = it },
-                        onFeaturedCollectionClick = {
-                            selectedCollection = CollectionRepository.collections.first()
+                        onFeaturedCollectionClick = { collection ->
+                            selectedCollection = collection
                             showCollectionScreen = true
                         }
                     )
@@ -210,7 +211,7 @@ fun HomeScreen(
     onCategoryClick: (String) -> Unit,
     onTrendingSelected: (String) -> Unit,
     onWallpaperClick: (Wallpaper) -> Unit,
-    onFeaturedCollectionClick: () -> Unit
+    onFeaturedCollectionClick: (WallpaperCollection) -> Unit
 ) {
     GalleryContent(
         title = "✦ Wallora",
@@ -389,7 +390,7 @@ fun GalleryContent(
     onCategoryClick: (String) -> Unit,
     onTrendingSelected: (String) -> Unit,
     onWallpaperClick: (Wallpaper) -> Unit,
-    onFeaturedCollectionClick: () -> Unit
+    onFeaturedCollectionClick: (WallpaperCollection) -> Unit
 ) {
     val heroWallpaper = remember(wallpapers) {
         wallpapers
@@ -426,8 +427,20 @@ fun GalleryContent(
         }
 
         item {
+            Text(
+                text = "⭐ Featured Collections",
+                color = Color.White,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        items(CollectionRepository.collections) { collection ->
             FeaturedCollection(
-                onClick = onFeaturedCollectionClick
+                collection = collection,
+                onClick = {
+                    onFeaturedCollectionClick(collection)
+                }
             )
         }
 
