@@ -31,13 +31,13 @@ fun HeroBanner(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(220.dp),
-        shape = RoundedCornerShape(26.dp)
+            .height(270.dp),
+        shape = RoundedCornerShape(28.dp)
     ) {
         Box {
             Image(
                 painter = painterResource(id = wallpaper.image),
-                contentDescription = null,
+                contentDescription = wallpaper.name,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
@@ -49,7 +49,8 @@ fun HeroBanner(
                         Brush.verticalGradient(
                             listOf(
                                 Color.Transparent,
-                                Color.Black.copy(alpha = 0.85f)
+                                Color.Black.copy(alpha = 0.25f),
+                                Color.Black.copy(alpha = 0.92f)
                             )
                         )
                     )
@@ -58,49 +59,61 @@ fun HeroBanner(
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
-                    .padding(18.dp)
+                    .padding(22.dp)
             ) {
                 Text(
-                    "⭐ Wallpaper of the Day",
+                    text = "⭐ Wallpaper of the Day",
                     color = Color(0xFFFFD54F),
-                    fontSize = 15.sp,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Spacer(modifier = Modifier.height(6.dp))
-
-                Text(
-                    wallpaper.name,
-                    color = Color.White,
-                    fontSize = 24.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Bold
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "⭐ ${wallpaper.rating} • ${wallpaper.downloads} downloads",
-                    color = Color.White.copy(alpha = 0.9f),
-                    fontSize = 14.sp
+                    text = wallpaper.name.uppercase(),
+                    color = Color.White,
+                    fontSize = 29.sp,
+                    fontWeight = FontWeight.Black
                 )
 
-                Spacer(modifier = Modifier.height(14.dp))
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = "★★★★★ ${wallpaper.rating}",
+                    color = Color.White.copy(alpha = 0.92f),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Text(
+                    text = "${wallpaper.downloads} Downloads",
+                    color = Color.White.copy(alpha = 0.78f),
+                    fontSize = 13.sp
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Button(
                     onClick = onExploreClick,
                     shape = RoundedCornerShape(50.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White
-                    )
+                        containerColor = Color.White,
+                        contentColor = Color.Black
+                    ),
+                    modifier = Modifier.height(44.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.ArrowForward,
                         contentDescription = null
                     )
 
-                    Spacer(modifier = Modifier.width(6.dp))
+                    Spacer(modifier = Modifier.width(8.dp))
 
-                    Text("Explore")
+                    Text(
+                        text = "EXPLORE",
+                        fontWeight = FontWeight.Bold
+                    )
                 }
             }
         }

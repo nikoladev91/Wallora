@@ -60,6 +60,7 @@ fun WallpaperScreen() {
 
     var selectedWallpaper by remember { mutableStateOf<Wallpaper?>(null) }
     var showCollectionScreen by remember { mutableStateOf(false) }
+    var returnToCollection by remember { mutableStateOf(false) }
     var selectedCollection by remember {
         mutableStateOf(CollectionRepository.collections.first())
     }
@@ -97,6 +98,7 @@ fun WallpaperScreen() {
             onWallpaperClick = {
                 selectedWallpaper = it
                 showCollectionScreen = false
+                returnToCollection = true
             },
             onBackClick = {
                 selectedWallpaper = null
@@ -146,7 +148,7 @@ fun WallpaperScreen() {
             },
             onBack = {
                 selectedWallpaper = null
-                showCollectionScreen = true
+                showCollectionScreen = returnToCollection
             }
         )
     } else {
@@ -172,7 +174,10 @@ fun WallpaperScreen() {
                         onSearchChange = { searchText = it },
                         onCategoryClick = { selectedCategory = it },
                         onTrendingSelected = { selectedTrending = it },
-                        onWallpaperClick = { selectedWallpaper = it },
+                        onWallpaperClick = {
+                            selectedWallpaper = it
+                            returnToCollection = false
+                        },
                         onFeaturedCollectionClick = { collection ->
                             selectedCollection = collection
                             showCollectionScreen = true
@@ -183,7 +188,10 @@ fun WallpaperScreen() {
                     "favorites" -> FavoritesScreen(
                         wallpapers = wallpapers.filter { favoriteNames.contains(it.name) },
                         favoriteNames = favoriteNames,
-                        onWallpaperClick = { selectedWallpaper = it }
+                        onWallpaperClick = {
+                            selectedWallpaper = it
+                            returnToCollection = false
+                        }
                     )
 
                     "settings" -> SettingsScreen()
@@ -398,6 +406,7 @@ fun GalleryContent(
             .ifEmpty { wallpapers }
             .randomOrNull()
     }
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -409,11 +418,10 @@ fun GalleryContent(
             HomeHeader(
                 title = title,
                 subtitle = subtitle,
-                favoriteInfo = favoriteInfo
+                favoriteInfo = favoriteInfo,
+                stats = "${WallpaperRepository.wallpapers.size} Wallpapers • ${CollectionRepository.collections.size} Collections"
             )
         }
-
-
 
         if (heroWallpaper != null) {
             item {
@@ -426,8 +434,6 @@ fun GalleryContent(
             }
         }
 
-
-
         item {
             Text(
                 text = "⭐ Collections",
@@ -436,6 +442,7 @@ fun GalleryContent(
                 fontWeight = FontWeight.Bold
             )
         }
+
         item {
             Row(
                 modifier = Modifier
@@ -485,6 +492,7 @@ fun GalleryContent(
                 fontWeight = FontWeight.Bold
             )
         }
+
         item {
             TrendingSection(
                 selectedTrending = selectedTrending,
@@ -501,7 +509,6 @@ fun GalleryContent(
         }
     }
 }
-
 @Composable
 fun CategoryButton(
     name: String,
@@ -565,23 +572,7 @@ fun WallpaperCard(
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
-            Box(
-                modifier = Modifier
-                    .align(Alignment.TopStart)
-                    .padding(10.dp)
-                    .background(
-                        Color(0xAA000000),
-                        RoundedCornerShape(12.dp)
-                    )
-                    .padding(horizontal = 8.dp, vertical = 4.dp)
-            ) {
-                Text(
-                    text = "✨ 4K",
-                    color = Color.White,
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
+
             Box(
                 modifier = Modifier
                     .align(Alignment.TopStart)

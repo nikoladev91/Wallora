@@ -35,7 +35,22 @@ object CollectionRepository {
             "Solar Eclipse"
         )
     }
-
+    private val tropicalParadise = WallpaperRepository.wallpapers.filter {
+        it.name in listOf(
+            "Bora Bora Sunset",
+            "Maldives Overwater Villas",
+            "Palm Beach Paradise",
+            "Tropical Beach Escape",
+            "Emerald Jungle Waterfall",
+            "Sunset Ocean Pavilion",
+            "Coral Reef World",
+            "Hibiscus Bloom",
+            "White Sand Shell",
+            "Moonlit Beach",
+            "Sea Turtle Journey",
+            "Paradise Island"
+        )
+    }
     val collections = listOf(
         WallpaperCollection(
             id = "neon_animals_vol_1",
@@ -51,6 +66,14 @@ object CollectionRepository {
             subtitle = "12 Exclusive Space Wallpapers",
             coverImage = cosmicDreams.first().image,
             wallpapers = cosmicDreams,
+            isPremium = false
+        ),
+        WallpaperCollection(
+            id = "tropical_paradise_vol_1",
+            title = "Tropical Paradise Vol.1",
+            subtitle = "12 Exclusive Tropical Wallpapers",
+            coverImage = tropicalParadise.first().image,
+            wallpapers = tropicalParadise,
             isPremium = false
         )
     )

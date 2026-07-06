@@ -13,7 +13,8 @@ import androidx.compose.ui.unit.sp
 fun HomeHeader(
     title: String,
     subtitle: String,
-    favoriteInfo: String
+    favoriteInfo: String,
+    stats: String
 ) {
     Text(
         text = title,
@@ -26,6 +27,13 @@ fun HomeHeader(
         text = subtitle,
         color = Color.LightGray,
         fontSize = 16.sp,
+        modifier = Modifier.padding(top = 4.dp)
+    )
+
+    Text(
+        text = stats,
+        color = Color.White.copy(alpha = 0.75f),
+        fontSize = 15.sp,
         modifier = Modifier.padding(top = 4.dp)
     )
 

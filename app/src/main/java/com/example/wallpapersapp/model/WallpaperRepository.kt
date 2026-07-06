@@ -214,6 +214,107 @@ object WallpaperRepository {
             isTopPick = true
         ),
         Wallpaper(
+            name = "Bora Bora Sunset",
+            image = R.drawable.tropical_bora_bora,
+            category = "Nature",
+            rating = 5.0,
+            downloads = "52K",
+            badge = "4K",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Maldives Overwater Villas",
+            image = R.drawable.tropical_maldives_villas,
+            category = "Nature",
+            rating = 5.0,
+            downloads = "49K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Palm Beach Paradise",
+            image = R.drawable.tropical_palm_beach,
+            category = "Nature",
+            rating = 4.9,
+            downloads = "44K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Tropical Beach Escape",
+            image = R.drawable.tropical_beach_escape,
+            category = "Nature",
+            rating = 5.0,
+            downloads = "47K",
+            badge = "TOP",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Emerald Jungle Waterfall",
+            image = R.drawable.tropical_jungle_waterfall,
+            category = "Nature",
+            rating = 5.0,
+            downloads = "53K",
+            badge = "TOP",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Sunset Ocean Pavilion",
+            image = R.drawable.tropical_ocean_pavilion,
+            category = "Nature",
+            rating = 4.9,
+            downloads = "42K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Coral Reef World",
+            image = R.drawable.tropical_coral_reef,
+            category = "Nature",
+            rating = 5.0,
+            downloads = "48K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Hibiscus Bloom",
+            image = R.drawable.tropical_hibiscus,
+            category = "Nature",
+            rating = 4.9,
+            downloads = "39K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "White Sand Shell",
+            image = R.drawable.tropical_white_shell,
+            category = "Nature",
+            rating = 4.9,
+            downloads = "36K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Moonlit Beach",
+            image = R.drawable.tropical_moon_beach,
+            category = "Nature",
+            rating = 5.0,
+            downloads = "58K",
+            badge = "AMOLED",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Sea Turtle Journey",
+            image = R.drawable.tropical_sea_turtle,
+            category = "Nature",
+            rating = 5.0,
+            downloads = "46K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Paradise Island",
+            image = R.drawable.tropical_paradise_island,
+            category = "Nature",
+            rating = 5.0,
+            downloads = "61K",
+            badge = "TOP",
+            isTopPick = true
+        ),
+        Wallpaper(
             name = "Blue Beach",
             image = R.drawable.wallpaper_2,
             category = "Nature",

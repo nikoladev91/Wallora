@@ -5,12 +5,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -40,95 +39,102 @@ fun FullScreenWallpaper(
             contentScale = ContentScale.Crop
         )
 
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            Color.Black.copy(alpha = 0.15f),
+                            Color.Black.copy(alpha = 0.85f)
+                        )
+                    )
+                )
+        )
+
+        Text(
+            text = "← Back",
+            color = Color.White,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(start = 22.dp, top = 48.dp)
+                .background(
+                    Color.Black.copy(alpha = 0.45f),
+                    RoundedCornerShape(50.dp)
+                )
+                .clickable { onBack() }
+                .padding(horizontal = 16.dp, vertical = 10.dp)
+        )
+
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
-                .background(Color.Black.copy(alpha = 0.75f))
-                .padding(22.dp),
+                .padding(horizontal = 22.dp, vertical = 34.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = wallpaper.name,
                 color = Color.White,
-                fontSize = 26.sp,
+                fontSize = 30.sp,
                 fontWeight = FontWeight.Bold
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(18.dp))
 
-            Button(
-                onClick = onFavoriteClick,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp)
-                    .padding(horizontal = 28.dp),
-                shape = RoundedCornerShape(14.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF2A2A2A),
-                    contentColor = Color.White
-                )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                Text(
-                    text = if (isFavorite) "❤️ Favorited" else "🤍 Favorite",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
+                Box(modifier = Modifier.weight(1f)) {
+                    PremiumActionButton(
+                        text = if (isFavorite) "❤️ Favorited" else "🤍 Favorite",
+                        onClick = onFavoriteClick
+                    )
+                }
 
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Button(
-                onClick = onDownloadClick,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp)
-                    .padding(horizontal = 28.dp),
-                shape = RoundedCornerShape(14.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF2A2A2A),
-                    contentColor = Color.White
-                )
-            ) {
-                Text(
-                    text = "⬇ Download",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Button(
-                onClick = onSetWallpaperClick,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp)
-                    .padding(horizontal = 28.dp),
-                shape = RoundedCornerShape(14.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF2A2A2A),
-                    contentColor = Color.White
-                )
-            ) {
-                Text(
-                    text = "🖼 Set Wallpaper",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
-                )
+                Box(modifier = Modifier.weight(1f)) {
+                    PremiumActionButton(
+                        text = "⬇ Download",
+                        onClick = onDownloadClick
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Text(
-                text = "Close",
-                color = Color(0xFF64B5F6),
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .clickable { onBack() }
+            PremiumActionButton(
+                text = "🖼 Set Wallpaper",
+                onClick = onSetWallpaperClick
             )
         }
+    }
+}
+
+@Composable
+fun PremiumActionButton(
+    text: String,
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(50.dp)
+            .background(
+                Color.White.copy(alpha = 0.18f),
+                RoundedCornerShape(18.dp)
+            )
+            .clickable { onClick() },
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = text,
+            color = Color.White,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
