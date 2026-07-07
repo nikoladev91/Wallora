@@ -313,6 +313,108 @@ object WallpaperRepository {
             downloads = "61K",
             badge = "TOP",
             isTopPick = true
+        ),        Wallpaper(
+            name = "Ferrari Night Drive",
+            image = R.drawable.hypercar_ferrari_night,
+            category = "Cars",
+            rating = 5.0,
+            downloads = "37K",
+            badge = "TOP",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Lamborghini Rain Street",
+            image = R.drawable.hypercar_lamborghini_rain,
+            category = "Cars",
+            rating = 5.0,
+            downloads = "34K",
+            badge = "AMOLED",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Porsche GT3 Mountain Road",
+            image = R.drawable.hypercar_porsche_mountain,
+            category = "Cars",
+            rating = 4.9,
+            downloads = "28K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "McLaren Neon Garage",
+            image = R.drawable.hypercar_mclaren_garage,
+            category = "Cars",
+            rating = 4.9,
+            downloads = "32K",
+            badge = "AI"
+        ),
+        Wallpaper(
+            name = "Bugatti City Lights",
+            image = R.drawable.hypercar_bugatti_city,
+            category = "Cars",
+            rating = 5.0,
+            downloads = "39K",
+            badge = "TOP",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Koenigsegg Desert Sunset",
+            image = R.drawable.hypercar_koenigsegg_sunset,
+            category = "Cars",
+            rating = 5.0,
+            downloads = "30K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Coastal Hypercar Sunset",
+            image = R.drawable.hypercar_coastal_sunset,
+            category = "Cars",
+            rating = 4.9,
+            downloads = "24K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Pagani Gold Reflections",
+            image = R.drawable.hypercar_pagani_gold,
+            category = "Cars",
+            rating = 5.0,
+            downloads = "18K",
+            badge = "TOP",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Cyberpunk Hypercar",
+            image = R.drawable.hypercar_cyberpunk,
+            category = "Cars",
+            rating = 5.0,
+            downloads = "31K",
+            badge = "TOP",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Tunnel Velocity",
+            image = R.drawable.hypercar_tunnel,
+            category = "Cars",
+            rating = 4.9,
+            downloads = "22K",
+            badge = "NEW"
+        ),
+        Wallpaper(
+            name = "Midnight Carbon",
+            image = R.drawable.hypercar_midnight_carbon,
+            category = "Cars",
+            rating = 5.0,
+            downloads = "26K",
+            badge = "PREMIUM",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Classic Legend",
+            image = R.drawable.hypercar_classic_legend,
+            category = "Cars",
+            rating = 5.0,
+            downloads = "42K",
+            badge = "LEGEND",
+            isTopPick = true
         ),
         Wallpaper(
             name = "Blue Beach",

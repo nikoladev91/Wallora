@@ -51,6 +51,22 @@ object CollectionRepository {
             "Paradise Island"
         )
     }
+    private val hypercars = WallpaperRepository.wallpapers.filter {
+        it.name in listOf(
+            "Ferrari Night Drive",
+            "Lamborghini Rain Street",
+            "Porsche GT3 Mountain Road",
+            "McLaren Neon Garage",
+            "Bugatti City Lights",
+            "Koenigsegg Desert Sunset",
+            "Coastal Hypercar Sunset",
+            "Pagani Gold Reflections",
+            "Cyberpunk Hypercar",
+            "Tunnel Velocity",
+            "Midnight Carbon",
+            "Classic Legend"
+        )
+    }
     val collections = listOf(
         WallpaperCollection(
             id = "neon_animals_vol_1",
@@ -74,6 +90,14 @@ object CollectionRepository {
             subtitle = "12 Exclusive Tropical Wallpapers",
             coverImage = tropicalParadise.first().image,
             wallpapers = tropicalParadise,
+            isPremium = false
+        ),
+        WallpaperCollection(
+            id = "hypercars_vol_1",
+            title = "Hypercars Vol.1",
+            subtitle = "12 Exclusive Hypercar Wallpapers",
+            coverImage = hypercars.first().image,
+            wallpapers = hypercars,
             isPremium = false
         )
     )
