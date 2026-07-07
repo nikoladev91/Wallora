@@ -1,30 +1,34 @@
 package com.example.wallpapersapp.screens
 
+import android.app.WallpaperManager
 import android.content.ContentValues
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.provider.MediaStore
-import android.view.MotionEvent
 import android.widget.Toast
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -34,25 +38,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.wallpapersapp.model.CategoryRepository
-import com.example.wallpapersapp.model.Wallpaper
-import com.example.wallpapersapp.model.WallpaperRepository
-import com.example.wallpapersapp.storage.FavoritesStorage
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.input.pointer.pointerInteropFilter
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.foundation.lazy.LazyColumn
-import com.example.wallpapersapp.screens.HomeHeader
-import android.app.WallpaperManager
-import androidx.compose.ui.draw.alpha
-import androidx.compose.animation.core.animateDpAsState
 import com.example.wallpapersapp.model.CollectionRepository
+import com.example.wallpapersapp.model.Wallpaper
 import com.example.wallpapersapp.model.WallpaperCollection
-import androidx.compose.foundation.lazy.items
+import com.example.wallpapersapp.model.WallpaperRepository
 import com.example.wallpapersapp.monetization.AdManager
+import com.example.wallpapersapp.storage.FavoritesStorage
+
 @Composable
 fun WallpaperScreen() {
     val wallpapers = WallpaperRepository.wallpapers
@@ -69,6 +61,7 @@ fun WallpaperScreen() {
     var searchText by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf("All") }
     var selectedTrending by remember { mutableStateOf("Popular") }
+    val homeListState = rememberLazyListState()
 
     val favoriteNames = remember {
         mutableStateListOf<String>().apply {
@@ -78,19 +71,18 @@ fun WallpaperScreen() {
 
     val filteredWallpapers = wallpapers.filter { wallpaper ->
         val cleanCategory = selectedCategory.substringAfter(" ").trim()
-
         val matchesSearch = wallpaper.name.contains(searchText, ignoreCase = true)
-
-        val matchesCategory =
-            cleanCategory == "All" || wallpaper.category == cleanCategory
+        val matchesCategory = cleanCategory == "All" || wallpaper.category == cleanCategory
 
         matchesSearch && matchesCategory
     }
+
     val displayedWallpapers = when (selectedTrending) {
         "New" -> filteredWallpapers.reversed()
         "Editor’s Choice" -> filteredWallpapers.filter { it.isTopPick }
         else -> filteredWallpapers
     }
+
     fun openWallpaper(
         wallpaper: Wallpaper,
         fromCollection: Boolean
@@ -195,9 +187,9 @@ fun WallpaperScreen() {
                         onFeaturedCollectionClick = { collection ->
                             selectedCollection = collection
                             showCollectionScreen = true
-                        }
+                        },
+                        listState = homeListState
                     )
-
 
                     "favorites" -> FavoritesScreen(
                         wallpapers = wallpapers.filter { favoriteNames.contains(it.name) },
@@ -206,6 +198,7 @@ fun WallpaperScreen() {
                             openWallpaper(it, fromCollection = false)
                         }
                     )
+
                     "settings" -> SettingsScreen()
                 }
             }
@@ -231,7 +224,8 @@ fun HomeScreen(
     onCategoryClick: (String) -> Unit,
     onTrendingSelected: (String) -> Unit,
     onWallpaperClick: (Wallpaper) -> Unit,
-    onFeaturedCollectionClick: (WallpaperCollection) -> Unit
+    onFeaturedCollectionClick: (WallpaperCollection) -> Unit,
+    listState: LazyListState
 ) {
     GalleryContent(
         title = "✦ Wallora",
@@ -249,10 +243,10 @@ fun HomeScreen(
         onCategoryClick = onCategoryClick,
         onTrendingSelected = onTrendingSelected,
         onWallpaperClick = onWallpaperClick,
-        onFeaturedCollectionClick = onFeaturedCollectionClick
+        onFeaturedCollectionClick = onFeaturedCollectionClick,
+        listState = listState
     )
 }
-
 
 @Composable
 fun FavoritesScreen(
@@ -319,6 +313,7 @@ fun FavoritesScreen(
         }
     }
 }
+
 @Composable
 fun SettingsScreen() {
     Column(
@@ -362,6 +357,7 @@ fun SettingsScreen() {
         )
     }
 }
+
 @Composable
 fun SettingItem(
     title: String,
@@ -393,6 +389,7 @@ fun SettingItem(
         )
     }
 }
+
 @Composable
 fun GalleryContent(
     title: String,
@@ -410,7 +407,8 @@ fun GalleryContent(
     onCategoryClick: (String) -> Unit,
     onTrendingSelected: (String) -> Unit,
     onWallpaperClick: (Wallpaper) -> Unit,
-    onFeaturedCollectionClick: (WallpaperCollection) -> Unit
+    onFeaturedCollectionClick: (WallpaperCollection) -> Unit,
+    listState: LazyListState
 ) {
     val heroWallpaper = remember(wallpapers) {
         wallpapers
@@ -420,6 +418,7 @@ fun GalleryContent(
     }
 
     LazyColumn(
+        state = listState,
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
@@ -521,6 +520,7 @@ fun GalleryContent(
         }
     }
 }
+
 @Composable
 fun CategoryButton(
     name: String,
@@ -561,10 +561,11 @@ fun WallpaperCard(
         label = "cardAlpha"
     )
 
-    val elevation by animateDpAsState(
+    animateDpAsState(
         targetValue = if (pressed) 2.dp else 8.dp,
         label = "cardElevation"
     )
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -621,6 +622,7 @@ fun WallpaperCard(
                     )
                 }
             }
+
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -648,7 +650,6 @@ fun WallpaperCard(
         }
     }
 }
-
 
 fun saveWallpaperToGallery(context: Context, wallpaper: Wallpaper): Boolean {
     return try {
@@ -686,6 +687,7 @@ fun saveWallpaperToGallery(context: Context, wallpaper: Wallpaper): Boolean {
         false
     }
 }
+
 fun setWallpaper(context: Context, wallpaper: Wallpaper): Boolean {
     return try {
         val bitmap = BitmapFactory.decodeResource(context.resources, wallpaper.image)
@@ -700,6 +702,7 @@ fun setWallpaper(context: Context, wallpaper: Wallpaper): Boolean {
         false
     }
 }
+
 @Composable
 fun TrendingChip(text: String) {
     Box(
