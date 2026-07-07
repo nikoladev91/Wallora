@@ -52,6 +52,7 @@ import androidx.compose.animation.core.animateDpAsState
 import com.example.wallpapersapp.model.CollectionRepository
 import com.example.wallpapersapp.model.WallpaperCollection
 import androidx.compose.foundation.lazy.items
+import com.example.wallpapersapp.monetization.AdManager
 @Composable
 fun WallpaperScreen() {
     val wallpapers = WallpaperRepository.wallpapers
@@ -90,15 +91,29 @@ fun WallpaperScreen() {
         "Editor’s Choice" -> filteredWallpapers.filter { it.isTopPick }
         else -> filteredWallpapers
     }
+    fun openWallpaper(
+        wallpaper: Wallpaper,
+        fromCollection: Boolean
+    ) {
+        selectedWallpaper = wallpaper
+        returnToCollection = fromCollection
+
+        if (AdManager.shouldShowInterstitial()) {
+            Toast.makeText(
+                context,
+                "Ad would show here",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 
     if (showCollectionScreen) {
         CollectionScreen(
             collection = selectedCollection,
             favoriteNames = favoriteNames,
             onWallpaperClick = {
-                selectedWallpaper = it
+                openWallpaper(it, fromCollection = true)
                 showCollectionScreen = false
-                returnToCollection = true
             },
             onBackClick = {
                 selectedWallpaper = null
@@ -175,8 +190,7 @@ fun WallpaperScreen() {
                         onCategoryClick = { selectedCategory = it },
                         onTrendingSelected = { selectedTrending = it },
                         onWallpaperClick = {
-                            selectedWallpaper = it
-                            returnToCollection = false
+                            openWallpaper(it, fromCollection = false)
                         },
                         onFeaturedCollectionClick = { collection ->
                             selectedCollection = collection
@@ -189,11 +203,9 @@ fun WallpaperScreen() {
                         wallpapers = wallpapers.filter { favoriteNames.contains(it.name) },
                         favoriteNames = favoriteNames,
                         onWallpaperClick = {
-                            selectedWallpaper = it
-                            returnToCollection = false
+                            openWallpaper(it, fromCollection = false)
                         }
                     )
-
                     "settings" -> SettingsScreen()
                 }
             }
