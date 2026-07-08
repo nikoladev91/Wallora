@@ -44,6 +44,8 @@ import com.example.wallpapersapp.model.WallpaperCollection
 import com.example.wallpapersapp.model.WallpaperRepository
 import com.example.wallpapersapp.monetization.AdManager
 import com.example.wallpapersapp.storage.FavoritesStorage
+import androidx.compose.foundation.lazy.items
+import com.example.wallpapersapp.monetization.AdBanner
 
 @Composable
 fun WallpaperScreen() {
@@ -201,6 +203,12 @@ fun WallpaperScreen() {
 
                     "settings" -> SettingsScreen()
                 }
+            }
+
+            if (selectedTab == "home") {
+                AdBanner(
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
 
             BottomMenu(
@@ -511,16 +519,34 @@ fun GalleryContent(
             )
         }
 
-        item {
-            WallpaperGrid(
-                wallpapers = wallpapers,
-                favoriteNames = favoriteNames,
-                onWallpaperClick = onWallpaperClick
-            )
+        items(
+            items = wallpapers.chunked(2)
+        ) { rowWallpapers ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(18.dp)
+            ) {
+                rowWallpapers.forEach { wallpaper ->
+                    Box(
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        WallpaperCard(
+                            wallpaper = wallpaper,
+                            isFavorite = favoriteNames.contains(wallpaper.name),
+                            onClick = {
+                                onWallpaperClick(wallpaper)
+                            }
+                        )
+                    }
+                }
+
+                if (rowWallpapers.size == 1) {
+                    Spacer(modifier = Modifier.weight(1f))
+                }
+            }
         }
     }
 }
-
 @Composable
 fun CategoryButton(
     name: String,
