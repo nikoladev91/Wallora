@@ -67,6 +67,22 @@ object CollectionRepository {
             "Classic Legend"
         )
     }
+    private val epicMountains = WallpaperRepository.wallpapers.filter {
+        it.name in listOf(
+            "Alpine Sunrise",
+            "Misty Peaks",
+            "Frozen Summit",
+            "Emerald Valley",
+            "Golden Ridge",
+            "Moonlight Mountains",
+            "Crystal Lake",
+            "Storm Above Peaks",
+            "Autumn Highlands",
+            "Waterfall Canyon",
+            "Endless Horizon",
+            "Aurora Summit"
+        )
+    }
     val collections = listOf(
         WallpaperCollection(
             id = "neon_animals_vol_1",
@@ -99,6 +115,14 @@ object CollectionRepository {
             coverImage = hypercars.first().image,
             wallpapers = hypercars,
             isPremium = false
-        )
+        ),
+            WallpaperCollection(
+                id = "epic_mountains_vol_1",
+                title = "Epic Mountains Vol.1",
+                subtitle = "12 Exclusive Mountain Wallpapers",
+                coverImage = epicMountains.first().image,
+                wallpapers = epicMountains,
+                isPremium = false
+            )
     )
 }

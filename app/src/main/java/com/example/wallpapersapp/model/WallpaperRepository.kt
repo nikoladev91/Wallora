@@ -417,6 +417,107 @@ object WallpaperRepository {
             isTopPick = true
         ),
         Wallpaper(
+            name = "Alpine Sunrise",
+            image = R.drawable.mountain_alpine_sunrise,
+            category = "Nature",
+            rating = 5.0,
+            downloads = "33K",
+            badge = "TOP",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Misty Peaks",
+            image = R.drawable.mountain_misty_peaks,
+            category = "Nature",
+            rating = 4.9,
+            downloads = "21K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Frozen Summit",
+            image = R.drawable.mountain_frozen_summit,
+            category = "Nature",
+            rating = 5.0,
+            downloads = "29K",
+            badge = "AMOLED",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Emerald Valley",
+            image = R.drawable.mountain_emerald_valley,
+            category = "Nature",
+            rating = 4.9,
+            downloads = "24K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Golden Ridge",
+            image = R.drawable.mountain_golden_ridge,
+            category = "Nature",
+            rating = 5.0,
+            downloads = "31K",
+            badge = "TOP",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Moonlight Mountains",
+            image = R.drawable.mountain_moonlight,
+            category = "Nature",
+            rating = 4.9,
+            downloads = "26K",
+            badge = "NIGHT"
+        ),
+        Wallpaper(
+            name = "Crystal Lake",
+            image = R.drawable.mountain_crystal_lake,
+            category = "Nature",
+            rating = 5.0,
+            downloads = "35K",
+            badge = "TOP",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Storm Above Peaks",
+            image = R.drawable.mountain_storm_peaks,
+            category = "Nature",
+            rating = 4.8,
+            downloads = "19K",
+            badge = "DRAMA"
+        ),
+        Wallpaper(
+            name = "Autumn Highlands",
+            image = R.drawable.mountain_autumn,
+            category = "Nature",
+            rating = 4.9,
+            downloads = "23K",
+            badge = "NEW"
+        ),
+        Wallpaper(
+            name = "Waterfall Canyon",
+            image = R.drawable.mountain_waterfall,
+            category = "Nature",
+            rating = 5.0,
+            downloads = "28K",
+            badge = "4K"
+        ),
+        Wallpaper(
+            name = "Endless Horizon",
+            image = R.drawable.mountain_horizon,
+            category = "Nature",
+            rating = 4.9,
+            downloads = "25K",
+            badge = "PREMIUM"
+        ),
+        Wallpaper(
+            name = "Aurora Summit",
+            image = R.drawable.mountain_aurora,
+            category = "Nature",
+            rating = 5.0,
+            downloads = "41K",
+            badge = "TOP",
+            isTopPick = true
+        ),
+        Wallpaper(
             name = "Blue Beach",
             image = R.drawable.wallpaper_2,
             category = "Nature",
