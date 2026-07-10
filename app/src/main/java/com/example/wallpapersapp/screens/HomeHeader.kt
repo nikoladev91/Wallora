@@ -19,29 +19,33 @@ fun HomeHeader(
     Text(
         text = title,
         color = Color.White,
-        fontSize = 34.sp,
-        fontWeight = FontWeight.Bold
+        fontSize = 38.sp,
+        fontWeight = FontWeight.ExtraBold
     )
 
     Text(
         text = subtitle,
         color = Color.LightGray,
-        fontSize = 16.sp,
-        modifier = Modifier.padding(top = 4.dp)
+        fontSize = 17.sp,
+        lineHeight = 23.sp,
+        fontWeight = FontWeight.Medium,
+        modifier = Modifier.padding(top = 6.dp)
     )
 
     Text(
         text = stats,
-        color = Color.White.copy(alpha = 0.75f),
-        fontSize = 15.sp,
-        modifier = Modifier.padding(top = 4.dp)
+        color = Color.White.copy(alpha = 0.85f),
+        fontSize = 17.sp,
+        lineHeight = 22.sp,
+        fontWeight = FontWeight.Medium,
+        modifier = Modifier.padding(top = 6.dp)
     )
 
     Text(
         text = favoriteInfo,
-        color = Color(0xFFFF6B81),
-        fontSize = 16.sp,
+        color = Color(0xFFFFC857),
+        fontSize = 17.sp,
         fontWeight = FontWeight.Bold,
-        modifier = Modifier.padding(top = 4.dp)
+        modifier = Modifier.padding(top = 8.dp)
     )
 }

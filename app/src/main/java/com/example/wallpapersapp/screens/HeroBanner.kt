@@ -31,7 +31,7 @@ fun HeroBanner(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(270.dp),
+            .height(230.dp),
         shape = RoundedCornerShape(28.dp)
     ) {
         Box {
@@ -59,7 +59,7 @@ fun HeroBanner(
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
-                    .padding(22.dp)
+                    .padding(18.dp)
             ) {
                 Text(
                     text = "⭐ Wallpaper of the Day",
@@ -68,16 +68,16 @@ fun HeroBanner(
                     fontWeight = FontWeight.Bold
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
                     text = wallpaper.name.uppercase(),
                     color = Color.White,
-                    fontSize = 29.sp,
+                    fontSize = 26.sp,
                     fontWeight = FontWeight.Black
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
                     text = "★★★★★ ${wallpaper.rating}",
@@ -92,7 +92,7 @@ fun HeroBanner(
                     fontSize = 13.sp
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(12.dp))
 
                 Button(
                     onClick = onExploreClick,

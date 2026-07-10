@@ -52,6 +52,8 @@ import androidx.compose.ui.draw.clip
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.TextButton
 @Composable
 fun WallpaperScreen() {
     val wallpapers = WallpaperRepository.wallpapers
@@ -330,7 +332,8 @@ fun FavoritesScreen(
 @Composable
 fun SettingsScreen() {
     val context = LocalContext.current
-    val developerEmail = "contact@wallora.app"
+    val developerEmail = "wallora.support@gmail.com"
+    var showAboutDialog by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -407,7 +410,10 @@ fun SettingsScreen() {
 
         SettingItem(
             title = "ℹ About Wallora",
-            subtitle = "App information"
+            subtitle = "App information",
+            onClick = {
+                showAboutDialog = true
+            }
         )
 
         Spacer(modifier = Modifier.weight(1f))
@@ -428,6 +434,52 @@ fun SettingsScreen() {
             text = "Made with ❤ in Poland",
             color = Color.Gray,
             fontSize = 13.sp
+        )
+    }
+
+    if (showAboutDialog) {
+        AlertDialog(
+            onDismissRequest = {
+                showAboutDialog = false
+            },
+            title = {
+                Text(
+                    text = "Wallora",
+                    fontWeight = FontWeight.Bold
+                )
+            },
+            text = {
+                Column {
+                    Text(
+                        text = "AI • 4K • AMOLED Wallpapers",
+                        fontWeight = FontWeight.Bold
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Text(
+                        text = "Discover premium AI-generated wallpapers designed for Android devices."
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Text(text = "Version 1.0.0")
+                    Text(text = "Support: wallora.support@gmail.com")
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Text(text = "© 2026 Wallora")
+                }
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showAboutDialog = false
+                    }
+                ) {
+                    Text("Close")
+                }
+            }
         )
     }
 }
