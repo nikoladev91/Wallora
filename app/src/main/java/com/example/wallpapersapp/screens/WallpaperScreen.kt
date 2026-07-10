@@ -46,7 +46,12 @@ import com.example.wallpapersapp.monetization.AdManager
 import com.example.wallpapersapp.storage.FavoritesStorage
 import androidx.compose.foundation.lazy.items
 import com.example.wallpapersapp.monetization.AdBanner
-
+import androidx.compose.material3.Divider
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.draw.clip
+import android.content.Intent
+import android.net.Uri
+import androidx.compose.ui.platform.LocalContext
 @Composable
 fun WallpaperScreen() {
     val wallpapers = WallpaperRepository.wallpapers
@@ -324,12 +329,15 @@ fun FavoritesScreen(
 
 @Composable
 fun SettingsScreen() {
+    val context = LocalContext.current
+    val developerEmail = "contact@wallora.app"
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
             .padding(24.dp)
     ) {
+
         Text(
             text = "⚙ Settings",
             color = Color.White,
@@ -339,29 +347,87 @@ fun SettingsScreen() {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        SettingItem(
-            title = "🌙 Dark Theme",
-            subtitle = "Enabled"
+        Text(
+            text = "General",
+            color = Color.Gray,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.SemiBold
         )
+
+        Spacer(modifier = Modifier.height(12.dp))
 
         SettingItem(
             title = "⭐ Rate Wallora",
-            subtitle = "Coming soon"
+            subtitle = "Support the project",
+            onClick = {
+                val intent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=com.example.wallpapersapp")
+                )
+                context.startActivity(intent)
+            }
         )
 
         SettingItem(
             title = "📤 Share Wallora",
-            subtitle = "Coming soon"
+            subtitle = "Invite your friends",
+            onClick = {
+                val sendIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(
+                        Intent.EXTRA_TEXT,
+                        "Check out Wallora - Premium Wallpapers!\n\nhttps://play.google.com/store/apps/details?id=com.example.wallpapersapp"
+                    )
+                    type = "text/plain"
+                }
+
+                val shareIntent = Intent.createChooser(sendIntent, "Share Wallora")
+
+                context.startActivity(shareIntent)
+            }
+        )
+
+        SettingItem(
+            title = "📜 Privacy Policy",
+            subtitle = "Read our privacy policy"
         )
 
         SettingItem(
             title = "📧 Contact Developer",
-            subtitle = "Coming soon"
+            subtitle = "Send feedback",
+            onClick = {
+                val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:$developerEmail")
+                    putExtra(Intent.EXTRA_SUBJECT, "Wallora Feedback")
+                }
+
+                context.startActivity(emailIntent)
+            }
         )
 
         SettingItem(
-            title = "ℹ Version",
-            subtitle = "0.1.0"
+            title = "ℹ About Wallora",
+            subtitle = "App information"
+        )
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        Divider(
+            color = Color.DarkGray
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = "Version 1.0.0",
+            color = Color.Gray,
+            fontSize = 14.sp
+        )
+
+        Text(
+            text = "Made with ❤ in Poland",
+            color = Color.Gray,
+            fontSize = 13.sp
         )
     }
 }
@@ -369,16 +435,16 @@ fun SettingsScreen() {
 @Composable
 fun SettingItem(
     title: String,
-    subtitle: String
+    subtitle: String,
+    onClick: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 10.dp)
-            .background(
-                color = Color(0xFF171717),
-                shape = RoundedCornerShape(18.dp)
-            )
+            .clip(RoundedCornerShape(18.dp))
+            .clickable { onClick() }
+            .background(Color(0xFF171717))
             .padding(16.dp)
     ) {
         Text(
@@ -397,7 +463,6 @@ fun SettingItem(
         )
     }
 }
-
 @Composable
 fun GalleryContent(
     title: String,
