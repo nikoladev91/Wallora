@@ -517,6 +517,15 @@ object WallpaperRepository {
             badge = "TOP",
             isTopPick = true
         ),
+        Wallpaper(
+            name = "Neo Tokyo",
+            image = R.drawable.cyberpunk_neo_tokyo_001,
+            category = "Cyberpunk Cities",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
 
     )
     fun getAllWallpapers(): List<Wallpaper> {

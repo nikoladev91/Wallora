@@ -83,6 +83,12 @@ object CollectionRepository {
             "Aurora Summit"
         )
     }
+
+    private val cyberpunkCities = WallpaperRepository.wallpapers.filter {
+        it.name in listOf(
+            "Neo Tokyo"
+        )
+    }
     val collections = listOf(
         WallpaperCollection(
             id = "neon_animals_vol_1",
@@ -116,13 +122,21 @@ object CollectionRepository {
             wallpapers = hypercars,
             isPremium = false
         ),
-            WallpaperCollection(
-                id = "epic_mountains_vol_1",
-                title = "Epic Mountains Vol.1",
-                subtitle = "12 Exclusive Mountain Wallpapers",
-                coverImage = epicMountains.first().image,
-                wallpapers = epicMountains,
-                isPremium = false
-            )
+        WallpaperCollection(
+            id = "epic_mountains_vol_1",
+            title = "Epic Mountains Vol.1",
+            subtitle = "12 Exclusive Mountain Wallpapers",
+            coverImage = epicMountains.first().image,
+            wallpapers = epicMountains,
+            isPremium = false
+        ),
+        WallpaperCollection(
+            id = "cyberpunk_cities_vol_1",
+            title = "Cyberpunk Cities Vol.1",
+            subtitle = "1 Premium Cyberpunk Wallpaper",
+            coverImage = cyberpunkCities.first().image,
+            wallpapers = cyberpunkCities,
+            isPremium = false
+        )
     )
 }
