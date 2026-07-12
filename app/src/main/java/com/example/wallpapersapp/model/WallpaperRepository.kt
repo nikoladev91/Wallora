@@ -526,6 +526,100 @@ object WallpaperRepository {
             badge = "NEW",
             isTopPick = true
         ),
+        Wallpaper(
+            name = "Neon Alley",
+            image = R.drawable.cyberpunk_neon_alley_002,
+            category = "Cyberpunk Cities",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Skyline 2099",
+            image = R.drawable.cyberpunk_skyline_2099_003,
+            category = "Cyberpunk Cities",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Rain District",
+            image = R.drawable.cyberpunk_rain_district_004,
+            category = "Cyberpunk Cities",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Neon Harbor",
+            image = R.drawable.cyberpunk_neon_harbor_005,
+            category = "Cyberpunk Cities",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Moon Overlook",
+            image = R.drawable.cyberpunk_moon_overlook_006,
+            category = "Cyberpunk Cities",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Sunset Bridge",
+            image = R.drawable.cyberpunk_sunset_bridge_007,
+            category = "Cyberpunk Cities",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Sky Lounge",
+            image = R.drawable.cyberpunk_sky_lounge_008,
+            category = "Cyberpunk Cities",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),Wallpaper(
+            name = "Infinity Pool",
+            image = R.drawable.cyberpunk_infinity_pool_009,
+            category = "Cyberpunk Cities",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW"
+        ),
+        Wallpaper(
+            name = "Penthouse View",
+            image = R.drawable.cyberpunk_penthouse_view_010,
+            category = "Cyberpunk Cities",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW"
+        ),
+        Wallpaper(
+            name = "Night Rider",
+            image = R.drawable.cyberpunk_night_rider_011,
+            category = "Cyberpunk Cities",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW"
+        ),Wallpaper(
+            name = "Cosmic City",
+            image = R.drawable.cyberpunk_cosmic_city_012,
+            category = "Cyberpunk Cities",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW"
+        ),
+
 
     )
     fun getAllWallpapers(): List<Wallpaper> {

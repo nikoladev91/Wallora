@@ -86,7 +86,18 @@ object CollectionRepository {
 
     private val cyberpunkCities = WallpaperRepository.wallpapers.filter {
         it.name in listOf(
-            "Neo Tokyo"
+            "Neo Tokyo",
+            "Neon Alley",
+            "Skyline 2099",
+            "Rain District",
+            "Neon Harbor",
+            "Moon Overlook",
+            "Sunset Bridge",
+            "Sky Lounge",
+            "Infinity Pool",
+            "Penthouse View",
+            "Night Rider",
+            "Cosmic City"
         )
     }
     val collections = listOf(
