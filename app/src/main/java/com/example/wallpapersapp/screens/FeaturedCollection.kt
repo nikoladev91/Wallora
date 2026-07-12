@@ -3,7 +3,14 @@ package com.example.wallpapersapp.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
@@ -18,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.wallpapersapp.model.WallpaperCollection
@@ -30,6 +38,7 @@ fun FeaturedCollection(
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .height(330.dp)
             .clip(RoundedCornerShape(24.dp))
             .background(
                 Brush.horizontalGradient(
@@ -42,8 +51,9 @@ fun FeaturedCollection(
             .clickable { onClick() }
             .padding(20.dp)
     ) {
-        Column {
-
+        Column(
+            modifier = Modifier.fillMaxWidth()
+        ) {
             Image(
                 painter = painterResource(id = collection.coverImage),
                 contentDescription = collection.title,
@@ -60,7 +70,9 @@ fun FeaturedCollection(
                 text = collection.title,
                 color = Color.White,
                 fontSize = 24.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
 
             Spacer(modifier = Modifier.height(4.dp))
@@ -68,10 +80,13 @@ fun FeaturedCollection(
             Text(
                 text = collection.subtitle,
                 color = Color.White.copy(alpha = 0.75f),
-                fontSize = 14.sp
+                fontSize = 14.sp,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.height(40.dp)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.weight(1f))
 
             Row(
                 verticalAlignment = Alignment.CenterVertically
