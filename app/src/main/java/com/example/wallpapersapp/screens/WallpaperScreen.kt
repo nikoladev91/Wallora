@@ -122,7 +122,7 @@ fun WallpaperScreen() {
 
         "New" -> filteredWallpapers.reversed()
 
-        "Editor’s Choice" -> filteredWallpapers.filter {
+        "Editor's Choice" -> filteredWallpapers.filter {
             it.isTopPick
         }
 
@@ -607,37 +607,6 @@ fun GalleryContent(
             }
         }
 
-        item {
-            Text(
-                text = "⭐ Collections",
-                color = Color.White,
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }
-
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState()),
-                horizontalArrangement = Arrangement.spacedBy(14.dp)
-            ) {
-                CollectionRepository.collections.forEach { collection ->
-                    Box(
-                        modifier = Modifier.width(280.dp)
-                    ) {
-                        FeaturedCollection(
-                            collection = collection,
-                            onClick = {
-                                onFeaturedCollectionClick(collection)
-                            }
-                        )
-                    }
-                }
-            }
-        }
-
         if (showSearch) {
             item {
                 SearchSection(
@@ -659,7 +628,7 @@ fun GalleryContent(
 
         item {
             Text(
-                text = "🔥 Today's Trending",
+                text = "Explore Wallpapers",
                 color = Color.White,
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold
@@ -695,7 +664,40 @@ fun GalleryContent(
                 }
 
                 if (rowWallpapers.size == 1) {
-                    Spacer(modifier = Modifier.weight(1f))
+                    Spacer(
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            }
+        }
+
+        item {
+            Text(
+                text = "⭐ Collections",
+                color = Color.White,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(14.dp)
+            ) {
+                CollectionRepository.collections.forEach { collection ->
+                    Box(
+                        modifier = Modifier.width(280.dp)
+                    ) {
+                        FeaturedCollection(
+                            collection = collection,
+                            onClick = {
+                                onFeaturedCollectionClick(collection)
+                            }
+                        )
+                    }
                 }
             }
         }
