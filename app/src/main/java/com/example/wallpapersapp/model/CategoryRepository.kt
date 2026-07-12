@@ -8,10 +8,6 @@ object CategoryRepository {
         Category(name = "🌿 Nature"),
         Category(name = "🌌 Space"),
         Category(name = "🌆 Cyberpunk Cities"),
-        Category(name = "🚗 Cars"),
-        Category(name = "🎮 Gaming"),
-        Category(name = "🖤 AMOLED"),
-        Category(name = "🎨 Abstract"),
-        Category(name = "❤️ Love")
+        Category(name = "🚗 Cars")
     )
 }
