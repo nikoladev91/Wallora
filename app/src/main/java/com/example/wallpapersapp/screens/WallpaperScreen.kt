@@ -55,6 +55,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.TextButton
 import android.os.Build
+import java.util.Calendar
 private fun downloadsToNumber(downloads: String): Int {
     val cleanValue = downloads
         .uppercase()
@@ -573,10 +574,20 @@ fun GalleryContent(
     listState: LazyListState
 ) {
     val heroWallpaper = remember(wallpapers) {
-        wallpapers
+        val dailyWallpapers = wallpapers
             .filter { it.isTopPick }
             .ifEmpty { wallpapers }
-            .randomOrNull()
+
+        if (dailyWallpapers.isEmpty()) {
+            null
+        } else {
+            val dayOfYear = Calendar.getInstance()
+                .get(Calendar.DAY_OF_YEAR)
+
+            val wallpaperIndex = dayOfYear % dailyWallpapers.size
+
+            dailyWallpapers[wallpaperIndex]
+        }
     }
 
     LazyColumn(
@@ -628,6 +639,37 @@ fun GalleryContent(
 
         item {
             Text(
+                text = "⭐ Collections",
+                color = Color.White,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(14.dp)
+            ) {
+                CollectionRepository.collections.forEach { collection ->
+                    Box(
+                        modifier = Modifier.width(280.dp)
+                    ) {
+                        FeaturedCollection(
+                            collection = collection,
+                            onClick = {
+                                onFeaturedCollectionClick(collection)
+                            }
+                        )
+                    }
+                }
+            }
+        }
+
+        item {
+            Text(
                 text = "Explore Wallpapers",
                 color = Color.White,
                 fontSize = 22.sp,
@@ -667,37 +709,6 @@ fun GalleryContent(
                     Spacer(
                         modifier = Modifier.weight(1f)
                     )
-                }
-            }
-        }
-
-        item {
-            Text(
-                text = "⭐ Collections",
-                color = Color.White,
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }
-
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState()),
-                horizontalArrangement = Arrangement.spacedBy(14.dp)
-            ) {
-                CollectionRepository.collections.forEach { collection ->
-                    Box(
-                        modifier = Modifier.width(280.dp)
-                    ) {
-                        FeaturedCollection(
-                            collection = collection,
-                            onClick = {
-                                onFeaturedCollectionClick(collection)
-                            }
-                        )
-                    }
                 }
             }
         }

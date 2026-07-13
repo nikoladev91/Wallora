@@ -1,15 +1,25 @@
 package com.example.wallpapersapp.screens
 
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -18,6 +28,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.wallpapersapp.model.Wallpaper
@@ -28,21 +40,20 @@ fun WallpaperCard(
     isFavorite: Boolean,
     onClick: () -> Unit
 ) {
-    var pressed by remember { mutableStateOf(false) }
+    val interactionSource = remember {
+        MutableInteractionSource()
+    }
+
+    val isPressed by interactionSource.collectIsPressedAsState()
 
     val scale by animateFloatAsState(
-        targetValue = if (pressed) 0.94f else 1f,
-        label = "cardScale"
+        targetValue = if (isPressed) 0.96f else 1f,
+        label = "wallpaperCardScale"
     )
 
     val cardAlpha by animateFloatAsState(
-        targetValue = if (pressed) 0.88f else 1f,
-        label = "cardAlpha"
-    )
-
-    animateDpAsState(
-        targetValue = if (pressed) 2.dp else 8.dp,
-        label = "cardElevation"
+        targetValue = if (isPressed) 0.9f else 1f,
+        label = "wallpaperCardAlpha"
     )
 
     Card(
@@ -51,7 +62,15 @@ fun WallpaperCard(
             .height(250.dp)
             .scale(scale)
             .alpha(cardAlpha)
-            .clickable { onClick() }
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = onClick
+            ),
+        shape = RoundedCornerShape(18.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFF151515)
+        )
     ) {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -63,39 +82,24 @@ fun WallpaperCard(
                 contentScale = ContentScale.Crop
             )
 
-            Box(
-                modifier = Modifier
-                    .align(Alignment.TopStart)
-                    .padding(10.dp)
-                    .background(
-                        Color.Black.copy(alpha = 0.55f),
-                        RoundedCornerShape(50.dp)
-                    )
-                    .padding(horizontal = 10.dp, vertical = 5.dp)
-            ) {
-                Text(
-                    text = if (wallpaper.isTopPick) "👑 TOP PICK" else wallpaper.badge,
-                    color = Color.White,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-
             if (isFavorite) {
                 Box(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(10.dp)
                         .background(
-                            Color.Black.copy(alpha = 0.55f),
-                            RoundedCornerShape(50.dp)
+                            color = Color.Black.copy(alpha = 0.6f),
+                            shape = RoundedCornerShape(50.dp)
                         )
-                        .padding(8.dp)
+                        .padding(
+                            horizontal = 9.dp,
+                            vertical = 6.dp
+                        )
                 ) {
                     Text(
                         text = "❤",
                         color = Color.Red,
-                        fontSize = 16.sp
+                        fontSize = 17.sp
                     )
                 }
             }
@@ -104,23 +108,33 @@ fun WallpaperCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.BottomCenter)
-                    .background(Color.Black.copy(alpha = 0.65f))
-                    .padding(12.dp),
+                    .background(
+                        Color.Black.copy(alpha = 0.68f)
+                    )
+                    .padding(
+                        horizontal = 10.dp,
+                        vertical = 10.dp
+                    ),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = wallpaper.name,
                     color = Color.White,
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Bold
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(
+                    modifier = Modifier.height(3.dp)
+                )
 
                 Text(
-                    text = "★ ${wallpaper.rating} • ${wallpaper.downloads} downloads",
-                    color = Color(0xFFD0D0D0),
-                    fontSize = 12.sp,
+                    text = "★ ${wallpaper.rating}",
+                    color = Color(0xFFFFD54F),
+                    fontSize = 13.sp,
                     fontWeight = FontWeight.Bold
                 )
             }
