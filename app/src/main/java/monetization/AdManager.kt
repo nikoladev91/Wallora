@@ -1,4 +1,4 @@
-package com.example.wallpapersapp.monetization
+package com.example.wallora.monetization
 
 import android.app.Activity
 import android.content.Context
