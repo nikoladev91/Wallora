@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.wallpapersapp.model.Wallpaper
+import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 fun FullScreenWallpaper(
@@ -33,7 +34,7 @@ fun FullScreenWallpaper(
             .background(Color.Black)
     ) {
         Image(
-            painter = painterResource(wallpaper.image),
+            painter = painterResource(id = wallpaper.image),
             contentDescription = wallpaper.name,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
@@ -45,95 +46,185 @@ fun FullScreenWallpaper(
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
-                            Color.Transparent,
                             Color.Black.copy(alpha = 0.15f),
-                            Color.Black.copy(alpha = 0.85f)
+                            Color.Transparent,
+                            Color.Black.copy(alpha = 0.92f)
                         )
                     )
                 )
         )
 
-        Text(
-            text = "← Back",
-            color = Color.White,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
+        Box(
             modifier = Modifier
                 .align(Alignment.TopStart)
-                .padding(start = 22.dp, top = 48.dp)
+                .padding(start = 20.dp, top = 48.dp)
+                .size(48.dp)
                 .background(
-                    Color.Black.copy(alpha = 0.45f),
-                    RoundedCornerShape(50.dp)
+                    color = Color.Black.copy(alpha = 0.55f),
+                    shape = RoundedCornerShape(50.dp)
                 )
-                .clickable { onBack() }
-                .padding(horizontal = 16.dp, vertical = 10.dp)
-        )
+                .clickable {
+                    onBack()
+                },
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "←",
+                color = Color.White,
+                fontSize = 26.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
 
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
-                .padding(horizontal = 22.dp, vertical = 34.dp),
+                .padding(
+                    horizontal = 22.dp,
+                    vertical = 34.dp
+                ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = wallpaper.name,
                 color = Color.White,
                 fontSize = 30.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(
+                modifier = Modifier.height(10.dp)
+            )
+
+            Text(
+                text = "★ ${wallpaper.rating}",
+                color = Color(0xFFFFD54F),
+                fontSize = 17.sp,
                 fontWeight = FontWeight.Bold
             )
 
-            Spacer(modifier = Modifier.height(18.dp))
+            Spacer(
+                modifier = Modifier.height(10.dp)
+            )
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                InfoChip(
+                    text = if (wallpaper.isTopPick) {
+                        "👑 TOP PICK"
+                    } else {
+                        wallpaper.badge
+                    }
+                )
+
+                InfoChip(
+                    text = "⬇ ${wallpaper.downloads}"
+                )
+            }
+
+            Spacer(
+                modifier = Modifier.height(22.dp)
+            )
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                Box(modifier = Modifier.weight(1f)) {
+                Box(
+                    modifier = Modifier.weight(1f)
+                ) {
                     PremiumActionButton(
-                        text = if (isFavorite) "❤️ Favorited" else "🤍 Favorite",
+                        text = if (isFavorite) {
+                            "❤️ Favorited"
+                        } else {
+                            "🤍 Favorite"
+                        },
+                        primary = false,
                         onClick = onFavoriteClick
                     )
                 }
 
-                Box(modifier = Modifier.weight(1f)) {
+                Box(
+                    modifier = Modifier.weight(1f)
+                ) {
                     PremiumActionButton(
                         text = "⬇ Download",
+                        primary = false,
                         onClick = onDownloadClick
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(
+                modifier = Modifier.height(10.dp)
+            )
 
             PremiumActionButton(
                 text = "🖼 Set Wallpaper",
+                primary = true,
                 onClick = onSetWallpaperClick
             )
         }
     }
 }
-
 @Composable
 fun PremiumActionButton(
     text: String,
+    primary: Boolean,
     onClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp)
+            .height(52.dp)
             .background(
-                Color.White.copy(alpha = 0.18f),
-                RoundedCornerShape(18.dp)
+                color = if (primary) {
+                    Color(0xFF64B5F6)
+                } else {
+                    Color.White.copy(alpha = 0.18f)
+                },
+                shape = RoundedCornerShape(18.dp)
             )
-            .clickable { onClick() },
+            .clickable {
+                onClick()
+            },
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
-            color = Color.White,
+            color = if (primary) {
+                Color.Black
+            } else {
+                Color.White
+            },
             fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+@Composable
+fun InfoChip(
+    text: String
+) {
+    Box(
+        modifier = Modifier
+            .background(
+                color = Color.Black.copy(alpha = 0.55f),
+                shape = RoundedCornerShape(50.dp)
+            )
+            .padding(
+                horizontal = 12.dp,
+                vertical = 7.dp
+            )
+    ) {
+        Text(
+            text = text,
+            color = Color.White,
+            fontSize = 13.sp,
             fontWeight = FontWeight.Bold
         )
     }
