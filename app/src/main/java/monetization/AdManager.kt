@@ -2,8 +2,9 @@ package com.example.wallpapersapp.monetization
 
 import android.app.Activity
 import android.content.Context
-import android.widget.Toast
+import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
@@ -12,14 +13,21 @@ object AdManager {
 
     private var wallpaperOpenCount = 0
     private var interstitialAd: InterstitialAd? = null
+    private var isLoadingInterstitial = false
 
     var adsEnabled = true
+
+    private const val INTERSTITIAL_INTERVAL = 6
 
     private const val TEST_INTERSTITIAL_ID =
         "ca-app-pub-3940256099942544/1033173712"
 
     fun loadInterstitial(context: Context) {
         if (!adsEnabled) return
+        if (interstitialAd != null) return
+        if (isLoadingInterstitial) return
+
+        isLoadingInterstitial = true
 
         val adRequest = AdRequest.Builder().build()
 
@@ -28,12 +36,15 @@ object AdManager {
             TEST_INTERSTITIAL_ID,
             adRequest,
             object : InterstitialAdLoadCallback() {
+
                 override fun onAdLoaded(ad: InterstitialAd) {
                     interstitialAd = ad
+                    isLoadingInterstitial = false
                 }
 
                 override fun onAdFailedToLoad(error: LoadAdError) {
                     interstitialAd = null
+                    isLoadingInterstitial = false
                 }
             }
         )
@@ -44,7 +55,7 @@ object AdManager {
 
         wallpaperOpenCount++
 
-        return if (wallpaperOpenCount >= 5) {
+        return if (wallpaperOpenCount >= INTERSTITIAL_INTERVAL) {
             wallpaperOpenCount = 0
             true
         } else {
@@ -57,19 +68,31 @@ object AdManager {
 
         val ad = interstitialAd
 
-        if (ad != null) {
-            ad.show(activity)
-            interstitialAd = null
+        if (ad == null) {
             loadInterstitial(activity)
-        } else {
-            Toast.makeText(
-                activity,
-                "Interstitial not ready yet",
-                Toast.LENGTH_SHORT
-            ).show()
-
-            loadInterstitial(activity)
+            return
         }
+
+        ad.fullScreenContentCallback =
+            object : FullScreenContentCallback() {
+
+                override fun onAdShowedFullScreenContent() {
+                    interstitialAd = null
+                }
+
+                override fun onAdDismissedFullScreenContent() {
+                    loadInterstitial(activity)
+                }
+
+                override fun onAdFailedToShowFullScreenContent(
+                    adError: AdError
+                ) {
+                    interstitialAd = null
+                    loadInterstitial(activity)
+                }
+            }
+
+        ad.show(activity)
     }
 
     fun disableAds() {

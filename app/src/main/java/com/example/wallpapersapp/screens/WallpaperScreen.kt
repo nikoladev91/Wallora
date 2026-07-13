@@ -56,6 +56,9 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.TextButton
 import android.os.Build
 import java.util.Calendar
+import android.app.Activity
+import android.content.ContextWrapper
+import androidx.compose.runtime.LaunchedEffect
 private fun downloadsToNumber(downloads: String): Int {
     val cleanValue = downloads
         .uppercase()
@@ -84,12 +87,27 @@ private fun downloadsToNumber(downloads: String): Int {
         else -> cleanValue.toIntOrNull() ?: 0
     }
 }
+private fun Context.findActivity(): Activity? {
+    var currentContext = this
+
+    while (currentContext is ContextWrapper) {
+        if (currentContext is Activity) {
+            return currentContext
+        }
+
+        currentContext = currentContext.baseContext
+    }
+
+    return currentContext as? Activity
+}
 @Composable
 fun WallpaperScreen() {
     val wallpapers = WallpaperRepository.wallpapers
     val categories = CategoryRepository.categories
     val context = LocalContext.current
-
+    LaunchedEffect(Unit) {
+        AdManager.loadInterstitial(context)
+    }
     var selectedWallpaper by remember { mutableStateOf<Wallpaper?>(null) }
     var showCollectionScreen by remember { mutableStateOf(false) }
     var returnToCollection by remember { mutableStateOf(false) }
@@ -138,14 +156,11 @@ fun WallpaperScreen() {
         returnToCollection = fromCollection
 
         if (AdManager.shouldShowInterstitial()) {
-            Toast.makeText(
-                context,
-                "Ad would show here",
-                Toast.LENGTH_SHORT
-            ).show()
+            context.findActivity()?.let { activity ->
+                AdManager.showInterstitialIfReady(activity)
+            }
         }
     }
-
     if (showCollectionScreen) {
         CollectionScreen(
             collection = selectedCollection,
