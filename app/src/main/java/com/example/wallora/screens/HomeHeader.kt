@@ -33,7 +33,7 @@ fun HomeHeader(
     )
 
     Text(
-        text = stats,
+        text = "Growing Collection",
         color = Color.White.copy(alpha = 0.85f),
         fontSize = 17.sp,
         lineHeight = 22.sp,
@@ -42,7 +42,7 @@ fun HomeHeader(
     )
 
     Text(
-        text = favoriteInfo,
+        text = "✨ Updated Weekly",
         color = Color(0xFFFFC857),
         fontSize = 17.sp,
         fontWeight = FontWeight.Bold,

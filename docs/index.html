@@ -3,151 +3,527 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wallora</title>
+
+    <title>Wallora – Premium Wallpapers</title>
+
+    <meta
+            name="description"
+            content="Discover premium wallpapers, daily picks and stunning collections with Wallora."
+    >
 
     <style>
-
-        body{
-            margin:0;
-            background:#000;
-            color:white;
-            font-family:Arial, Helvetica, sans-serif;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        .container{
-            max-width:900px;
-            margin:auto;
-            padding:70px 30px;
-            text-align:center;
+        html {
+            scroll-behavior: smooth;
         }
 
-        .logo{
-        width:110px;
-         max-width:28vw;
-    height:auto;
-    display:block;
-    margin:0 auto 18px auto;
-}
-
-
-        h1{
-            font-size:54px;
-            margin-bottom:8px;
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    rgba(100, 181, 246, 0.18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 80% 30%,
+                    rgba(156, 39, 176, 0.18),
+                    transparent 35%
+                ),
+                #050505;
+            line-height: 1.6;
         }
 
-        .subtitle{
-            color:#BBBBBB;
-            font-size:22px;
-            margin-bottom:50px;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
-        .card{
-            background:#141414;
-            border-radius:24px;
-            padding:35px;
-            margin-top:35px;
+        .page {
+            width: min(1100px, calc(100% - 40px));
+            margin: 0 auto;
         }
 
-        .button{
-            display:inline-block;
-            margin:10px;
-            padding:16px 30px;
-            border-radius:16px;
-            text-decoration:none;
-            font-weight:bold;
-            transition:.2s;
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 0;
         }
 
-        .play{
-            background:#FFD54F;
-            color:black;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
 
-        .privacy{
-            background:#262626;
-            color:white;
+        .brand img {
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 200, 87, 0.35);
         }
 
-        .button:hover{
-            transform:scale(1.04);
+        .brand-name {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
         }
 
-        .footer{
-            margin-top:60px;
-            color:#777;
-            font-size:14px;
+        nav {
+            display: flex;
+            gap: 22px;
+            color: rgba(255, 255, 255, 0.76);
+            font-size: 14px;
         }
 
-        .email{
-            color:#FFD54F;
-            text-decoration:none;
+        nav a:hover {
+            color: #ffc857;
         }
 
+        .hero {
+            min-height: 68vh;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            align-items: center;
+            gap: 60px;
+            padding: 70px 0 90px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            margin-bottom: 18px;
+            color: #ffc857;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            max-width: 720px;
+            font-size: clamp(48px, 7vw, 82px);
+            line-height: 1.02;
+            letter-spacing: -2px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(
+                90deg,
+                #ffc857,
+                #ffffff,
+                #64b5f6
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-description {
+            max-width: 620px;
+            margin-top: 24px;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 19px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 34px;
+        }
+
+        .button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 52px;
+            padding: 0 24px;
+            border-radius: 16px;
+            font-weight: 800;
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button-primary {
+            color: #050505;
+            background: #ffc857;
+        }
+
+        .button-secondary {
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .logo-card {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 420px;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 34px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.08),
+                    rgba(255, 255, 255, 0.02)
+                );
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+            overflow: hidden;
+        }
+
+        .logo-card::before {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: rgba(255, 200, 87, 0.16);
+            filter: blur(45px);
+        }
+
+        .logo-card img {
+            position: relative;
+            z-index: 1;
+            width: min(330px, 78%);
+            border-radius: 24px;
+        }
+
+        section {
+            padding: 90px 0;
+        }
+
+        .section-heading {
+            max-width: 680px;
+            margin-bottom: 42px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(34px, 5vw, 52px);
+            line-height: 1.1;
+        }
+
+        .section-heading p {
+            margin-top: 16px;
+            color: rgba(255, 255, 255, 0.66);
+            font-size: 17px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature {
+            min-height: 200px;
+            padding: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .feature-icon {
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+            font-size: 21px;
+        }
+
+        .feature p {
+            color: rgba(255, 255, 255, 0.64);
+            font-size: 15px;
+        }
+
+        .contact-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            padding: 38px;
+            border: 1px solid rgba(255, 200, 87, 0.22);
+            border-radius: 28px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 200, 87, 0.10),
+                    rgba(100, 181, 246, 0.08)
+                );
+        }
+
+        .contact-box h2 {
+            font-size: 32px;
+        }
+
+        .contact-box p {
+            margin-top: 8px;
+            color: rgba(255, 255, 255, 0.68);
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 35px 0 45px;
+            color: rgba(255, 255, 255, 0.52);
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 18px;
+        }
+
+        .footer-links a:hover {
+            color: #ffc857;
+        }
+
+        @media (max-width: 820px) {
+            nav {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding-top: 50px;
+            }
+
+            .logo-card {
+                min-height: 330px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-box {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            footer {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page {
+                width: min(100% - 28px, 1100px);
+            }
+
+            header {
+                padding-top: 18px;
+            }
+
+            .brand img {
+                width: 46px;
+                height: 46px;
+            }
+
+            .brand-name {
+                font-size: 21px;
+            }
+
+            h1 {
+                font-size: 46px;
+            }
+
+            .hero-description {
+                font-size: 17px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
     </style>
-
 </head>
 
 <body>
+<div class="page">
 
-<div class="container">
-
-    <img
-            src="assets/wallora-logo.png"
-            alt="Wallora Logo"
-            class="logo"
-    >
-
-    <h1>Wallora</h1>
-
-    <div class="subtitle">
-        AI • 4K • AMOLED Wallpapers
-    </div>
-
-    <div class="card">
-
-        <h2>Premium AI Wallpapers</h2>
-
-        <p>
-            Discover beautiful AI-generated wallpapers designed for AMOLED displays and 4K screens.
-        </p>
-
-        <br>
-
-        <a class="button play" href="#">
-            Google Play (Coming Soon)
+    <header>
+        <a class="brand" href="#">
+            <img
+                    src="assets/wallora-logo.png"
+                    alt="Wallora logo"
+            >
+            <span class="brand-name">Wallora</span>
         </a>
 
-        <a class="button privacy" href="privacy-policy.md">
-            Privacy Policy
-        </a>
+        <nav>
+            <a href="#features">Features</a>
+            <a href="#contact">Contact</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </nav>
+    </header>
 
-    </div>
+    <main>
+        <section class="hero">
+            <div>
+                <span class="eyebrow">Premium wallpapers</span>
 
-    <div class="card">
+                <h1>
+                    Make your screen
+                    <span class="gradient-text">extraordinary.</span>
+                </h1>
 
-        <h2>Contact</h2>
+                <p class="hero-description">
+                    Discover premium wallpapers, daily featured picks
+                    and carefully designed collections for your Android
+                    device.
+                </p>
 
-        <p>
+                <div class="hero-buttons">
+                    <a
+                            class="button button-primary"
+                            href="#features"
+                    >
+                        Explore Wallora
+                    </a>
 
-            <a class="email"
-               href="mailto:wallora.support@gmail.com">
+                    <a
+                            class="button button-secondary"
+                            href="privacy-policy.html"
+                    >
+                        Privacy Policy
+                    </a>
+                </div>
+            </div>
 
-                wallora.support@gmail.com
+            <div class="logo-card">
+                <img
+                        src="assets/wallora-logo.png"
+                        alt="Wallora premium wallpaper application"
+                >
+            </div>
+        </section>
 
-            </a>
+        <section id="features">
+            <div class="section-heading">
+                <span class="eyebrow">Designed for Android</span>
 
-        </p>
+                <h2>
+                    Beautiful wallpapers.
+                    Simple experience.
+                </h2>
 
-    </div>
+                <p>
+                    Wallora makes it easy to discover, save and set
+                    wallpapers that match your style.
+                </p>
+            </div>
 
-    <div class="footer">
+            <div class="features-grid">
+                <article class="feature">
+                    <div class="feature-icon">✨</div>
+                    <h3>Today's Pick</h3>
+                    <p>
+                        Discover a featured wallpaper selected for each
+                        day.
+                    </p>
+                </article>
 
-        © 2026 Wallora. All rights reserved.
+                <article class="feature">
+                    <div class="feature-icon">🖼️</div>
+                    <h3>Premium Collections</h3>
+                    <p>
+                        Browse curated collections including neon,
+                        nature, space, cars and city wallpapers.
+                    </p>
+                </article>
 
-    </div>
+                <article class="feature">
+                    <div class="feature-icon">❤️</div>
+                    <h3>Favorites</h3>
+                    <p>
+                        Save your favorite wallpapers locally and return
+                        to them whenever you want.
+                    </p>
+                </article>
+
+                <article class="feature">
+                    <div class="feature-icon">⬇️</div>
+                    <h3>Easy Download</h3>
+                    <p>
+                        Save a wallpaper directly to your device gallery
+                        with one tap.
+                    </p>
+                </article>
+
+                <article class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h3>Set Wallpaper</h3>
+                    <p>
+                        Apply your selected image as a device wallpaper
+                        directly from the app.
+                    </p>
+                </article>
+
+                <article class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Growing Collection</h3>
+                    <p>
+                        New wallpapers and collections will be added in
+                        future updates.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="contact-box">
+                <div>
+                    <h2>Need help?</h2>
+
+                    <p>
+                        Questions, suggestions or support requests are
+                        always welcome.
+                    </p>
+                </div>
+
+                <a
+                        class="button button-primary"
+                        href="mailto:wallora.support@gmail.com"
+                >
+                    Contact Wallora
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <span>© 2026 Wallora. All rights reserved.</span>
+
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="mailto:wallora.support@gmail.com">Support</a>
+        </div>
+    </footer>
 
 </div>
-
 </body>
-
 </html>

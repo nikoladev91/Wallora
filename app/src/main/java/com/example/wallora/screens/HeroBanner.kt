@@ -2,7 +2,16 @@ package com.example.wallora.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
@@ -19,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.wallora.model.Wallpaper
@@ -31,10 +41,12 @@ fun HeroBanner(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(230.dp),
+            .height(250.dp),
         shape = RoundedCornerShape(28.dp)
     ) {
-        Box {
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
             Image(
                 painter = painterResource(id = wallpaper.image),
                 contentDescription = wallpaper.name,
@@ -47,9 +59,9 @@ fun HeroBanner(
                     .fillMaxSize()
                     .background(
                         Brush.verticalGradient(
-                            listOf(
+                            colors = listOf(
+                                Color.Black.copy(alpha = 0.05f),
                                 Color.Transparent,
-                                Color.Black.copy(alpha = 0.25f),
                                 Color.Black.copy(alpha = 0.92f)
                             )
                         )
@@ -59,60 +71,76 @@ fun HeroBanner(
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
-                    .padding(18.dp)
+                    .fillMaxWidth()
+                    .padding(20.dp)
             ) {
                 Text(
-                    text = "⭐ Wallpaper of the Day",
-                    color = Color(0xFFFFD54F),
-                    fontSize = 14.sp,
+                    text = "✨ TODAY'S PICK",
+                    color = Color(0xFF90CAF9),
+                    fontSize = 13.sp,
                     fontWeight = FontWeight.Bold
                 )
 
-                Spacer(modifier = Modifier.height(6.dp))
+                Spacer(
+                    modifier = Modifier.height(6.dp)
+                )
 
                 Text(
-                    text = wallpaper.name.uppercase(),
+                    text = wallpaper.name,
                     color = Color.White,
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Black
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.Black,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
 
-                Spacer(modifier = Modifier.height(6.dp))
-
-                Text(
-                    text = "★★★★★ ${wallpaper.rating}",
-                    color = Color.White.copy(alpha = 0.92f),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold
+                Spacer(
+                    modifier = Modifier.height(8.dp)
                 )
 
-                Text(
-                    text = "${wallpaper.downloads} Downloads",
-                    color = Color.White.copy(alpha = 0.78f),
-                    fontSize = 13.sp
-                )
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "★ ${wallpaper.rating}",
+                        color = Color(0xFFFFD54F),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold
+                    )
 
-                Spacer(modifier = Modifier.height(12.dp))
+                    Text(
+                        text = "Updated daily",
+                        color = Color.White.copy(alpha = 0.78f),
+                        fontSize = 13.sp
+                    )
+                }
+
+                Spacer(
+                    modifier = Modifier.height(14.dp)
+                )
 
                 Button(
                     onClick = onExploreClick,
                     shape = RoundedCornerShape(50.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White,
+                        containerColor = Color(0xFF64B5F6),
                         contentColor = Color.Black
                     ),
                     modifier = Modifier.height(44.dp)
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowForward,
-                        contentDescription = null
-                    )
-
-                    Spacer(modifier = Modifier.width(8.dp))
-
                     Text(
                         text = "EXPLORE",
                         fontWeight = FontWeight.Bold
+                    )
+
+                    Spacer(
+                        modifier = Modifier.width(8.dp)
+                    )
+
+                    Icon(
+                        imageVector = Icons.Default.ArrowForward,
+                        contentDescription = null
                     )
                 }
             }
