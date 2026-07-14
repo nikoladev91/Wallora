@@ -406,11 +406,23 @@ fun SettingsScreen() {
             title = "⭐ Rate Wallora",
             subtitle = "Support the project",
             onClick = {
-                val intent = Intent(
+                val appPackageName = context.packageName
+
+                val marketIntent = Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=com.example.wallpapersapp")
+                    Uri.parse("market://details?id=$appPackageName")
                 )
-                context.startActivity(intent)
+
+                val webIntent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                )
+
+                try {
+                    context.startActivity(marketIntent)
+                } catch (exception: Exception) {
+                    context.startActivity(webIntent)
+                }
             }
         )
 
@@ -422,7 +434,7 @@ fun SettingsScreen() {
                     action = Intent.ACTION_SEND
                     putExtra(
                         Intent.EXTRA_TEXT,
-                        "Check out Wallora - Premium Wallpapers!\n\nhttps://play.google.com/store/apps/details?id=com.example.wallpapersapp"
+                        "Check out Wallora - Premium Wallpapers!\n\nhttps://play.google.com/store/apps/details?id=com.example.wallora"
                     )
                     type = "text/plain"
                 }
@@ -435,7 +447,14 @@ fun SettingsScreen() {
 
         SettingItem(
             title = "📜 Privacy Policy",
-            subtitle = "Read our privacy policy"
+            subtitle = "Read our privacy policy",
+            onClick = {
+                val intent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://nikoladev91.github.io/Wallora/privacy-policy.html")
+                )
+                context.startActivity(intent)
+            }
         )
 
         SettingItem(
