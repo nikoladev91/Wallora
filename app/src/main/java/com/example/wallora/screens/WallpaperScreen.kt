@@ -486,32 +486,85 @@ fun SettingsScreen() {
                 showAboutDialog = false
             },
             title = {
-                Text(
-                    text = "Wallora",
-                    fontWeight = FontWeight.Bold
-                )
+                Column {
+                    Text(
+                        text = "Wallora",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 24.sp
+                    )
+
+                    Text(
+                        text = "Premium Wallpapers",
+                        color = Color.Gray,
+                        fontSize = 14.sp
+                    )
+                }
             },
             text = {
                 Column {
+
                     Text(
-                        text = "AI • 4K • AMOLED Wallpapers",
+                        text = "✨ AI Crafted Wallpapers",
+                        fontWeight = FontWeight.SemiBold
+                    )
+
+                    Spacer(modifier = Modifier.height(6.dp))
+
+                    Text(
+                        text = "📱 Optimized for AMOLED Displays",
+                        fontWeight = FontWeight.SemiBold
+                    )
+
+                    Spacer(modifier = Modifier.height(6.dp))
+
+                    Text(
+                        text = "🌍 Weekly Wallpaper Collections",
+                        fontWeight = FontWeight.SemiBold
+                    )
+
+                    Spacer(modifier = Modifier.height(6.dp))
+
+                    Text(
+                        text = "❤️ Made in Poland",
+                        fontWeight = FontWeight.SemiBold
+                    )
+
+                    Spacer(modifier = Modifier.height(18.dp))
+
+                    Divider()
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Text(
+                        text = "Version 1.0.0",
+                        color = Color.Gray
+                    )
+
+                    Text(
+                        text = "Developer",
                         fontWeight = FontWeight.Bold
                     )
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(
+                        text = "Nikola Ławniczak"
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "Discover premium AI-generated wallpapers designed for Android devices."
+                        text = "wallora.support@gmail.com",
+                        color = Color.Gray
                     )
 
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    Text(text = "Version 1.0.0")
-                    Text(text = "Support: wallora.support@gmail.com")
+                    Divider()
 
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    Text(text = "© 2026 Wallora")
+                    Text(
+                        text = "© 2026 Wallora"
+                    )
                 }
             },
             confirmButton = {
@@ -526,7 +579,6 @@ fun SettingsScreen() {
         )
     }
 }
-
 @Composable
 fun SettingItem(
     title: String,
