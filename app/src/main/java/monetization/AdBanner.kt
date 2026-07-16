@@ -18,7 +18,7 @@ fun AdBanner(
                 setAdSize(AdSize.BANNER)
 
                 // Oficjalny testowy banner ID Google
-                adUnitId = "ca-app-pub-3940256099942544/6300978111"
+                adUnitId = "ca-app-pub-5924658712397080/6875677333"
 
                 loadAd(AdRequest.Builder().build())
             }

@@ -19,8 +19,8 @@ object AdManager {
 
     private const val INTERSTITIAL_INTERVAL = 6
 
-    private const val TEST_INTERSTITIAL_ID =
-        "ca-app-pub-3940256099942544/1033173712"
+    private const val  INTERSTITIAL_ID=
+        "ca-app-pub-5924658712397080/4734481143"
 
     fun loadInterstitial(context: Context) {
         if (!adsEnabled) return
@@ -33,7 +33,7 @@ object AdManager {
 
         InterstitialAd.load(
             context,
-            TEST_INTERSTITIAL_ID,
+            INTERSTITIAL_ID,
             adRequest,
             object : InterstitialAdLoadCallback() {
 

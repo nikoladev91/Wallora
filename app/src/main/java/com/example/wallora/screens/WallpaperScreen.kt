@@ -665,6 +665,13 @@ fun GalleryContent(
             dailyWallpapers[wallpaperIndex]
         }
     }
+    val displayedWallpapers = if (searchText.isBlank()) {
+        wallpapers
+    } else {
+        wallpapers.filter { wallpaper ->
+            wallpaper.name.contains(searchText.trim(), ignoreCase = true)
+        }
+    }
 
     LazyColumn(
         state = listState,
@@ -712,56 +719,65 @@ fun GalleryContent(
                 )
             }
         }
+        if (searchText.isBlank()) {
+            item {
+                Text(
+                    text = "⭐ Collections",
+                    color = Color.White,
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
 
-        item {
-            Text(
-                text = "⭐ Collections",
-                color = Color.White,
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }
-
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState()),
-                horizontalArrangement = Arrangement.spacedBy(14.dp)
-            ) {
-                CollectionRepository.collections.forEach { collection ->
-                    Box(
-                        modifier = Modifier.width(280.dp)
-                    ) {
-                        FeaturedCollection(
-                            collection = collection,
-                            onClick = {
-                                onFeaturedCollectionClick(collection)
-                            }
-                        )
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState()),
+                    horizontalArrangement = Arrangement.spacedBy(14.dp)
+                ) {
+                    CollectionRepository.collections.forEach { collection ->
+                        Box(
+                            modifier = Modifier.width(280.dp)
+                        ) {
+                            FeaturedCollection(
+                                collection = collection,
+                                onClick = {
+                                    onFeaturedCollectionClick(collection)
+                                }
+                            )
+                        }
                     }
                 }
             }
-        }
 
-        item {
-            Text(
-                text = "Explore Wallpapers",
-                color = Color.White,
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }
+            item {
+                Text(
+                    text = "Explore Wallpapers",
+                    color = Color.White,
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
 
-        item {
-            TrendingSection(
-                selectedTrending = selectedTrending,
-                onTrendingSelected = onTrendingSelected
-            )
+            item {
+                TrendingSection(
+                    selectedTrending = selectedTrending,
+                    onTrendingSelected = onTrendingSelected
+                )
+            }
+        } else {
+            item {
+                Text(
+                    text = "Search results",
+                    color = Color.White,
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
-
         items(
-            items = wallpapers.chunked(2)
+            items = displayedWallpapers.chunked(2)
         ) { rowWallpapers ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
