@@ -1,4 +1,5 @@
 package com.example.wallora.model
+import com.example.wallora.repository.collections.CuteAnimalsCollection
 
 object CollectionRepository {
 
@@ -107,6 +108,14 @@ object CollectionRepository {
             subtitle = "12 Exclusive AMOLED Wallpapers",
             coverImage = neonAnimals.first().image,
             wallpapers = neonAnimals,
+            isPremium = false
+        ),
+        WallpaperCollection(
+            id = "cute_animals_vol_1",
+            title = "Cute Animals Vol.1",
+            subtitle = "12 Adorable Animal Wallpapers",
+            coverImage = CuteAnimalsCollection.wallpapers.first().image,
+            wallpapers = CuteAnimalsCollection.wallpapers,
             isPremium = false
         ),
         WallpaperCollection(

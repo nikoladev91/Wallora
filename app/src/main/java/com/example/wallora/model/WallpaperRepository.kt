@@ -2,10 +2,13 @@ package com.example.wallora.model
 
 import com.example.wallora.R
 import com.example.wallora.repository.collections.AnimalsCollection
+import com.example.wallora.repository.collections.CuteAnimalsCollection
 object WallpaperRepository {
 
     val wallpapers =
-        AnimalsCollection.wallpapers + listOf(
+        AnimalsCollection.wallpapers +
+                CuteAnimalsCollection.wallpapers +
+                listOf(
 
         Wallpaper(
             name = "Black Hole",
@@ -545,7 +548,6 @@ object WallpaperRepository {
         searchQuery: String,
         category: String
     ): List<Wallpaper> {
-
         return wallpapers.filter { wallpaper ->
 
             val matchesSearch =
@@ -557,4 +559,5 @@ object WallpaperRepository {
             matchesSearch && matchesCategory
         }
     }
-}
+    }
+
