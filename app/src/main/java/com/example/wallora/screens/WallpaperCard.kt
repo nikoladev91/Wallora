@@ -127,16 +127,6 @@ fun WallpaperCard(
                     overflow = TextOverflow.Ellipsis
                 )
 
-                Spacer(
-                    modifier = Modifier.height(3.dp)
-                )
-
-                Text(
-                    text = "★ ${wallpaper.rating}",
-                    color = Color(0xFFFFD54F),
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.Bold
-                )
             }
         }
     }

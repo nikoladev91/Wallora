@@ -162,7 +162,7 @@ object CollectionRepository {
         WallpaperCollection(
             id = "cyberpunk_cities_vol_1",
             title = "Cyberpunk Cities Vol.1",
-            subtitle = "1 Premium Cyberpunk Wallpaper",
+            subtitle = "12 Exclusive  Cyberpunk Wallpapers",
             coverImage = cyberpunkCities.first().image,
             wallpapers = cyberpunkCities,
             isPremium = false

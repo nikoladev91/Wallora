@@ -98,17 +98,6 @@ fun FullScreenWallpaper(
                 modifier = Modifier.height(10.dp)
             )
 
-            Text(
-                text = "★ ${wallpaper.rating}",
-                color = Color(0xFFFFD54F),
-                fontSize = 17.sp,
-                fontWeight = FontWeight.Bold
-            )
-
-            Spacer(
-                modifier = Modifier.height(10.dp)
-            )
-
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.CenterVertically
@@ -120,11 +109,11 @@ fun FullScreenWallpaper(
                         wallpaper.badge
                     }
                 )
-
-                InfoChip(
-                    text = "⬇ ${wallpaper.downloads}"
-                )
             }
+
+            Spacer(
+                modifier = Modifier.height(22.dp)
+            )
 
             Spacer(
                 modifier = Modifier.height(22.dp)

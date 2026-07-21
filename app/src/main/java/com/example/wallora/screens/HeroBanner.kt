@@ -97,24 +97,11 @@ fun HeroBanner(
                 Spacer(
                     modifier = Modifier.height(8.dp)
                 )
-
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "★ ${wallpaper.rating}",
-                        color = Color(0xFFFFD54F),
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-
                     Text(
                         text = "Updated daily",
                         color = Color.White.copy(alpha = 0.78f),
                         fontSize = 13.sp
                     )
-                }
 
                 Spacer(
                     modifier = Modifier.height(14.dp)
