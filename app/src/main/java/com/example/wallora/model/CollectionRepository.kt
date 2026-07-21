@@ -1,5 +1,6 @@
 package com.example.wallora.model
 import com.example.wallora.repository.collections.CuteAnimalsCollection
+import com.example.wallora.repository.collections.BeautifulPolandCollection
 
 object CollectionRepository {
 
@@ -116,6 +117,14 @@ object CollectionRepository {
             subtitle = "12 Adorable Animal Wallpapers",
             coverImage = CuteAnimalsCollection.wallpapers.first().image,
             wallpapers = CuteAnimalsCollection.wallpapers,
+            isPremium = false
+        ),
+        WallpaperCollection(
+            id = "beautiful_poland_vol_1",
+            title = "Beautiful Poland Vol.1",
+            subtitle = "12 Iconic Polish Wallpapers",
+            coverImage = BeautifulPolandCollection.wallpapers.first().image,
+            wallpapers = BeautifulPolandCollection.wallpapers,
             isPremium = false
         ),
         WallpaperCollection(
