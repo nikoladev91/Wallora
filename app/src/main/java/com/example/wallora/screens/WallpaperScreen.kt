@@ -182,16 +182,36 @@ fun WallpaperScreen() {
                 )
             },
             onDownloadClick = {
-                val saved = saveWallpaperToGallery(
-                    context = context,
-                    wallpaper = selectedWallpaper!!
-                )
+                val wallpaperToSave = selectedWallpaper
+                    ?: return@FullScreenWallpaper
 
-                Toast.makeText(
-                    context,
-                    if (saved) "Wallpaper saved successfully" else "Could not save wallpaper",
-                    Toast.LENGTH_SHORT
-                ).show()
+                val saveWallpaper = {
+                    val saved = saveWallpaperToGallery(
+                        context = context,
+                        wallpaper = wallpaperToSave
+                    )
+
+                    Toast.makeText(
+                        context,
+                        if (saved) {
+                            "Wallpaper saved successfully"
+                        } else {
+                            "Could not save wallpaper"
+                        },
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                val activity = context as? Activity
+
+                if (activity != null) {
+                    AdManager.showInterstitialBeforeDownload(
+                        activity = activity,
+                        onFinished = saveWallpaper
+                    )
+                } else {
+                    saveWallpaper()
+                }
             },
             onSetWallpaperClick = {
                 val success = setWallpaper(

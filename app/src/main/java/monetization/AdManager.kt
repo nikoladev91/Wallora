@@ -9,15 +9,18 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
+
 object AdManager {
 
     private var wallpaperOpenCount = 0
+    private var downloadCount = 0
     private var interstitialAd: InterstitialAd? = null
     private var isLoadingInterstitial = false
 
     var adsEnabled = true
 
     private const val INTERSTITIAL_INTERVAL = 6
+    private const val DOWNLOAD_INTERSTITIAL_INTERVAL = 3
 
     private const val  INTERSTITIAL_ID=
         "ca-app-pub-5924658712397080/4734481143"
@@ -49,7 +52,18 @@ object AdManager {
             }
         )
     }
+    fun shouldShowDownloadInterstitial(): Boolean {
+        if (!adsEnabled) return false
 
+        downloadCount++
+
+        return if (downloadCount >= DOWNLOAD_INTERSTITIAL_INTERVAL) {
+            downloadCount = 0
+            true
+        } else {
+            false
+        }
+    }
     fun shouldShowInterstitial(): Boolean {
         if (!adsEnabled) return false
 
@@ -89,6 +103,46 @@ object AdManager {
                 ) {
                     interstitialAd = null
                     loadInterstitial(activity)
+                }
+            }
+
+        ad.show(activity)
+    }
+    fun showInterstitialBeforeDownload(
+        activity: Activity,
+        onFinished: () -> Unit
+    ) {
+        if (!adsEnabled || !shouldShowDownloadInterstitial()) {
+            onFinished()
+            return
+        }
+
+        val ad = interstitialAd
+
+        if (ad == null) {
+            loadInterstitial(activity)
+            onFinished()
+            return
+        }
+
+        ad.fullScreenContentCallback =
+            object : FullScreenContentCallback() {
+
+                override fun onAdShowedFullScreenContent() {
+                    interstitialAd = null
+                }
+
+                override fun onAdDismissedFullScreenContent() {
+                    loadInterstitial(activity)
+                    onFinished()
+                }
+
+                override fun onAdFailedToShowFullScreenContent(
+                    adError: AdError
+                ) {
+                    interstitialAd = null
+                    loadInterstitial(activity)
+                    onFinished()
                 }
             }
 
