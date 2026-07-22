@@ -518,6 +518,120 @@ object WallpaperRepository {
             downloads = "New",
             badge = "NEW"
         ),
+                    Wallpaper(
+                        name = "Aries Rocks",
+                        image = R.drawable.zodiac_01_aries,
+                        category = "Zodiac",
+                        rating = 5.0,
+                        downloads = "New",
+                        badge = "NEW",
+                        isTopPick = true
+                    ),
+
+                    Wallpaper(
+                        name = "MOOvision",
+                        image = R.drawable.zodiac_02_taurus,
+                        category = "Zodiac",
+                        rating = 5.0,
+                        downloads = "New",
+                        badge = "NEW",
+                        isTopPick = true
+                    ),
+
+                    Wallpaper(
+                        name = "Gemini Freedom",
+                        image = R.drawable.zodiac_03_gemini,
+                        category = "Zodiac",
+                        rating = 5.0,
+                        downloads = "New",
+                        badge = "NEW",
+                        isTopPick = true
+                    ),
+
+                    Wallpaper(
+                        name = "Crabby's Galaxy Family Resort",
+                        image = R.drawable.zodiac_04_cancer,
+                        category = "Zodiac",
+                        rating = 5.0,
+                        downloads = "New",
+                        badge = "NEW"
+                    ),
+
+                    Wallpaper(
+                        name = "Roarlywood",
+                        image = R.drawable.zodiac_05_leo,
+                        category = "Zodiac",
+                        rating = 5.0,
+                        downloads = "New",
+                        badge = "NEW",
+                        isTopPick = true
+                    ),
+
+                    Wallpaper(
+                        name = "Universe Quality Control",
+                        image = R.drawable.zodiac_06_virgo,
+                        category = "Zodiac",
+                        rating = 5.0,
+                        downloads = "New",
+                        badge = "NEW"
+                    ),
+
+                    Wallpaper(
+                        name = "Balance Bureau",
+                        image = R.drawable.zodiac_07_libra,
+                        category = "Zodiac",
+                        rating = 5.0,
+                        downloads = "New",
+                        badge = "NEW"
+                    ),
+
+                    Wallpaper(
+                        name = "Scorp Syndicate",
+                        image = R.drawable.zodiac_08_scorpio,
+                        category = "Zodiac",
+                        rating = 5.0,
+                        downloads = "New",
+                        badge = "NEW",
+                        isTopPick = true
+                    ),
+
+                    Wallpaper(
+                        name = "Born to Roam",
+                        image = R.drawable.zodiac_09_sagittarius,
+                        category = "Zodiac",
+                        rating = 5.0,
+                        downloads = "New",
+                        badge = "NEW"
+                    ),
+
+                    Wallpaper(
+                        name = "Summit Enterprises",
+                        image = R.drawable.zodiac_10_capricorn,
+                        category = "Zodiac",
+                        rating = 5.0,
+                        downloads = "New",
+                        badge = "NEW",
+                        isTopPick = true
+                    ),
+
+                    Wallpaper(
+                        name = "Galaxy Plumbing Co.",
+                        image = R.drawable.zodiac_11_aquarius,
+                        category = "Zodiac",
+                        rating = 5.0,
+                        downloads = "New",
+                        badge = "NEW"
+                    ),
+
+                    Wallpaper(
+                        name = "Ocean Dreams Studio",
+                        image = R.drawable.zodiac_12_pisces,
+                        category = "Zodiac",
+                        rating = 5.0,
+                        downloads = "New",
+                        badge = "NEW",
+                        isTopPick = true
+                    ),
 
 
     )

@@ -102,7 +102,31 @@ object CollectionRepository {
             "Cosmic City"
         )
     }
+        private val zodiac = WallpaperRepository.wallpapers.filter {
+            it.name in listOf(
+                "Aries Rocks",
+                "MOOvision",
+                "Gemini Freedom",
+                "Crabby's Galaxy Family Resort",
+                "Roarlywood",
+                "Universe Quality Control",
+                "Balance Bureau",
+                "Scorp Syndicate",
+                "Born to Roam",
+                "Summit Enterprises",
+                "Galaxy Plumbing Co.",
+                "Ocean Dreams Studio"
+            )
+    }
     val collections = listOf(
+            WallpaperCollection(
+                id = "zodiac_what_if_vol_1",
+                title = "Zodiac: What If...?",
+                subtitle = "12 Original Zodiac Wallpapers",
+                coverImage = zodiac.first().image,
+                wallpapers = zodiac,
+                isPremium = false
+            ),
         WallpaperCollection(
             id = "neon_animals_vol_1",
             title = "Neon Animals Vol.1",
