@@ -6,65 +6,39 @@ import com.example.wallora.model.Wallpaper
 object BeautifulPolandCollection {
 
     val wallpapers = listOf(
+
         Wallpaper(
-            name = "Mazury Sunrise",
-            image = R.drawable.poland_mazury_sunrise,
+            name = "Aurora Over Morskie Oko",
+            image = R.drawable.aurora_over_morskie_oko,
+            category = "Nature"
+        ),
+
+        Wallpaper(
+            name = "Masurian Sunset",
+            image = R.drawable.masurian_sunset,
+            category = "Nature"
+        ),
+
+        Wallpaper(
+            name = "Spirit of Białowieża",
+            image = R.drawable.spirit_of_bialowieza,
             category = "Nature"
         ),
         Wallpaper(
-            name = "Winter Tatras",
-            image = R.drawable.poland_tatras_winter,
-            category = "Nature"
+            name = "Książ Castle at Twilight",
+            image = R.drawable.ksiaz_castle_twilight,
+            category = "Poland"
         ),
         Wallpaper(
-            name = "Morskie Oko",
-            image = R.drawable.poland_morskie_oko,
-            category = "Nature"
+            name = "Autumn at Wang Temple",
+            image = R.drawable.autumn_wang_temple,
+            category = "Poland"
         ),
         Wallpaper(
-            name = "Bieszczady Autumn",
-            image = R.drawable.poland_bieszczady_autumn,
-            category = "Nature"
-        ),
-        Wallpaper(
-            name = "Baltic Sunset",
-            image = R.drawable.poland_baltic_sunset,
-            category = "Nature"
-        ),
-        Wallpaper(
-            name = "Malbork Castle",
-            image = R.drawable.poland_malbork_castle,
-            category = "Nature"
-        ),
-        Wallpaper(
-            name = "Kraków Old Town",
-            image = R.drawable.poland_krakow_night,
-            category = "Nature"
-        ),
-        Wallpaper(
-            name = "Wrocław Cathedral",
-            image = R.drawable.poland_wroclaw_river,
-            category = "Nature"
-        ),
-        Wallpaper(
-            name = "Warsaw Skyline",
-            image = R.drawable.poland_warsaw_skyline,
-            category = "Nature"
-        ),
-        Wallpaper(
-            name = "Gdańsk Old Town",
-            image = R.drawable.poland_gdansk_old_town,
-            category = "Nature"
-        ),
-        Wallpaper(
-            name = "Białowieża Forest",
-            image = R.drawable.poland_bialowieza_forest,
-            category = "Nature"
-        ),
-        Wallpaper(
-            name = "Polish Rapeseed Fields",
-            image = R.drawable.poland_rapeseed_fields,
-            category = "Nature"
+            name = "Baltic Paradise",
+            image = R.drawable.baltic_paradise,
+            category = "Poland"
         )
+
     )
 }
