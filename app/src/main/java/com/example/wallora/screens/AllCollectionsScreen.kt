@@ -2,7 +2,9 @@ package com.example.wallora.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
@@ -24,7 +26,12 @@ fun AllCollectionsScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
-            .padding(start = 16.dp, end = 16.dp, top = 42.dp, bottom = 16.dp),
+            .padding(
+                start = 16.dp,
+                end = 16.dp,
+                top = 42.dp,
+                bottom = 16.dp
+            ),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
@@ -56,7 +63,10 @@ fun AllCollectionsScreen(
             )
         }
 
-        items(CollectionRepository.collections) { collection ->
+        items(
+            items = CollectionRepository.collections,
+            key = { collection -> collection.title }
+        ) { collection ->
             FeaturedCollection(
                 collection = collection,
                 onClick = {
