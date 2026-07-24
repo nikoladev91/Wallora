@@ -3,7 +3,7 @@ package com.example.wallora.repository.collections
 import com.example.wallora.R
 import com.example.wallora.model.Wallpaper
 
-object BeautifulPolandCollection {
+object PolishWondersCollection {
 
     val wallpapers = listOf(
 
@@ -37,6 +37,25 @@ object BeautifulPolandCollection {
         Wallpaper(
             name = "Baltic Paradise",
             image = R.drawable.baltic_paradise,
+            category = "Poland"
+        ),
+        Wallpaper(
+            name = "Salt Cathedral",
+            image = R.drawable.salt_cathedral,
+            category = "Poland"
+        ),Wallpaper(
+            name = "Kraków After Rain",
+            image = R.drawable.krakow_after_rain,
+            category = "Poland"
+        ),
+        Wallpaper(
+            name = "Warsaw Lights",
+            image = R.drawable.warsaw_lights,
+            category = "Poland"
+        ),
+        Wallpaper(
+            name = "Gothic Toruń",
+            image = R.drawable.gothic_torun,
             category = "Poland"
         )
 

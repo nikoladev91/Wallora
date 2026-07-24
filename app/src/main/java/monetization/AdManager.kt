@@ -13,14 +13,14 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 object AdManager {
 
     private var wallpaperOpenCount = 0
-    private var downloadCount = 0
+    private var premiumActionCount = 0
     private var interstitialAd: InterstitialAd? = null
     private var isLoadingInterstitial = false
 
     var adsEnabled = true
 
     private const val INTERSTITIAL_INTERVAL = 6
-    private const val DOWNLOAD_INTERSTITIAL_INTERVAL = 3
+    private const val PREMIUM_ACTION_INTERVAL = 3
 
     private const val  INTERSTITIAL_ID=
         "ca-app-pub-5924658712397080/4734481143"
@@ -52,13 +52,13 @@ object AdManager {
             }
         )
     }
-    fun shouldShowDownloadInterstitial(): Boolean {
+    fun shouldShowPremiumActionInterstitial(): Boolean {
         if (!adsEnabled) return false
 
-        downloadCount++
+        premiumActionCount++
 
-        return if (downloadCount >= DOWNLOAD_INTERSTITIAL_INTERVAL) {
-            downloadCount = 0
+        return if (premiumActionCount >= PREMIUM_ACTION_INTERVAL) {
+            premiumActionCount = 0
             true
         } else {
             false
@@ -108,11 +108,11 @@ object AdManager {
 
         ad.show(activity)
     }
-    fun showInterstitialBeforeDownload(
+    fun showInterstitialBeforePremiumAction(
         activity: Activity,
         onFinished: () -> Unit
     ) {
-        if (!adsEnabled || !shouldShowDownloadInterstitial()) {
+        if (!adsEnabled || !shouldShowPremiumActionInterstitial()) {
             onFinished()
             return
         }

@@ -72,10 +72,10 @@ fun HeroBanner(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .fillMaxWidth()
-                    .padding(20.dp)
+                    .padding(start = 20.dp, end = 20.dp, bottom = 28.dp)
             ) {
                 Text(
-                    text = "✨ TODAY'S PICK",
+                    text = "✨ FEATURED WALLPAPER",
                     color = Color(0xFF90CAF9),
                     fontSize = 13.sp,
                     fontWeight = FontWeight.Bold
@@ -98,7 +98,7 @@ fun HeroBanner(
                     modifier = Modifier.height(8.dp)
                 )
                     Text(
-                        text = "Updated daily",
+                        text = "Hand-picked for you",
                         color = Color.White.copy(alpha = 0.78f),
                         fontSize = 13.sp
                     )

@@ -3,13 +3,13 @@ package com.example.wallora.model
 import com.example.wallora.R
 import com.example.wallora.repository.collections.AnimalsCollection
 import com.example.wallora.repository.collections.CuteAnimalsCollection
-import com.example.wallora.repository.collections.BeautifulPolandCollection
+import com.example.wallora.repository.collections.PolishWondersCollection
 object WallpaperRepository {
 
     val wallpapers =
         AnimalsCollection.wallpapers +
                 CuteAnimalsCollection.wallpapers +
-                BeautifulPolandCollection.wallpapers +
+                PolishWondersCollection.wallpapers +
                 listOf(
 
         Wallpaper(

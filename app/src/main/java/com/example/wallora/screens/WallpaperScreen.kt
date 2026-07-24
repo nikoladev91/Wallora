@@ -117,12 +117,21 @@ fun WallpaperScreen() {
     }
 
     val filteredWallpapers = wallpapers.filter { wallpaper ->
-        val cleanCategory = selectedCategory.substringAfter(" ").trim()
-        val matchesSearch = wallpaper.name.contains(searchText, ignoreCase = true)
-        val matchesCategory = cleanCategory == "All" || wallpaper.category == cleanCategory
+            val cleanCategory = selectedCategory.substringAfter(" ").trim()
+            val cleanSearch = searchText.trim()
 
-        matchesSearch && matchesCategory
-    }
+            val matchesSearch = cleanSearch.isBlank() ||
+                    wallpaper.name
+                        .split(" ", "-", "_")
+                        .any { word ->
+                            word.equals(cleanSearch, ignoreCase = true)
+                        }
+
+            val matchesCategory =
+                cleanCategory == "All" || wallpaper.category == cleanCategory
+
+            matchesSearch && matchesCategory
+        }
 
     val displayedWallpapers = when (selectedTrending) {
         "Popular" -> filteredWallpapers.sortedByDescending {
@@ -205,7 +214,7 @@ fun WallpaperScreen() {
                 val activity = context as? Activity
 
                 if (activity != null) {
-                    AdManager.showInterstitialBeforeDownload(
+                    AdManager.showInterstitialBeforePremiumAction(
                         activity = activity,
                         onFinished = saveWallpaper
                     )
@@ -214,16 +223,36 @@ fun WallpaperScreen() {
                 }
             },
             onSetWallpaperClick = {
-                val success = setWallpaper(
-                    context = context,
-                    wallpaper = selectedWallpaper!!
-                )
+                val wallpaperToSet = selectedWallpaper
+                    ?: return@FullScreenWallpaper
 
-                Toast.makeText(
-                    context,
-                    if (success) "Wallpaper set successfully" else "Could not set wallpaper",
-                    Toast.LENGTH_SHORT
-                ).show()
+                val setSelectedWallpaper = {
+                    val success = setWallpaper(
+                        context = context,
+                        wallpaper = wallpaperToSet
+                    )
+
+                    Toast.makeText(
+                        context,
+                        if (success) {
+                            "Wallpaper set successfully"
+                        } else {
+                            "Could not set wallpaper"
+                        },
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                val activity = context as? Activity
+
+                if (activity != null) {
+                    AdManager.showInterstitialBeforePremiumAction(
+                        activity = activity,
+                        onFinished = setSelectedWallpaper
+                    )
+                } else {
+                    setSelectedWallpaper()
+                }
             },
             onBack = {
                 selectedWallpaper = null
@@ -274,10 +303,11 @@ fun WallpaperScreen() {
                     "settings" -> SettingsScreen()
                 }
             }
-
             if (selectedTab == "home") {
                 AdBanner(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp)
                 )
             }
 
@@ -786,6 +816,13 @@ fun GalleryContent(
                     onTrendingSelected = onTrendingSelected
                 )
             }
+
+            item {
+                Spacer(
+                    modifier = Modifier.height(20.dp)
+                )
+            }
+
         } else {
             item {
                 Text(
@@ -796,6 +833,7 @@ fun GalleryContent(
                 )
             }
         }
+
         items(
             items = displayedWallpapers.chunked(2)
         ) { rowWallpapers ->

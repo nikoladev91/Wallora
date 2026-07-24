@@ -42,7 +42,7 @@ fun HomeHeader(
     )
 
     Text(
-        text = "✨ Updated Weekly",
+        text = "✨ New Wallpapers Every Week",
         color = Color(0xFFFFC857),
         fontSize = 17.sp,
         fontWeight = FontWeight.Bold,
