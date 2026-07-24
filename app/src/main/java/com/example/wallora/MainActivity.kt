@@ -8,12 +8,13 @@ import androidx.compose.material3.darkColorScheme
 import com.example.wallora.screens.WallpaperScreen
 import com.google.android.gms.ads.MobileAds
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-
+import com.example.wallora.analytics.AnalyticsManager
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
+        AnalyticsManager.init(applicationContext)
         MobileAds.initialize(this)
 
         setContent {

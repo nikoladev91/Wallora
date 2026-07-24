@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "316789276767",
+    "project_id": "wallora-70e28",
+    "storage_bucket": "wallora-70e28.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316789276767:android:c0b7b953080f634c4d9bea",
+        "android_client_info": {
+          "package_name": "com.example.wallora"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQduD3CFxBPM_ISkeKqaVnczRQZ3mYqi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316789276767:android:ae8ba6eee6b8948f4d9bea",
+        "android_client_info": {
+          "package_name": "com.nikoladev91.wallora"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQduD3CFxBPM_ISkeKqaVnczRQZ3mYqi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

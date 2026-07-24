@@ -49,6 +49,11 @@ import java.util.Calendar
 import android.app.Activity
 import android.content.ContextWrapper
 import androidx.compose.runtime.LaunchedEffect
+import com.example.wallora.analytics.AnalyticsManager
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 private fun downloadsToNumber(downloads: String): Int {
     val cleanValue = downloads
         .uppercase()
@@ -95,6 +100,7 @@ fun WallpaperScreen() {
     val wallpapers = WallpaperRepository.wallpapers
     val categories = CategoryRepository.categories
     val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
     LaunchedEffect(Unit) {
         AdManager.loadInterstitial(context)
     }
@@ -151,6 +157,8 @@ fun WallpaperScreen() {
         wallpaper: Wallpaper,
         fromCollection: Boolean
     ) {
+        AnalyticsManager.logWallpaperOpen(wallpaper.name)
+
         selectedWallpaper = wallpaper
         returnToCollection = fromCollection
 
@@ -199,6 +207,9 @@ fun WallpaperScreen() {
                         context = context,
                         wallpaper = wallpaperToSave
                     )
+                    if (saved) {
+                        AnalyticsManager.logWallpaperDownload(wallpaperToSave.name)
+                    }
 
                     Toast.makeText(
                         context,
@@ -226,23 +237,31 @@ fun WallpaperScreen() {
                 val wallpaperToSet = selectedWallpaper
                     ?: return@FullScreenWallpaper
 
-                val setSelectedWallpaper = {
-                    val success = setWallpaper(
-                        context = context,
-                        wallpaper = wallpaperToSet
-                    )
+                val setSelectedWallpaper: () -> Unit = {
+                    coroutineScope.launch {
 
-                    Toast.makeText(
-                        context,
+                        val success = withContext(Dispatchers.IO) {
+                            setWallpaper(
+                                context = context,
+                                wallpaper = wallpaperToSet
+                            )
+                        }
+
                         if (success) {
-                            "Wallpaper set successfully"
-                        } else {
-                            "Could not set wallpaper"
-                        },
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                            AnalyticsManager.logWallpaperSet(wallpaperToSet.name)
+                        }
 
+                        Toast.makeText(
+                            context,
+                            if (success) {
+                                "Wallpaper set successfully"
+                            } else {
+                                "Could not set wallpaper"
+                            },
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
                 val activity = context as? Activity
 
                 if (activity != null) {
