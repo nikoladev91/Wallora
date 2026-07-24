@@ -187,10 +187,13 @@ fun WallpaperScreen() {
             wallpaper = selectedWallpaper!!,
             isFavorite = favoriteNames.contains(selectedWallpaper!!.name),
             onFavoriteClick = {
-                if (favoriteNames.contains(selectedWallpaper!!.name)) {
-                    favoriteNames.remove(selectedWallpaper!!.name)
+                val wallpaperName = selectedWallpaper!!.name
+
+                if (favoriteNames.contains(wallpaperName)) {
+                    favoriteNames.remove(wallpaperName)
                 } else {
-                    favoriteNames.add(selectedWallpaper!!.name)
+                    favoriteNames.add(wallpaperName)
+                    AnalyticsManager.logFavoriteAdd(wallpaperName)
                 }
 
                 FavoritesStorage.saveFavorites(
@@ -202,24 +205,31 @@ fun WallpaperScreen() {
                 val wallpaperToSave = selectedWallpaper
                     ?: return@FullScreenWallpaper
 
-                val saveWallpaper = {
-                    val saved = saveWallpaperToGallery(
-                        context = context,
-                        wallpaper = wallpaperToSave
-                    )
-                    if (saved) {
-                        AnalyticsManager.logWallpaperDownload(wallpaperToSave.name)
-                    }
+                val saveWallpaper: () -> Unit = {
+                    coroutineScope.launch {
+                        val saved = withContext(Dispatchers.IO) {
+                            saveWallpaperToGallery(
+                                context = context,
+                                wallpaper = wallpaperToSave
+                            )
+                        }
 
-                    Toast.makeText(
-                        context,
                         if (saved) {
-                            "Wallpaper saved successfully"
-                        } else {
-                            "Could not save wallpaper"
-                        },
-                        Toast.LENGTH_SHORT
-                    ).show()
+                            AnalyticsManager.logWallpaperDownload(
+                                wallpaperToSave.name
+                            )
+                        }
+
+                        Toast.makeText(
+                            context,
+                            if (saved) {
+                                "Wallpaper saved successfully"
+                            } else {
+                                "Could not save wallpaper"
+                            },
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
 
                 val activity = context as? Activity
@@ -234,6 +244,7 @@ fun WallpaperScreen() {
                 }
             },
             onSetWallpaperClick = {
+
                 val wallpaperToSet = selectedWallpaper
                     ?: return@FullScreenWallpaper
 
@@ -306,6 +317,7 @@ fun WallpaperScreen() {
                         },
                         onFeaturedCollectionClick = { collection ->
                             selectedCollection = collection
+                            AnalyticsManager.logCollectionOpen(collection.title)
                             showCollectionScreen = true
                         },
                         listState = homeListState
