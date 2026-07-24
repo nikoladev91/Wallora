@@ -54,6 +54,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.example.wallora.analytics.CrashlyticsManager
 private fun downloadsToNumber(downloads: String): Int {
     val cleanValue = downloads
         .uppercase()
@@ -158,6 +159,7 @@ fun WallpaperScreen() {
         fromCollection: Boolean
     ) {
         AnalyticsManager.logWallpaperOpen(wallpaper.name)
+        CrashlyticsManager.wallpaperOpened(wallpaper.name)
 
         selectedWallpaper = wallpaper
         returnToCollection = fromCollection
