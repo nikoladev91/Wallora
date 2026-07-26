@@ -7,6 +7,7 @@ object CategoryRepository {
         Category(name = "🐱 Animals"),
         Category(name = "🌿 Nature"),
         Category(name = "🌌 Space"),
+        Category(name = "♈ Zodiac"),
         Category(name = "🌆 Cyberpunk Cities"),
         Category(name = "🚗 Cars")
     )

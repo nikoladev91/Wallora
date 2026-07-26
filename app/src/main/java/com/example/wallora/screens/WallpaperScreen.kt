@@ -56,6 +56,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.wallora.analytics.CrashlyticsManager
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material3.Icon
+
 private fun downloadsToNumber(downloads: String): Int {
     val cleanValue = downloads
         .uppercase()
@@ -234,7 +238,6 @@ fun WallpaperScreen() {
                         ).show()
                     }
                 }
-
                 val activity = context as? Activity
 
                 if (activity != null) {
@@ -858,6 +861,41 @@ fun GalleryContent(
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold
                 )
+            }
+
+            if (displayedWallpapers.isEmpty()) {
+                item {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Search,
+                            contentDescription = null,
+                            tint = Color.Gray,
+                            modifier = Modifier.size(48.dp)
+                        )
+
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        Text(
+                            text = "No wallpapers found",
+                            color = Color.White,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.SemiBold
+                        )
+
+                        Spacer(modifier = Modifier.height(6.dp))
+
+                        Text(
+                            text = "Try another keyword",
+                            color = Color.Gray,
+                            fontSize = 14.sp
+                        )
+                    }
+                }
             }
         }
 

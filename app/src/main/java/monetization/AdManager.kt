@@ -9,11 +9,11 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
-
 object AdManager {
 
     private var wallpaperOpenCount = 0
     private var premiumActionCount = 0
+
     private var interstitialAd: InterstitialAd? = null
     private var isLoadingInterstitial = false
 
@@ -22,7 +22,7 @@ object AdManager {
     private const val INTERSTITIAL_INTERVAL = 6
     private const val PREMIUM_ACTION_INTERVAL = 3
 
-    private const val  INTERSTITIAL_ID=
+    private const val INTERSTITIAL_ID =
         "ca-app-pub-5924658712397080/4734481143"
 
     fun loadInterstitial(context: Context) {
@@ -52,18 +52,7 @@ object AdManager {
             }
         )
     }
-    fun shouldShowPremiumActionInterstitial(): Boolean {
-        if (!adsEnabled) return false
 
-        premiumActionCount++
-
-        return if (premiumActionCount >= PREMIUM_ACTION_INTERVAL) {
-            premiumActionCount = 0
-            true
-        } else {
-            false
-        }
-    }
     fun shouldShowInterstitial(): Boolean {
         if (!adsEnabled) return false
 
@@ -108,11 +97,19 @@ object AdManager {
 
         ad.show(activity)
     }
+
     fun showInterstitialBeforePremiumAction(
         activity: Activity,
         onFinished: () -> Unit
     ) {
-        if (!adsEnabled || !shouldShowPremiumActionInterstitial()) {
+        if (!adsEnabled) {
+            onFinished()
+            return
+        }
+
+        premiumActionCount++
+
+        if (premiumActionCount < PREMIUM_ACTION_INTERVAL) {
             onFinished()
             return
         }
@@ -121,9 +118,15 @@ object AdManager {
 
         if (ad == null) {
             loadInterstitial(activity)
+
+            // Nie zerujemy licznika.
+            // Reklama pokaże się przy kolejnej próbie,
+            // gdy będzie już załadowana.
             onFinished()
             return
         }
+
+        premiumActionCount = 0
 
         ad.fullScreenContentCallback =
             object : FullScreenContentCallback() {
