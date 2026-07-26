@@ -125,15 +125,6 @@ fun FullScreenWallpaper(
                         ),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    InfoChip(
-                        text = if (wallpaper.isTopPick) {
-                            "✨ WALLORA ORIGINAL"
-                        } else {
-                            wallpaper.badge
-                        }
-                    )
-
-                    Spacer(modifier = Modifier.height(14.dp))
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),

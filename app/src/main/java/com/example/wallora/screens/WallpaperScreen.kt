@@ -55,6 +55,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.wallora.analytics.CrashlyticsManager
+import androidx.compose.foundation.layout.statusBarsPadding
 private fun downloadsToNumber(downloads: String): Int {
     val cleanValue = downloads
         .uppercase()
@@ -399,7 +400,9 @@ fun FavoritesScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
-            .padding(16.dp)
+            .statusBarsPadding()
+            .padding(horizontal = 16.dp)
+
     ) {
         Text(
             text = "❤️ Favorites",
@@ -411,7 +414,7 @@ fun FavoritesScreen(
         Spacer(modifier = Modifier.height(6.dp))
 
         Text(
-            text = "${wallpapers.size} saved wallpapers",
+            text = "${wallpapers.size} wallpapers saved",
             color = Color.LightGray,
             fontSize = 14.sp
         )
@@ -474,16 +477,7 @@ fun SettingsScreen() {
             fontWeight = FontWeight.Bold
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
-
-        Text(
-            text = "General",
-            color = Color.Gray,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.SemiBold
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         SettingItem(
             title = "⭐ Rate Wallora",
@@ -554,7 +548,7 @@ fun SettingsScreen() {
         )
 
         SettingItem(
-            title = "ℹ About Wallora",
+            title = "ℹ️ About Wallora",
             subtitle = "App information",
             onClick = {
                 showAboutDialog = true
