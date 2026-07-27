@@ -48,6 +48,7 @@ import android.os.Build
 import java.util.Calendar
 import android.app.Activity
 import android.content.ContextWrapper
+import android.graphics.Bitmap
 import androidx.compose.runtime.LaunchedEffect
 import com.example.wallora.analytics.AnalyticsManager
 import androidx.compose.runtime.rememberCoroutineScope
@@ -59,6 +60,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
+
 
 private fun downloadsToNumber(downloads: String): Int {
     val cleanValue = downloads
@@ -1018,8 +1020,10 @@ fun saveWallpaperToGallery(
 
 fun setWallpaper(context: Context, wallpaper: Wallpaper): Boolean {
     return try {
-        val bitmap = BitmapFactory.decodeResource(context.resources, wallpaper.image)
-            ?: return false
+        val bitmap = BitmapFactory.decodeResource(
+            context.resources,
+            wallpaper.image
+        ) ?: return false
 
         val wallpaperManager = WallpaperManager.getInstance(context)
         wallpaperManager.setBitmap(bitmap)
@@ -1030,6 +1034,8 @@ fun setWallpaper(context: Context, wallpaper: Wallpaper): Boolean {
         false
     }
 }
+
+
 
 @Composable
 fun TrendingChip(text: String) {
