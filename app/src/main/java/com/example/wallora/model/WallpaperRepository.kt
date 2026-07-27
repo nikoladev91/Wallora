@@ -4,12 +4,14 @@ import com.example.wallora.R
 import com.example.wallora.repository.collections.AnimalsCollection
 import com.example.wallora.repository.collections.CuteAnimalsCollection
 import com.example.wallora.repository.collections.PolishWondersCollection
+import com.example.wallora.repository.collections.FantasyRealmsCollection
 object WallpaperRepository {
 
     val wallpapers =
         AnimalsCollection.wallpapers +
                 CuteAnimalsCollection.wallpapers +
                 PolishWondersCollection.wallpapers +
+                FantasyRealmsCollection.wallpapers +
                 listOf(
 
         Wallpaper(

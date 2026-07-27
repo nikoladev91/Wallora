@@ -1,6 +1,7 @@
 package com.example.wallora.model
 import com.example.wallora.repository.collections.CuteAnimalsCollection
 import com.example.wallora.repository.collections.PolishWondersCollection
+import com.example.wallora.repository.collections.FantasyRealmsCollection
 
 object CollectionRepository {
 
@@ -150,6 +151,14 @@ object CollectionRepository {
             subtitle = "10 Magical Places in Poland",
             coverImage = PolishWondersCollection.wallpapers.first().image,
             wallpapers = PolishWondersCollection.wallpapers,
+            isPremium = false
+        ),
+        WallpaperCollection(
+            id = "fantasy_realms_vol_1",
+            title = "Fantasy Realms Vol. 1",
+            subtitle = "Magical Castles and Enchanted Worlds",
+            coverImage = FantasyRealmsCollection.wallpapers.first().image,
+            wallpapers = FantasyRealmsCollection.wallpapers,
             isPremium = false
         ),
         WallpaperCollection(
