@@ -34,5 +34,14 @@ object FantasyRealmsCollection {
             badge = "NEW",
             isTopPick = true
         ),
+        Wallpaper(
+            name = "Elven Sanctuary",
+            image = R.drawable.fantasy_castle_04,
+            category = "Fantasy",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
     )
 }
