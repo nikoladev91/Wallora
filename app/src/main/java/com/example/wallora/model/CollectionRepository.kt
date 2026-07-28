@@ -2,6 +2,7 @@ package com.example.wallora.model
 import com.example.wallora.repository.collections.CuteAnimalsCollection
 import com.example.wallora.repository.collections.PolishWondersCollection
 import com.example.wallora.repository.collections.FantasyRealmsCollection
+import com.example.wallora.repository.collections.ChibiDragonsCollection
 
 object CollectionRepository {
 
@@ -159,6 +160,14 @@ object CollectionRepository {
             subtitle = "Magical Castles and Enchanted Worlds",
             coverImage = FantasyRealmsCollection.wallpapers.first().image,
             wallpapers = FantasyRealmsCollection.wallpapers,
+            isPremium = false
+        ),
+        WallpaperCollection(
+            id = "chibi_dragons",
+            title = "Chibi Dragons",
+            subtitle = "Cute Baby Dragons in Magical Worlds",
+            coverImage = ChibiDragonsCollection.wallpapers.first().image,
+            wallpapers = ChibiDragonsCollection.wallpapers,
             isPremium = false
         ),
         WallpaperCollection(
