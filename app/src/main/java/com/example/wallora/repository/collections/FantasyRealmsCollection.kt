@@ -16,7 +16,7 @@ object FantasyRealmsCollection {
             badge = "NEW",
             isTopPick = true
         ),
-                Wallpaper(
+        Wallpaper(
                 name = "Moonlit Kingdom",
         image = R.drawable.fantasy_castle_02,
         category = "Fantasy",
@@ -24,7 +24,15 @@ object FantasyRealmsCollection {
         downloads = "New",
         badge = "NEW",
         isTopPick = true
-    )
-
+    ),
+        Wallpaper(
+            name = "Crystal Castle",
+            image = R.drawable.fantasy_castle_03,
+            category = "Fantasy",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
     )
 }
