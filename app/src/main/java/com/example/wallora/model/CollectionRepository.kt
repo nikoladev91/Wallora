@@ -4,6 +4,7 @@ import com.example.wallora.repository.collections.PolishWondersCollection
 import com.example.wallora.repository.collections.FantasyRealmsCollection
 import com.example.wallora.repository.collections.ChibiDragonsCollection
 import com.example.wallora.repository.collections.FunnyDinosaursCollection
+import com.example.wallora.repository.collections.FoodMonstersCollection
 
 object CollectionRepository {
 
@@ -218,6 +219,14 @@ object CollectionRepository {
             coverImage = cyberpunkCities.first().image,
             wallpapers = cyberpunkCities,
             isPremium = false
-        )
+        ),
+        WallpaperCollection(
+            id = "food_monsters_vol_1",
+            title = "Food Monsters Vol. 1",
+            subtitle = "10 Delicious Little Monsters",
+            coverImage = FoodMonstersCollection.wallpapers.first().image,
+            wallpapers = FoodMonstersCollection.wallpapers,
+            isPremium = false
+        ),
     )
 }
