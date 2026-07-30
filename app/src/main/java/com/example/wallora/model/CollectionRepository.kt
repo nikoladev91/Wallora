@@ -3,6 +3,7 @@ import com.example.wallora.repository.collections.CuteAnimalsCollection
 import com.example.wallora.repository.collections.PolishWondersCollection
 import com.example.wallora.repository.collections.FantasyRealmsCollection
 import com.example.wallora.repository.collections.ChibiDragonsCollection
+import com.example.wallora.repository.collections.FunnyDinosaursCollection
 
 object CollectionRepository {
 
@@ -168,6 +169,14 @@ object CollectionRepository {
             subtitle = "Cute Baby Dragons in Magical Worlds",
             coverImage = ChibiDragonsCollection.wallpapers.first().image,
             wallpapers = ChibiDragonsCollection.wallpapers,
+            isPremium = false
+        ),
+        WallpaperCollection(
+            id = "funny_dinosaurs_vol_1",
+            title = "Funny Dinosaurs Vol. 1",
+            subtitle = "10 Funny Dinosaur Adventures",
+            coverImage = FunnyDinosaursCollection.wallpapers.first().image,
+            wallpapers = FunnyDinosaursCollection.wallpapers,
             isPremium = false
         ),
         WallpaperCollection(
