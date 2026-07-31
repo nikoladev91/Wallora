@@ -34,6 +34,70 @@ object FoodMonstersCollection {
             badge = "NEW",
             isTopPick = true
         ),
+        Wallpaper(
+            name = "Popcorn Monster",
+            image = R.drawable.food_monster_04,
+            category = "Funny",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Watermelon Monster",
+            image = R.drawable.food_monster_05,
+            category = "Funny",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Cookie Monster",
+            image = R.drawable.food_monster_06,
+            category = "Funny",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Strawberry Monster",
+            image = R.drawable.food_monster_07,
+            category = "Funny",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Pancake Monster",
+            image = R.drawable.food_monster_08,
+            category = "Funny",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Ice Cream Monster",
+            image = R.drawable.food_monster_09,
+            category = "Funny",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
+        Wallpaper(
+            name = "Cupcake Monster",
+            image = R.drawable.food_monster_10,
+            category = "Funny",
+            rating = 5.0,
+            downloads = "New",
+            badge = "NEW",
+            isTopPick = true
+        ),
+
 
     )
 }
