@@ -22,11 +22,13 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.wallora.model.Wallpaper
+import com.example.wallora.ui.theme.WalloraAccent
 import kotlinx.coroutines.delay
 
 @Composable
@@ -38,8 +40,27 @@ fun FullScreenWallpaper(
     onSetWallpaperClick: () -> Unit,
     onBack: () -> Unit
 ) {
+
     var controlsVisible by remember(wallpaper.image) {
         mutableStateOf(true)
+    }
+
+    val context = LocalContext.current
+
+    val ratingPreferences = remember {
+        context.getSharedPreferences(
+            "wallora_ratings",
+            android.content.Context.MODE_PRIVATE
+        )
+    }
+
+    var userRating by remember(wallpaper.name) {
+        mutableStateOf(
+            ratingPreferences.getInt(
+                "rating_${wallpaper.name}",
+                0
+            )
+        )
     }
 
     LaunchedEffect(controlsVisible, wallpaper.image) {
@@ -59,6 +80,7 @@ fun FullScreenWallpaper(
                 }
             }
     ) {
+
         Image(
             painter = painterResource(id = wallpaper.image),
             contentDescription = wallpaper.name,
@@ -69,15 +91,18 @@ fun FullScreenWallpaper(
                 ContentScale.Crop
             }
         )
+
         AnimatedVisibility(
             visible = controlsVisible,
             enter = fadeIn(),
             exit = fadeOut(),
             modifier = Modifier.fillMaxSize()
         ) {
+
             Box(
                 modifier = Modifier.fillMaxSize()
             ) {
+
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -92,6 +117,7 @@ fun FullScreenWallpaper(
                         )
                 )
 
+                // Back button
                 Box(
                     modifier = Modifier
                         .align(Alignment.TopStart)
@@ -114,22 +140,78 @@ fun FullScreenWallpaper(
                     )
                 }
 
+                // Bottom controls
                 Column(
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .fillMaxWidth()
+                        .navigationBarsPadding()
                         .padding(
                             start = 18.dp,
                             end = 18.dp,
-                            bottom = 22.dp
+                            bottom = 12.dp
                         ),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
+                    // Rating
+                    Text(
+                        text = if (userRating == 0) {
+                            "Rate this wallpaper"
+                        } else {
+                            "Your rating"
+                        },
+                        color = Color.White,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+
+                        for (star in 1..5) {
+
+                            Text(
+                                text = if (star <= userRating) {
+                                    "★"
+                                } else {
+                                    "☆"
+                                },
+                                color = if (star <= userRating) {
+                                    WalloraAccent
+                                } else {
+                                    Color.White
+                                },
+                                fontSize = 28.sp,
+                                modifier = Modifier
+                                    .clickable {
+                                        userRating = star
+
+                                        ratingPreferences
+                                            .edit()
+                                            .putInt(
+                                                "rating_${wallpaper.name}",
+                                                star
+                                            )
+                                            .apply()
+                                    }
+                                    .padding(horizontal = 3.dp)
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    // Favorite + Download
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
+
                         Box(
                             modifier = Modifier.weight(1f)
                         ) {
@@ -157,6 +239,7 @@ fun FullScreenWallpaper(
 
                     Spacer(modifier = Modifier.height(9.dp))
 
+                    // Set wallpaper
                     PremiumActionButton(
                         text = "🖼 Set Wallpaper",
                         primary = true,
@@ -174,13 +257,14 @@ fun PremiumActionButton(
     primary: Boolean,
     onClick: () -> Unit
 ) {
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(44.dp)
             .background(
                 color = if (primary) {
-                    Color(0xFF64B5F6)
+                    WalloraAccent
                 } else {
                     Color.Black.copy(alpha = 0.68f)
                 },
@@ -191,6 +275,7 @@ fun PremiumActionButton(
             },
         contentAlignment = Alignment.Center
     ) {
+
         Text(
             text = text,
             color = if (primary) {
@@ -208,6 +293,7 @@ fun PremiumActionButton(
 fun InfoChip(
     text: String
 ) {
+
     Box(
         modifier = Modifier
             .background(
@@ -219,6 +305,7 @@ fun InfoChip(
                 vertical = 6.dp
             )
     ) {
+
         Text(
             text = text,
             color = Color.White,

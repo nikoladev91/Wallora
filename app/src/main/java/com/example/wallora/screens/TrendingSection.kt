@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.wallora.ui.theme.WalloraAccent
 
 @Composable
 fun TrendingSection(
@@ -66,7 +67,7 @@ fun TrendingChipButton(
         modifier = Modifier
             .background(
                 color = if (selected) {
-                    Color(0xFF64B5F6)
+                    WalloraAccent
                 } else {
                     Color(0xFF1E1E1E)
                 },

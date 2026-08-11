@@ -32,6 +32,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.wallora.model.Wallpaper
+import com.example.wallora.ui.theme.WalloraAccent
 
 @Composable
 fun HeroBanner(
@@ -111,7 +112,7 @@ fun HeroBanner(
                     onClick = onExploreClick,
                     shape = RoundedCornerShape(50.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF64B5F6),
+                        containerColor = WalloraAccent,
                         contentColor = Color.Black
                     ),
                     modifier = Modifier.height(44.dp)

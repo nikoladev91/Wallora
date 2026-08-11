@@ -60,6 +60,10 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
+import com.example.wallora.ui.theme.WalloraAccent
+import com.example.wallora.ui.theme.WalloraBackground
+import androidx.compose.foundation.border
+import androidx.compose.foundation.shape.CircleShape
 
 
 private fun downloadsToNumber(downloads: String): Int {
@@ -404,7 +408,7 @@ fun FavoritesScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(WalloraBackground)
             .statusBarsPadding()
             .padding(horizontal = 16.dp)
 
@@ -468,10 +472,26 @@ fun SettingsScreen() {
     val context = LocalContext.current
     val developerEmail = "wallora.support@gmail.com"
     var showAboutDialog by remember { mutableStateOf(false) }
+
+    val preferences = remember {
+        context.getSharedPreferences(
+            "wallora_preferences",
+            android.content.Context.MODE_PRIVATE
+        )
+    }
+
+    fun changeBackground(color: Color, colorValue: Long) {
+        WalloraBackground = color
+
+        preferences.edit()
+            .putLong("background_color", colorValue)
+            .apply()
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(WalloraBackground)
             .padding(24.dp)
     ) {
 
@@ -483,6 +503,92 @@ fun SettingsScreen() {
         )
 
         Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = "Background color",
+            color = Color.White,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.height(4.dp))
+
+        Text(
+            text = "Choose your Wallora style",
+            color = Color.Gray,
+            fontSize = 13.sp
+        )
+
+        Spacer(modifier = Modifier.height(14.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.Top
+        ) {
+
+            BackgroundColorOption(
+                name = "Black",
+                color = Color(0xFF000000),
+                selected = WalloraBackground == Color(0xFF000000),
+                onClick = {
+                    changeBackground(
+                        Color(0xFF000000),
+                        0xFF000000
+                    )
+                }
+            )
+
+            BackgroundColorOption(
+                name = "Charcoal",
+                color = Color(0xFF1A1A1A),
+                selected = WalloraBackground == Color(0xFF1A1A1A),
+                onClick = {
+                    changeBackground(
+                        Color(0xFF1A1A1A),
+                        0xFF1A1A1A
+                    )
+                }
+            )
+
+            BackgroundColorOption(
+                name = "Navy",
+                color = Color(0xFF0D1B2A),
+                selected = WalloraBackground == Color(0xFF0D1B2A),
+                onClick = {
+                    changeBackground(
+                        Color(0xFF0D1B2A),
+                        0xFF0D1B2A
+                    )
+                }
+            )
+
+            BackgroundColorOption(
+                name = "Purple",
+                color = Color(0xFF1B1028),
+                selected = WalloraBackground == Color(0xFF1B1028),
+                onClick = {
+                    changeBackground(
+                        Color(0xFF1B1028),
+                        0xFF1B1028
+                    )
+                }
+            )
+
+            BackgroundColorOption(
+                name = "Rose",
+                color = Color(0xFF2A101A),
+                selected = WalloraBackground == Color(0xFF2A101A),
+                onClick = {
+                    changeBackground(
+                        Color(0xFF2A101A),
+                        0xFF2A101A
+                    )
+                }
+            )
+        }
+
+        Spacer(modifier = Modifier.height(18.dp))
 
         SettingItem(
             title = "⭐ Rate Wallora",
@@ -521,7 +627,8 @@ fun SettingsScreen() {
                     type = "text/plain"
                 }
 
-                val shareIntent = Intent.createChooser(sendIntent, "Share Wallora")
+                val shareIntent =
+                    Intent.createChooser(sendIntent, "Share Wallora")
 
                 context.startActivity(shareIntent)
             }
@@ -533,8 +640,11 @@ fun SettingsScreen() {
             onClick = {
                 val intent = Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("https://nikoladev91.github.io/Wallora/privacy-policy.html")
+                    Uri.parse(
+                        "https://nikoladev91.github.io/Wallora/privacy-policy.html"
+                    )
                 )
+
                 context.startActivity(intent)
             }
         )
@@ -543,10 +653,14 @@ fun SettingsScreen() {
             title = "📧 Contact Developer",
             subtitle = "Send feedback",
             onClick = {
-                val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
-                    data = Uri.parse("mailto:$developerEmail")
-                    putExtra(Intent.EXTRA_SUBJECT, "Wallora Feedback")
-                }
+                val emailIntent =
+                    Intent(Intent.ACTION_SENDTO).apply {
+                        data = Uri.parse("mailto:$developerEmail")
+                        putExtra(
+                            Intent.EXTRA_SUBJECT,
+                            "Wallora Feedback"
+                        )
+                    }
 
                 context.startActivity(emailIntent)
             }
@@ -582,12 +696,15 @@ fun SettingsScreen() {
     }
 
     if (showAboutDialog) {
+
         AlertDialog(
             onDismissRequest = {
                 showAboutDialog = false
             },
+
             title = {
                 Column {
+
                     Text(
                         text = "Wallora",
                         fontWeight = FontWeight.Bold,
@@ -601,6 +718,7 @@ fun SettingsScreen() {
                     )
                 }
             },
+
             text = {
                 Column {
 
@@ -668,6 +786,7 @@ fun SettingsScreen() {
                     )
                 }
             },
+
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -680,21 +799,86 @@ fun SettingsScreen() {
         )
     }
 }
+
+
+@Composable
+fun BackgroundColorOption(
+    name: String,
+    color: Color,
+    selected: Boolean,
+    onClick: () -> Unit
+) {
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .width(58.dp)
+            .clickable {
+                onClick()
+            }
+    ) {
+
+        Box(
+            modifier = Modifier
+                .size(46.dp)
+                .background(
+                    color = color,
+                    shape = CircleShape
+                )
+                .border(
+                    width = if (selected) 3.dp else 1.dp,
+                    color = if (selected) Color.White else Color.Gray,
+                    shape = CircleShape
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+
+            if (selected) {
+                Text(
+                    text = "✓",
+                    color = Color.White,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(6.dp))
+
+        Text(
+            text = name,
+            color = if (selected) Color.White else Color.LightGray,
+            fontSize = 11.sp,
+            fontWeight = if (selected) {
+                FontWeight.Bold
+            } else {
+                FontWeight.Normal
+            },
+            maxLines = 1
+        )
+    }
+}
+
+
 @Composable
 fun SettingItem(
     title: String,
     subtitle: String,
     onClick: () -> Unit = {}
 ) {
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 10.dp)
             .clip(RoundedCornerShape(18.dp))
-            .clickable { onClick() }
+            .clickable {
+                onClick()
+            }
             .background(Color(0xFF171717))
             .padding(16.dp)
     ) {
+
         Text(
             text = title,
             color = Color.White,
@@ -759,7 +943,7 @@ fun GalleryContent(
         state = listState,
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(WalloraBackground)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -945,7 +1129,7 @@ fun CategoryButton(
         modifier = Modifier
             .padding(end = 8.dp)
             .background(
-                color = if (selected) Color(0xFF64B5F6) else Color(0xFF222222),
+                color = if (selected) WalloraAccent else Color(0xFF222222),
                 shape = RoundedCornerShape(18.dp)
             )
             .clickable { onClick() }

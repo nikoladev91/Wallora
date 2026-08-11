@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
+import com.example.wallora.ui.theme.WalloraAccent
 @Composable
 fun BottomMenu(
     selectedTab: String,
@@ -53,7 +53,7 @@ fun MenuItem(
 ) {
     Text(
         text = text,
-        color = if (selected) Color(0xFF64B5F6) else Color.White,
+        color = if (selected) WalloraAccent else Color.White,
         fontSize = if (selected) 17.sp else 15.sp,
         fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
         modifier = Modifier

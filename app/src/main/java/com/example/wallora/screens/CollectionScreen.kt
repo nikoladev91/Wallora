@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.wallora.model.Wallpaper
 import com.example.wallora.model.WallpaperCollection
-
+import com.example.wallora.ui.theme.WalloraBackground
 @Composable
 fun CollectionScreen(
     collection: WallpaperCollection,
@@ -26,7 +26,7 @@ fun CollectionScreen(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(WalloraBackground)
             .padding(start = 16.dp, end = 16.dp, top = 42.dp, bottom = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
