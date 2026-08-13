@@ -30,9 +30,12 @@ android {
             optimization {
                 enable = false
             }
+
+            ndk {
+                debugSymbolLevel = "SYMBOL_TABLE"
+            }
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
