@@ -14,7 +14,11 @@ object CuteAnimalsCollection {
             rating = 5.0,
             downloads = "New",
             badge = "NEW",
-            isTopPick = true
+            isTopPick = true,
+            tags = listOf(
+                "panda", "bear", "animal", "cute", "adorable",
+                "wildlife", "china", "bamboo", "fluffy"
+            )
         ),
 
         Wallpaper(
@@ -24,7 +28,11 @@ object CuteAnimalsCollection {
             rating = 5.0,
             downloads = "New",
             badge = "NEW",
-            isTopPick = true
+            isTopPick = true,
+            tags = listOf(
+                "red panda", "panda", "animal", "cute", "adorable",
+                "wildlife", "forest", "fluffy"
+            )
         ),
 
         Wallpaper(
@@ -34,7 +42,11 @@ object CuteAnimalsCollection {
             rating = 5.0,
             downloads = "New",
             badge = "NEW",
-            isTopPick = true
+            isTopPick = true,
+            tags = listOf(
+                "koala", "animal", "cute", "adorable",
+                "wildlife", "australia", "tree", "fluffy"
+            )
         ),
 
         Wallpaper(
@@ -44,7 +56,11 @@ object CuteAnimalsCollection {
             rating = 5.0,
             downloads = "New",
             badge = "NEW",
-            isTopPick = true
+            isTopPick = true,
+            tags = listOf(
+                "penguin", "bird", "animal", "cute", "adorable",
+                "antarctica", "snow", "ice", "winter"
+            )
         ),
 
         Wallpaper(
@@ -54,7 +70,11 @@ object CuteAnimalsCollection {
             rating = 5.0,
             downloads = "New",
             badge = "NEW",
-            isTopPick = true
+            isTopPick = true,
+            tags = listOf(
+                "otter", "animal", "cute", "adorable",
+                "water", "river", "wildlife", "fluffy"
+            )
         ),
 
         Wallpaper(
@@ -64,7 +84,11 @@ object CuteAnimalsCollection {
             rating = 5.0,
             downloads = "New",
             badge = "NEW",
-            isTopPick = true
+            isTopPick = true,
+            tags = listOf(
+                "sloth", "animal", "cute", "adorable",
+                "jungle", "forest", "tree", "wildlife"
+            )
         ),
 
         Wallpaper(
@@ -74,7 +98,11 @@ object CuteAnimalsCollection {
             rating = 5.0,
             downloads = "New",
             badge = "NEW",
-            isTopPick = true
+            isTopPick = true,
+            tags = listOf(
+                "bunny", "rabbit", "animal", "cute", "adorable",
+                "pet", "fluffy", "easter"
+            )
         ),
 
         Wallpaper(
@@ -84,7 +112,11 @@ object CuteAnimalsCollection {
             rating = 5.0,
             downloads = "New",
             badge = "NEW",
-            isTopPick = true
+            isTopPick = true,
+            tags = listOf(
+                "raccoon", "animal", "cute", "adorable",
+                "wildlife", "forest", "fluffy"
+            )
         ),
 
         Wallpaper(
@@ -94,7 +126,12 @@ object CuteAnimalsCollection {
             rating = 5.0,
             downloads = "New",
             badge = "NEW",
-            isTopPick = true
+            isTopPick = true,
+            tags = listOf(
+                "lion", "lion cub", "cub", "cat", "big cat",
+                "feline", "animal", "cute", "adorable",
+                "wildlife", "africa", "safari"
+            )
         ),
 
         Wallpaper(
@@ -104,7 +141,12 @@ object CuteAnimalsCollection {
             rating = 5.0,
             downloads = "New",
             badge = "NEW",
-            isTopPick = true
+            isTopPick = true,
+            tags = listOf(
+                "tiger", "tiger cub", "cub", "cat", "big cat",
+                "feline", "animal", "cute", "adorable",
+                "wildlife", "jungle"
+            )
         ),
 
         Wallpaper(
@@ -114,7 +156,11 @@ object CuteAnimalsCollection {
             rating = 5.0,
             downloads = "New",
             badge = "NEW",
-            isTopPick = true
+            isTopPick = true,
+            tags = listOf(
+                "fox", "fox kit", "kit", "animal", "cute",
+                "adorable", "wildlife", "forest", "fluffy"
+            )
         ),
 
         Wallpaper(
@@ -124,7 +170,12 @@ object CuteAnimalsCollection {
             rating = 5.0,
             downloads = "New",
             badge = "NEW",
-            isTopPick = true
+            isTopPick = true,
+            tags = listOf(
+                "polar bear", "bear", "cub", "animal", "cute",
+                "adorable", "wildlife", "arctic", "snow",
+                "ice", "winter"
+            )
         )
     )
 }

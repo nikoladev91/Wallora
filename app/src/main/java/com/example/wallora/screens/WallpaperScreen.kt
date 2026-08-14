@@ -96,6 +96,39 @@ private fun downloadsToNumber(downloads: String): Int {
         else -> cleanValue.toIntOrNull() ?: 0
     }
 }
+
+private fun matchesWallpaperSearch(
+    wallpaper: Wallpaper,
+    query: String
+): Boolean {
+    val cleanQuery = query.trim().lowercase()
+
+    if (cleanQuery.isBlank()) {
+        return true
+    }
+
+    fun matchesText(text: String): Boolean {
+        val normalizedText = text.trim().lowercase()
+
+        if (normalizedText == cleanQuery) {
+            return true
+        }
+
+        val words = normalizedText
+            .split(Regex("[^a-z0-9]+"))
+            .filter { it.isNotBlank() }
+
+        return words.any { word ->
+            word == cleanQuery
+        }
+    }
+
+    return matchesText(wallpaper.name) ||
+            matchesText(wallpaper.category) ||
+            wallpaper.tags.any { tag ->
+                matchesText(tag)
+            }
+}
 private fun Context.findActivity(): Activity? {
     var currentContext = this
 
@@ -137,21 +170,20 @@ fun WallpaperScreen() {
     }
 
     val filteredWallpapers = wallpapers.filter { wallpaper ->
-            val cleanCategory = selectedCategory.substringAfter(" ").trim()
-            val cleanSearch = searchText.trim()
+        val cleanCategory = selectedCategory.substringAfter(" ").trim()
 
-            val matchesSearch = cleanSearch.isBlank() ||
-                    wallpaper.name
-                        .split(" ", "-", "_")
-                        .any { word ->
-                            word.equals(cleanSearch, ignoreCase = true)
-                        }
+        val matchesSearch =
+            matchesWallpaperSearch(
+                wallpaper = wallpaper,
+                query = searchText
+            )
 
-            val matchesCategory =
-                cleanCategory == "All" || wallpaper.category == cleanCategory
+        val matchesCategory =
+            cleanCategory == "All" ||
+                    wallpaper.category == cleanCategory
 
-            matchesSearch && matchesCategory
-        }
+        matchesSearch && matchesCategory
+    }
 
     val displayedWallpapers = when (selectedTrending) {
         "Popular" -> filteredWallpapers.sortedByDescending {
@@ -407,14 +439,23 @@ fun FavoritesScreen(
     favoriteNames: List<String>,
     onWallpaperClick: (Wallpaper) -> Unit
 ) {
+    var searchText by remember { mutableStateOf("") }
+
+    val filteredFavorites = wallpapers.filter { wallpaper ->
+        matchesWallpaperSearch(
+            wallpaper = wallpaper,
+            query = searchText
+        )
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(WalloraBackground)
             .statusBarsPadding()
             .padding(horizontal = 16.dp)
-
     ) {
+
         Text(
             text = "❤️ Favorites",
             color = Color.White,
@@ -430,9 +471,19 @@ fun FavoritesScreen(
             fontSize = 14.sp
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(16.dp))
+
+        if (wallpapers.isNotEmpty()) {
+            SearchSection(
+                searchText = searchText,
+                onSearchChange = { searchText = it }
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+        }
 
         if (wallpapers.isEmpty()) {
+
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -440,7 +491,11 @@ fun FavoritesScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(text = "❤️", fontSize = 56.sp)
+
+                Text(
+                    text = "❤️",
+                    fontSize = 56.sp
+                )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -459,9 +514,44 @@ fun FavoritesScreen(
                     fontSize = 16.sp
                 )
             }
+
+        } else if (filteredFavorites.isEmpty()) {
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+
+                Text(
+                    text = "🔍",
+                    fontSize = 48.sp
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text(
+                    text = "No favorites found",
+                    color = Color.White,
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = "Try another keyword",
+                    color = Color.LightGray,
+                    fontSize = 14.sp
+                )
+            }
+
         } else {
+
             WallpaperGrid(
-                wallpapers = wallpapers,
+                wallpapers = filteredFavorites,
                 favoriteNames = favoriteNames,
                 onWallpaperClick = onWallpaperClick
             )
@@ -949,10 +1039,12 @@ fun GalleryContent(
     onFeaturedCollectionClick: (WallpaperCollection) -> Unit,
     listState: LazyListState
 ) {
-    val heroWallpaper = remember(wallpapers) {
-        val dailyWallpapers = wallpapers
+    val heroWallpaper = remember {
+        val allWallpapers = WallpaperRepository.wallpapers
+
+        val dailyWallpapers = allWallpapers
             .filter { it.isTopPick }
-            .ifEmpty { wallpapers }
+            .ifEmpty { allWallpapers }
 
         if (dailyWallpapers.isEmpty()) {
             null
@@ -963,15 +1055,11 @@ fun GalleryContent(
             val wallpaperIndex = dayOfYear % dailyWallpapers.size
 
             dailyWallpapers[wallpaperIndex]
+
+
         }
     }
-    val displayedWallpapers = if (searchText.isBlank()) {
-        wallpapers
-    } else {
-        wallpapers.filter { wallpaper ->
-            wallpaper.name.contains(searchText.trim(), ignoreCase = true)
-        }
-    }
+    val displayedWallpapers = wallpapers
 
     LazyColumn(
         state = listState,
