@@ -16,7 +16,10 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.input.ImeAction
 import com.example.wallora.analytics.AnalyticsManager
-
+import com.example.wallora.ui.theme.WalloraSurface
+import androidx.compose.material3.TextFieldDefaults
+import com.example.wallora.ui.theme.WalloraAccent
+import androidx.compose.ui.graphics.Color
 @Composable
 fun SearchSection(
     searchText: String,
@@ -47,8 +50,21 @@ fun SearchSection(
             onSearchChange(newValue.text)
         },
         placeholder = {
-            Text(text = "Search wallpapers...")
+            Text(
+                text = "Search wallpapers...",
+                color = Color.LightGray
+            )
         },
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = WalloraSurface,
+            unfocusedContainerColor = WalloraSurface,
+            disabledContainerColor = WalloraSurface,
+            focusedTextColor = Color.White,
+            unfocusedTextColor = Color.White,
+            cursorColor = WalloraAccent,
+            focusedIndicatorColor = WalloraAccent,
+            unfocusedIndicatorColor = Color.LightGray
+        ),
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Search
         ),

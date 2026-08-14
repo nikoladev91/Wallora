@@ -64,6 +64,8 @@ import com.example.wallora.ui.theme.WalloraAccent
 import com.example.wallora.ui.theme.WalloraBackground
 import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.CircleShape
+import com.example.wallora.ui.theme.WalloraSurface
+
 
 
 private fun downloadsToNumber(downloads: String): Int {
@@ -480,8 +482,15 @@ fun SettingsScreen() {
         )
     }
 
-    fun changeBackground(color: Color, colorValue: Long) {
+    fun changeBackground(
+        color: Color,
+        surfaceColor: Color,
+        accentColor: Color,
+        colorValue: Long
+    ) {
         WalloraBackground = color
+        WalloraSurface = surfaceColor
+        WalloraAccent = accentColor
 
         preferences.edit()
             .putLong("background_color", colorValue)
@@ -533,56 +542,80 @@ fun SettingsScreen() {
                 selected = WalloraBackground == Color(0xFF000000),
                 onClick = {
                     changeBackground(
-                        Color(0xFF000000),
-                        0xFF000000
+                        color = Color(0xFF000000),
+                        surfaceColor = Color(0xFF171717),
+                        accentColor = Color(0xFF3A3A3A),
+                        colorValue = 0xFF000000
                     )
                 }
             )
 
             BackgroundColorOption(
                 name = "Charcoal",
-                color = Color(0xFF1A1A1A),
-                selected = WalloraBackground == Color(0xFF1A1A1A),
+                color = Color(0xFF2B2B2B),
+                selected = WalloraBackground == Color(0xFF2B2B2B),
                 onClick = {
                     changeBackground(
-                        Color(0xFF1A1A1A),
-                        0xFF1A1A1A
+                        color = Color(0xFF2B2B2B),
+                        surfaceColor = Color(0xFF3A3A3A),
+                        accentColor = Color(0xFF5A5A5A),
+                        colorValue = 0xFF2B2B2B
                     )
                 }
             )
 
             BackgroundColorOption(
                 name = "Navy",
-                color = Color(0xFF0D1B2A),
-                selected = WalloraBackground == Color(0xFF0D1B2A),
+                color = Color(0xFF0F1F3A),
+                selected = WalloraBackground == Color(0xFF0F1F3A),
                 onClick = {
                     changeBackground(
-                        Color(0xFF0D1B2A),
-                        0xFF0D1B2A
+                        color = Color(0xFF0F1F3A),
+                        surfaceColor = Color(0xFF17365D),
+                        accentColor = Color(0xFF2F6FDB),
+                        colorValue = 0xFF0F1F3A
                     )
                 }
             )
 
             BackgroundColorOption(
                 name = "Purple",
-                color = Color(0xFF1B1028),
-                selected = WalloraBackground == Color(0xFF1B1028),
+                color = Color(0xFF4B2E83),
+                selected = WalloraBackground == Color(0xFF4B2E83),
                 onClick = {
                     changeBackground(
-                        Color(0xFF1B1028),
-                        0xFF1B1028
+                        color = Color(0xFF4B2E83),
+                        surfaceColor = Color(0xFF5B3A9B),
+                        accentColor = Color(0xFF8B5CF6),
+                        colorValue = 0xFF4B2E83
                     )
                 }
             )
 
             BackgroundColorOption(
                 name = "Rose",
-                color = Color(0xFF2A101A),
-                selected = WalloraBackground == Color(0xFF2A101A),
+                color = Color(0xFF6A1E2E),
+                selected = WalloraBackground == Color(0xFF6A1E2E),
                 onClick = {
                     changeBackground(
-                        Color(0xFF2A101A),
-                        0xFF2A101A
+                        color = Color(0xFF6A1E2E),
+                        surfaceColor = Color(0xFF81283B),
+                        accentColor = Color(0xFFFF5CA8),
+                        colorValue = 0xFF6A1E2E
+                    )
+                }
+            )
+
+            BackgroundColorOption(
+                name = "Green",
+                color = Color(0xFF00A86B),
+                selected = WalloraBackground == Color(0xFF00A86B),
+                onClick = {
+                    changeBackground(
+                        color = Color(0xFF00A86B),
+                        surfaceColor = Color(0xFF008C57),
+                        accentColor = Color(0xFF00D98B),
+                        colorValue = 0xFF00A86B
                     )
                 }
             )
@@ -603,7 +636,9 @@ fun SettingsScreen() {
 
                 val webIntent = Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                    Uri.parse(
+                        "https://play.google.com/store/apps/details?id=$appPackageName"
+                    )
                 )
 
                 try {
@@ -800,7 +835,6 @@ fun SettingsScreen() {
     }
 }
 
-
 @Composable
 fun BackgroundColorOption(
     name: String,
@@ -875,7 +909,7 @@ fun SettingItem(
             .clickable {
                 onClick()
             }
-            .background(Color(0xFF171717))
+            .background(WalloraSurface)
             .padding(16.dp)
     ) {
 
