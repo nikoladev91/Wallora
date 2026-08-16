@@ -229,34 +229,7 @@ fun WallpaperScreen() {
             }
         }
     }
-    if (!termsAccepted) {
-        if (legalPageUrl != null) {
-            LegalDocumentScreen(
-                url = legalPageUrl!!,
-                onBack = {
-                    legalPageUrl = null
-                }
-            )
-        } else {
-            TermsConsentScreen(
-                onTermsClick = {
-                    legalPageUrl =
-                        "https://nikoladev91.github.io/wallora-privacy-policy/terms.html?v=2"
-                },
-                onPrivacyClick = {
-                    legalPageUrl =
-                        "https://nikoladev91.github.io/wallora-privacy-policy/?v=2"
-                },
-                onAccept = {
-                    preferences.edit()
-                        .putBoolean("terms_accepted", true)
-                        .apply()
-
-                    termsAccepted = true
-                }
-            )
-        }
-    } else if (showCollectionScreen) {
+    if (showCollectionScreen) {
         CollectionScreen(
             collection = selectedCollection,
             favoriteNames = favoriteNames,
@@ -420,6 +393,15 @@ fun WallpaperScreen() {
                                 AnalyticsManager.logCollectionOpen(collection.title)
                                 showCollectionScreen = true
                             },
+                            onNewCollectionClick = {
+                                CollectionRepository.collections
+                                    .firstOrNull { it.id == "autumn_cozy_vol_1" }
+                                    ?.let { collection ->
+                                        selectedCollection = collection
+                                        AnalyticsManager.logCollectionOpen(collection.title)
+                                        showCollectionScreen = true
+                                    }
+                            },
                             listState = homeListState
                         )
 
@@ -436,7 +418,7 @@ fun WallpaperScreen() {
                         "settings" -> SettingsScreen(
                             onPrivacyPolicyClick = {
                                 legalPageUrl =
-                                    "https://nikoladev91.github.io/wallora-privacy-policy/?v=2"
+                                    "https://nikoladev91.github.io/wallora-privacy-policy/"
                             },
                             onTermsOfUseClick = {
                                 legalPageUrl =
@@ -482,6 +464,7 @@ fun HomeScreen(
     onTrendingSelected: (String) -> Unit,
     onWallpaperClick: (Wallpaper) -> Unit,
     onFeaturedCollectionClick: (WallpaperCollection) -> Unit,
+    onNewCollectionClick: () -> Unit,
     listState: LazyListState
 ) {
     GalleryContent(
@@ -501,6 +484,7 @@ fun HomeScreen(
         onTrendingSelected = onTrendingSelected,
         onWallpaperClick = onWallpaperClick,
         onFeaturedCollectionClick = onFeaturedCollectionClick,
+        onNewCollectionClick = onNewCollectionClick,
         listState = listState
     )
 }
@@ -1057,86 +1041,6 @@ fun LegalDocumentScreen(
 }
 
 @Composable
-fun TermsConsentScreen(
-    onTermsClick: () -> Unit,
-    onPrivacyClick: () -> Unit,
-    onAccept: () -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(WalloraBackground)
-            .statusBarsPadding()
-            .padding(24.dp),
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = "Welcome to Wallora ✨",
-            color = Color.White,
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold
-        )
-
-        Spacer(modifier = Modifier.height(14.dp))
-
-        Text(
-            text = "Before continuing, please review our Terms of Use and Privacy Policy.",
-            color = Color.LightGray,
-            fontSize = 16.sp
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        Text(
-            text = "Terms of Use",
-            color = WalloraAccent,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .clickable { onTermsClick() }
-                .padding(vertical = 10.dp)
-        )
-
-        Text(
-            text = "Privacy Policy",
-            color = WalloraAccent,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .clickable { onPrivacyClick() }
-                .padding(vertical = 10.dp)
-        )
-
-        Spacer(modifier = Modifier.height(30.dp))
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(18.dp))
-                .background(WalloraAccent)
-                .clickable { onAccept() }
-                .padding(vertical = 16.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "Accept & Continue",
-                color = Color.Black,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }
-
-        Spacer(modifier = Modifier.height(14.dp))
-
-        Text(
-            text = "By tapping Accept & Continue, you agree to the Terms of Use and acknowledge the Privacy Policy.",
-            color = Color.Gray,
-            fontSize = 13.sp
-        )
-    }
-}
-
-@Composable
 fun BackgroundColorOption(
     name: String,
     color: Color,
@@ -1231,6 +1135,56 @@ fun SettingItem(
     }
 }
 @Composable
+fun NewWallpapersBanner(
+    title: String,
+    subtitle: String,
+    onClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(22.dp))
+            .background(Color(0xFF211B2E))
+            .clickable { onClick() }
+            .padding(horizontal = 20.dp, vertical = 18.dp)
+    ) {
+
+        Text(
+            text = "🍂  NEW THIS WEEK",
+            color = Color(0xFFFFC84A),
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            text = title,
+            color = Color.White,
+            fontSize = 21.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        Text(
+            text = subtitle,
+            color = Color(0xFFD0D0D0),
+            fontSize = 14.sp
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Text(
+            text = "Explore collection  →",
+            color = Color(0xFFFFC84A),
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
+@Composable
 fun GalleryContent(
     title: String,
     subtitle: String,
@@ -1248,6 +1202,7 @@ fun GalleryContent(
     onTrendingSelected: (String) -> Unit,
     onWallpaperClick: (Wallpaper) -> Unit,
     onFeaturedCollectionClick: (WallpaperCollection) -> Unit,
+    onNewCollectionClick: () -> Unit,
     listState: LazyListState
 ) {
     val heroWallpaper = remember {
@@ -1286,6 +1241,14 @@ fun GalleryContent(
                 subtitle = subtitle,
                 favoriteInfo = favoriteInfo,
                 stats = "${WallpaperRepository.wallpapers.size} Wallpapers • ${CollectionRepository.collections.size} Collections"
+            )
+        }
+
+        item {
+            NewWallpapersBanner(
+                title = "Autumn Cozy is here",
+                subtitle = "12 new wallpapers • warm autumn vibes",
+                onClick = onNewCollectionClick
             )
         }
 
