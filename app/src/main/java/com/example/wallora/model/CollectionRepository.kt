@@ -1,4 +1,6 @@
 package com.example.wallora.model
+
+import com.example.wallora.repository.collections.AutumnCozyCollection
 import com.example.wallora.repository.collections.CuteAnimalsCollection
 import com.example.wallora.repository.collections.PolishWondersCollection
 import com.example.wallora.repository.collections.FantasyRealmsCollection
@@ -41,6 +43,7 @@ object CollectionRepository {
             "Solar Eclipse"
         )
     }
+
     private val tropicalParadise = WallpaperRepository.wallpapers.filter {
         it.name in listOf(
             "Bora Bora Sunset",
@@ -57,6 +60,7 @@ object CollectionRepository {
             "Paradise Island"
         )
     }
+
     private val hypercars = WallpaperRepository.wallpapers.filter {
         it.name in listOf(
             "Ferrari Night Drive",
@@ -73,6 +77,7 @@ object CollectionRepository {
             "Classic Legend"
         )
     }
+
     private val epicMountains = WallpaperRepository.wallpapers.filter {
         it.name in listOf(
             "Alpine Sunrise",
@@ -106,31 +111,44 @@ object CollectionRepository {
             "Cosmic City"
         )
     }
-        private val zodiac = WallpaperRepository.wallpapers.filter {
-            it.name in listOf(
-                "Aries Rocks",
-                "MOOvision",
-                "Gemini Freedom",
-                "Crabby's Galaxy Family Resort",
-                "Roarlywood",
-                "Universe Quality Control",
-                "Balance Bureau",
-                "Scorp Syndicate",
-                "Born to Roam",
-                "Summit Enterprises",
-                "Galaxy Plumbing Co.",
-                "Ocean Dreams Studio"
-            )
+
+    private val zodiac = WallpaperRepository.wallpapers.filter {
+        it.name in listOf(
+            "Aries Rocks",
+            "MOOvision",
+            "Gemini Freedom",
+            "Crabby's Galaxy Family Resort",
+            "Roarlywood",
+            "Universe Quality Control",
+            "Balance Bureau",
+            "Scorp Syndicate",
+            "Born to Roam",
+            "Summit Enterprises",
+            "Galaxy Plumbing Co.",
+            "Ocean Dreams Studio"
+        )
     }
+
     val collections = listOf(
-            WallpaperCollection(
-                id = "zodiac_what_if_vol_1",
-                title = "Zodiac: What If...?",
-                subtitle = "12 Original Zodiac Wallpapers",
-                coverImage = zodiac.first().image,
-                wallpapers = zodiac,
-                isPremium = false
-            ),
+
+        WallpaperCollection(
+            id = "autumn_cozy_vol_1",
+            title = "Autumn Cozy",
+            subtitle = "Warm Autumn Wallpapers",
+            coverImage = AutumnCozyCollection.wallpapers.first().image,
+            wallpapers = AutumnCozyCollection.wallpapers,
+            isPremium = false
+        ),
+
+        WallpaperCollection(
+            id = "zodiac_what_if_vol_1",
+            title = "Zodiac: What If...?",
+            subtitle = "12 Original Zodiac Wallpapers",
+            coverImage = zodiac.first().image,
+            wallpapers = zodiac,
+            isPremium = false
+        ),
+
         WallpaperCollection(
             id = "dream_animals",
             title = "Dream Animals",
@@ -148,6 +166,7 @@ object CollectionRepository {
             wallpapers = CuteAnimalsCollection.wallpapers,
             isPremium = false
         ),
+
         WallpaperCollection(
             id = "polish_wonders_vol_1",
             title = "Polish Wonders Vol. 1",
@@ -156,6 +175,7 @@ object CollectionRepository {
             wallpapers = PolishWondersCollection.wallpapers,
             isPremium = false
         ),
+
         WallpaperCollection(
             id = "fantasy_realms_vol_1",
             title = "Fantasy Realms Vol. 1",
@@ -164,6 +184,7 @@ object CollectionRepository {
             wallpapers = FantasyRealmsCollection.wallpapers,
             isPremium = false
         ),
+
         WallpaperCollection(
             id = "chibi_dragons",
             title = "Chibi Dragons",
@@ -172,6 +193,7 @@ object CollectionRepository {
             wallpapers = ChibiDragonsCollection.wallpapers,
             isPremium = false
         ),
+
         WallpaperCollection(
             id = "funny_dinosaurs_vol_1",
             title = "Funny Dinosaurs Vol. 1",
@@ -180,6 +202,7 @@ object CollectionRepository {
             wallpapers = FunnyDinosaursCollection.wallpapers,
             isPremium = false
         ),
+
         WallpaperCollection(
             id = "cosmic_dreams_vol_1",
             title = "Cosmic Dreams Vol.1",
@@ -188,6 +211,7 @@ object CollectionRepository {
             wallpapers = cosmicDreams,
             isPremium = false
         ),
+
         WallpaperCollection(
             id = "tropical_paradise_vol_1",
             title = "Tropical Paradise Vol.1",
@@ -196,6 +220,7 @@ object CollectionRepository {
             wallpapers = tropicalParadise,
             isPremium = false
         ),
+
         WallpaperCollection(
             id = "hypercars_vol_1",
             title = "Hypercars Vol.1",
@@ -204,6 +229,7 @@ object CollectionRepository {
             wallpapers = hypercars,
             isPremium = false
         ),
+
         WallpaperCollection(
             id = "epic_mountains_vol_1",
             title = "Epic Mountains Vol.1",
@@ -212,14 +238,16 @@ object CollectionRepository {
             wallpapers = epicMountains,
             isPremium = false
         ),
+
         WallpaperCollection(
             id = "cyberpunk_cities_vol_1",
             title = "Cyberpunk Cities Vol.1",
-            subtitle = "12 Exclusive  Cyberpunk Wallpapers",
+            subtitle = "12 Exclusive Cyberpunk Wallpapers",
             coverImage = cyberpunkCities.first().image,
             wallpapers = cyberpunkCities,
             isPremium = false
         ),
+
         WallpaperCollection(
             id = "food_monsters_vol_1",
             title = "Food Monsters Vol. 1",
@@ -227,6 +255,6 @@ object CollectionRepository {
             coverImage = FoodMonstersCollection.wallpapers.first().image,
             wallpapers = FoodMonstersCollection.wallpapers,
             isPremium = false
-        ),
+        )
     )
 }
