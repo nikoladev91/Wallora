@@ -29,6 +29,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import com.example.wallora.model.CategoryRepository
 import com.example.wallora.model.CollectionRepository
 import com.example.wallora.model.Wallpaper
@@ -65,7 +66,7 @@ import com.example.wallora.ui.theme.WalloraBackground
 import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.CircleShape
 import com.example.wallora.ui.theme.WalloraSurface
-
+import androidx.compose.foundation.verticalScroll
 
 
 private fun downloadsToNumber(downloads: String): Int {
@@ -148,6 +149,18 @@ fun WallpaperScreen() {
     val categories = CategoryRepository.categories
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
+    val preferences = remember {
+        context.getSharedPreferences(
+            "wallora_preferences",
+            android.content.Context.MODE_PRIVATE
+        )
+    }
+
+    var termsAccepted by remember {
+        mutableStateOf(
+            preferences.getBoolean("terms_accepted", false)
+        )
+    }
     LaunchedEffect(Unit) {
         AdManager.loadInterstitial(context)
     }
@@ -158,6 +171,7 @@ fun WallpaperScreen() {
         mutableStateOf(CollectionRepository.collections.first())
     }
     var selectedTab by remember { mutableStateOf("home") }
+    var legalPageUrl by remember { mutableStateOf<String?>(null) }
     var searchText by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf("All") }
     var selectedTrending by remember { mutableStateOf("Popular") }
@@ -215,7 +229,34 @@ fun WallpaperScreen() {
             }
         }
     }
-    if (showCollectionScreen) {
+    if (!termsAccepted) {
+        if (legalPageUrl != null) {
+            LegalDocumentScreen(
+                url = legalPageUrl!!,
+                onBack = {
+                    legalPageUrl = null
+                }
+            )
+        } else {
+            TermsConsentScreen(
+                onTermsClick = {
+                    legalPageUrl =
+                        "https://nikoladev91.github.io/wallora-privacy-policy/terms.html?v=2"
+                },
+                onPrivacyClick = {
+                    legalPageUrl =
+                        "https://nikoladev91.github.io/wallora-privacy-policy/?v=2"
+                },
+                onAccept = {
+                    preferences.edit()
+                        .putBoolean("terms_accepted", true)
+                        .apply()
+
+                    termsAccepted = true
+                }
+            )
+        }
+    } else if (showCollectionScreen) {
         CollectionScreen(
             collection = selectedCollection,
             favoriteNames = favoriteNames,
@@ -346,52 +387,83 @@ fun WallpaperScreen() {
                     .weight(1f)
                     .fillMaxWidth()
             ) {
-                when (selectedTab) {
-                    "home" -> HomeScreen(
-                        wallpapers = displayedWallpapers,
-                        allWallpapersCount = wallpapers.size,
-                        favoriteNames = favoriteNames,
-                        searchText = searchText,
-                        selectedCategory = selectedCategory,
-                        selectedTrending = selectedTrending,
-                        categories = categories.map { it.name },
-                        onSearchChange = { searchText = it },
-                        onCategoryClick = { selectedCategory = it },
-                        onTrendingSelected = { selectedTrending = it },
-                        onWallpaperClick = {
-                            openWallpaper(it, fromCollection = false)
-                        },
-                        onFeaturedCollectionClick = { collection ->
-                            selectedCollection = collection
-                            AnalyticsManager.logCollectionOpen(collection.title)
-                            showCollectionScreen = true
-                        },
-                        listState = homeListState
-                    )
 
-                    "favorites" -> FavoritesScreen(
-                        wallpapers = wallpapers.filter { favoriteNames.contains(it.name) },
-                        favoriteNames = favoriteNames,
-                        onWallpaperClick = {
-                            openWallpaper(it, fromCollection = false)
+                if (legalPageUrl != null) {
+
+                    LegalDocumentScreen(
+                        url = legalPageUrl!!,
+                        onBack = {
+                            legalPageUrl = null
                         }
                     )
 
-                    "settings" -> SettingsScreen()
+                } else {
+
+                    when (selectedTab) {
+
+                        "home" -> HomeScreen(
+                            wallpapers = displayedWallpapers,
+                            allWallpapersCount = wallpapers.size,
+                            favoriteNames = favoriteNames,
+                            searchText = searchText,
+                            selectedCategory = selectedCategory,
+                            selectedTrending = selectedTrending,
+                            categories = categories.map { it.name },
+                            onSearchChange = { searchText = it },
+                            onCategoryClick = { selectedCategory = it },
+                            onTrendingSelected = { selectedTrending = it },
+                            onWallpaperClick = {
+                                openWallpaper(it, fromCollection = false)
+                            },
+                            onFeaturedCollectionClick = { collection ->
+                                selectedCollection = collection
+                                AnalyticsManager.logCollectionOpen(collection.title)
+                                showCollectionScreen = true
+                            },
+                            listState = homeListState
+                        )
+
+                        "favorites" -> FavoritesScreen(
+                            wallpapers = wallpapers.filter {
+                                favoriteNames.contains(it.name)
+                            },
+                            favoriteNames = favoriteNames,
+                            onWallpaperClick = {
+                                openWallpaper(it, fromCollection = false)
+                            }
+                        )
+
+                        "settings" -> SettingsScreen(
+                            onPrivacyPolicyClick = {
+                                legalPageUrl =
+                                    "https://nikoladev91.github.io/wallora-privacy-policy/?v=2"
+                            },
+                            onTermsOfUseClick = {
+                                legalPageUrl =
+                                    "https://nikoladev91.github.io/wallora-privacy-policy/terms.html?v=2"
+                            }
+                        )
+                    }
                 }
             }
-            if (selectedTab == "home") {
-                AdBanner(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp)
+
+            if (legalPageUrl == null) {
+
+                if (selectedTab == "home") {
+                    AdBanner(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp)
+                    )
+                }
+
+                BottomMenu(
+                    selectedTab = selectedTab,
+                    onTabSelected = {
+                        selectedTab = it
+                    }
                 )
             }
-
-            BottomMenu(
-                selectedTab = selectedTab,
-                onTabSelected = { selectedTab = it }
-            )
         }
     }
 }
@@ -560,7 +632,10 @@ fun FavoritesScreen(
 }
 
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(
+    onPrivacyPolicyClick: () -> Unit,
+    onTermsOfUseClick: () -> Unit
+) {
     val context = LocalContext.current
     val developerEmail = "wallora.support@gmail.com"
     var showAboutDialog by remember { mutableStateOf(false) }
@@ -591,7 +666,9 @@ fun SettingsScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(WalloraBackground)
-            .padding(24.dp)
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 24.dp)
+            .padding(top = 24.dp, bottom = 120.dp)
     ) {
 
         Text(
@@ -743,11 +820,14 @@ fun SettingsScreen() {
             title = "📤 Share Wallora",
             subtitle = "Invite your friends",
             onClick = {
+                val appPackageName = context.packageName
+
                 val sendIntent = Intent().apply {
                     action = Intent.ACTION_SEND
                     putExtra(
                         Intent.EXTRA_TEXT,
-                        "Check out Wallora - Premium Wallpapers!\n\nhttps://play.google.com/store/apps/details?id=com.example.wallora"
+                        "Check out Wallora - Premium Wallpapers!\n\n" +
+                                "https://play.google.com/store/apps/details?id=$appPackageName"
                     )
                     type = "text/plain"
                 }
@@ -762,16 +842,13 @@ fun SettingsScreen() {
         SettingItem(
             title = "📜 Privacy Policy",
             subtitle = "Read our privacy policy",
-            onClick = {
-                val intent = Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(
-                        "https://nikoladev91.github.io/Wallora/privacy-policy.html"
-                    )
-                )
+            onClick = onPrivacyPolicyClick
+        )
 
-                context.startActivity(intent)
-            }
+        SettingItem(
+            title = "📄 Terms of Use",
+            subtitle = "Read our terms of use",
+            onClick = onTermsOfUseClick
         )
 
         SettingItem(
@@ -799,7 +876,7 @@ fun SettingsScreen() {
             }
         )
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Divider(
             color = Color.DarkGray
@@ -880,7 +957,7 @@ fun SettingsScreen() {
                     Spacer(modifier = Modifier.height(12.dp))
 
                     Text(
-                        text = "Version 1.0.0",
+                        text = "Version 1.0.1",
                         color = Color.Gray
                     )
 
@@ -921,6 +998,140 @@ fun SettingsScreen() {
                     Text("Close")
                 }
             }
+        )
+    }
+}
+@Composable
+fun LegalDocumentScreen(
+    url: String,
+    onBack: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(WalloraBackground)
+            .statusBarsPadding()
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { onBack() }
+                .padding(horizontal = 20.dp, vertical = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "←",
+                color = Color.White,
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Bold
+            )
+
+            Spacer(modifier = Modifier.width(12.dp))
+
+            Text(
+                text = "Back",
+                color = Color.White,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        AndroidView(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            factory = { context ->
+                android.webkit.WebView(context).apply {
+                    settings.javaScriptEnabled = false
+                    webViewClient = android.webkit.WebViewClient()
+                    loadUrl(url)
+                }
+            },
+            update = { webView ->
+                if (webView.url != url) {
+                    webView.loadUrl(url)
+                }
+            }
+        )
+    }
+}
+
+@Composable
+fun TermsConsentScreen(
+    onTermsClick: () -> Unit,
+    onPrivacyClick: () -> Unit,
+    onAccept: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(WalloraBackground)
+            .statusBarsPadding()
+            .padding(24.dp),
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "Welcome to Wallora ✨",
+            color = Color.White,
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.height(14.dp))
+
+        Text(
+            text = "Before continuing, please review our Terms of Use and Privacy Policy.",
+            color = Color.LightGray,
+            fontSize = 16.sp
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = "Terms of Use",
+            color = WalloraAccent,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .clickable { onTermsClick() }
+                .padding(vertical = 10.dp)
+        )
+
+        Text(
+            text = "Privacy Policy",
+            color = WalloraAccent,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .clickable { onPrivacyClick() }
+                .padding(vertical = 10.dp)
+        )
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(18.dp))
+                .background(WalloraAccent)
+                .clickable { onAccept() }
+                .padding(vertical = 16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Accept & Continue",
+                color = Color.Black,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        Spacer(modifier = Modifier.height(14.dp))
+
+        Text(
+            text = "By tapping Accept & Continue, you agree to the Terms of Use and acknowledge the Privacy Policy.",
+            color = Color.Gray,
+            fontSize = 13.sp
         )
     }
 }
