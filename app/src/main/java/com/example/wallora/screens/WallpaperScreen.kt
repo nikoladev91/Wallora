@@ -869,7 +869,7 @@ fun SettingsScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Version 1.1.0",
+            text = "Version 1.1.1",
             color = Color.Gray,
             fontSize = 14.sp
         )

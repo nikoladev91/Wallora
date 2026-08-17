@@ -19,8 +19,8 @@ android {
         minSdk = 24
         targetSdk = 36
 
-        versionCode = 7
-        versionName = "1.1.0"
+        versionCode = 8
+        versionName = "1.1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
     implementation("com.google.android.gms:play-services-ads:25.4.0")
+    implementation("androidx.work:work-runtime:2.11.2")
     implementation("androidx.core:core-splashscreen:1.0.1")
 
     testImplementation(libs.junit)
