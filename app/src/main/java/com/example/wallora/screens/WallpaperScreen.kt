@@ -882,13 +882,13 @@ fun SettingsScreen(
 
         Text(
             text = "Version 1.1.1",
-            color = Color.Gray,
+            color = Color.White.copy(alpha = 0.75f),
             fontSize = 14.sp
         )
 
         Text(
             text = "Made with ❤ in Poland",
-            color = Color.Gray,
+            color = Color.White.copy(alpha = 0.75f),
             fontSize = 13.sp
         )
     }
