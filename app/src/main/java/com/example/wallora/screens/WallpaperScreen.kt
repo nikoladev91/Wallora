@@ -1233,10 +1233,9 @@ fun GalleryContent(
             val wallpaperIndex = dayOfYear % dailyWallpapers.size
 
             dailyWallpapers[wallpaperIndex]
-
-
         }
     }
+
     val displayedWallpapers = wallpapers
 
     LazyColumn(
@@ -1293,6 +1292,7 @@ fun GalleryContent(
                 )
             }
         }
+
         if (searchText.isBlank()) {
             item {
                 Text(
@@ -1346,7 +1346,6 @@ fun GalleryContent(
                     modifier = Modifier.height(20.dp)
                 )
             }
-
         } else {
             item {
                 Text(
