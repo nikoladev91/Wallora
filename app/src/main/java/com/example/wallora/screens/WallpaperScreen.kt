@@ -69,6 +69,7 @@ import com.example.wallora.ui.theme.WalloraSurface
 import androidx.compose.foundation.verticalScroll
 
 
+
 private fun downloadsToNumber(downloads: String): Int {
     val cleanValue = downloads
         .uppercase()
@@ -497,6 +498,8 @@ fun FavoritesScreen(
 ) {
     var searchText by remember { mutableStateOf("") }
 
+    val scrollState = rememberScrollState()
+
     val filteredFavorites = wallpapers.filter { wallpaper ->
         matchesWallpaperSearch(
             wallpaper = wallpaper,
@@ -510,6 +513,13 @@ fun FavoritesScreen(
             .background(WalloraBackground)
             .statusBarsPadding()
             .padding(horizontal = 16.dp)
+            .then(
+                if (wallpapers.isNotEmpty()) {
+                    Modifier.verticalScroll(scrollState)
+                } else {
+                    Modifier
+                }
+            )
     ) {
 
         Text(
@@ -611,6 +621,8 @@ fun FavoritesScreen(
                 favoriteNames = favoriteNames,
                 onWallpaperClick = onWallpaperClick
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
