@@ -33,7 +33,9 @@ import androidx.compose.ui.unit.sp
 import com.example.wallora.model.Wallpaper
 import com.example.wallora.ui.theme.WalloraAccent
 import kotlinx.coroutines.delay
-
+import androidx.activity.compose.BackHandler
+import androidx.compose.ui.res.stringResource
+import com.example.wallora.R
 @Composable
 fun FullScreenWallpaper(
     wallpaper: Wallpaper,
@@ -46,6 +48,10 @@ fun FullScreenWallpaper(
 
     var controlsVisible by remember(wallpaper.image) {
         mutableStateOf(true)
+    }
+
+    BackHandler {
+        onBack()
     }
 
     val context = LocalContext.current
@@ -137,7 +143,7 @@ fun FullScreenWallpaper(
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back",
+                        contentDescription = stringResource(R.string.back),
                         tint = Color.White,
                         modifier = Modifier.size(26.dp)
                     )
@@ -160,9 +166,9 @@ fun FullScreenWallpaper(
                     // Rating
                     Text(
                         text = if (userRating == 0) {
-                            "Rate this wallpaper"
+                            stringResource(R.string.rate_this_wallpaper)
                         } else {
-                            "Your rating"
+                            stringResource(R.string.your_rating)
                         },
                         color = Color.White,
                         fontSize = 13.sp,
@@ -220,9 +226,9 @@ fun FullScreenWallpaper(
                         ) {
                             PremiumActionButton(
                                 text = if (isFavorite) {
-                                    "❤️ Favorited"
+                                    "❤️ ${stringResource(R.string.favorited)}"
                                 } else {
-                                    "🤍 Favorite"
+                                    "🤍 ${stringResource(R.string.favorite)}"
                                 },
                                 primary = false,
                                 onClick = onFavoriteClick
@@ -233,7 +239,7 @@ fun FullScreenWallpaper(
                             modifier = Modifier.weight(1f)
                         ) {
                             PremiumActionButton(
-                                text = "⬇ Download",
+                                text = "⬇ ${stringResource(R.string.download)}",
                                 primary = false,
                                 onClick = onDownloadClick
                             )
@@ -244,7 +250,7 @@ fun FullScreenWallpaper(
 
                     // Set wallpaper
                     PremiumActionButton(
-                        text = "🖼 Set Wallpaper",
+                        text = "🖼 ${stringResource(R.string.set_wallpaper)}",
                         primary = true,
                         onClick = onSetWallpaperClick
                     )
@@ -253,7 +259,6 @@ fun FullScreenWallpaper(
         }
     }
 }
-
 @Composable
 fun PremiumActionButton(
     text: String,

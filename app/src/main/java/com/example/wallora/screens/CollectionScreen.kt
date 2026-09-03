@@ -10,12 +10,65 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.wallora.R
 import com.example.wallora.model.Wallpaper
 import com.example.wallora.model.WallpaperCollection
 import com.example.wallora.ui.theme.WalloraBackground
+
+@Composable
+fun getLocalizedCollectionSubtitle(subtitle: String): String {
+    return when (subtitle) {
+
+        "Warm Autumn Wallpapers" ->
+            stringResource(R.string.collection_autumn_cozy_subtitle)
+
+        "12 Original Zodiac Wallpapers" ->
+            stringResource(R.string.collection_zodiac_subtitle)
+
+        "12 Cinematic Animal Wallpapers" ->
+            stringResource(R.string.collection_dream_animals_subtitle)
+
+        "12 Adorable Animal Wallpapers" ->
+            stringResource(R.string.collection_cute_animals_subtitle)
+
+        "10 Magical Places in Poland" ->
+            stringResource(R.string.collection_polish_wonders_subtitle)
+
+        "Magical Castles and Enchanted Worlds" ->
+            stringResource(R.string.collection_fantasy_realms_subtitle)
+
+        "Cute Baby Dragons in Magical Worlds" ->
+            stringResource(R.string.collection_chibi_dragons_subtitle)
+
+        "10 Funny Dinosaur Adventures" ->
+            stringResource(R.string.collection_funny_dinosaurs_subtitle)
+
+        "12 Exclusive Space Wallpapers" ->
+            stringResource(R.string.collection_cosmic_dreams_subtitle)
+
+        "12 Exclusive Tropical Wallpapers" ->
+            stringResource(R.string.collection_tropical_paradise_subtitle)
+
+        "12 Exclusive Hypercar Wallpapers" ->
+            stringResource(R.string.collection_hypercars_subtitle)
+
+        "12 Exclusive Mountain Wallpapers" ->
+            stringResource(R.string.collection_epic_mountains_subtitle)
+
+        "12 Exclusive Cyberpunk Wallpapers" ->
+            stringResource(R.string.collection_cyberpunk_cities_subtitle)
+
+        "10 Delicious Little Monsters" ->
+            stringResource(R.string.collection_food_monsters_subtitle)
+
+        else -> subtitle
+    }
+}
+
 @Composable
 fun CollectionScreen(
     collection: WallpaperCollection,
@@ -27,9 +80,15 @@ fun CollectionScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(WalloraBackground)
-            .padding(start = 16.dp, end = 16.dp, top = 42.dp, bottom = 16.dp),
+            .padding(
+                start = 16.dp,
+                end = 16.dp,
+                top = 42.dp,
+                bottom = 16.dp
+            ),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+
         item {
             Box(
                 modifier = Modifier
@@ -38,11 +97,14 @@ fun CollectionScreen(
                         shape = RoundedCornerShape(50.dp)
                     )
                     .clickable { onBackClick() }
-                    .padding(horizontal = 16.dp, vertical = 10.dp),
+                    .padding(
+                        horizontal = 16.dp,
+                        vertical = 10.dp
+                    ),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "← Back",
+                    text = "← ${stringResource(R.string.back)}",
                     color = Color.White,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
@@ -52,6 +114,7 @@ fun CollectionScreen(
 
         item {
             Column {
+
                 Text(
                     text = collection.title,
                     color = Color.White,
@@ -59,10 +122,14 @@ fun CollectionScreen(
                     fontWeight = FontWeight.Bold
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(
+                    modifier = Modifier.height(4.dp)
+                )
 
                 Text(
-                    text = collection.subtitle,
+                    text = getLocalizedCollectionSubtitle(
+                        collection.subtitle
+                    ),
                     color = Color.White.copy(alpha = 0.7f),
                     fontSize = 14.sp
                 )

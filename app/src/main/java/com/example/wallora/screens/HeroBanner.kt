@@ -33,7 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.wallora.model.Wallpaper
 import com.example.wallora.ui.theme.WalloraAccent
-
+import androidx.compose.ui.res.stringResource
+import com.example.wallora.R
 @Composable
 fun HeroBanner(
     wallpaper: Wallpaper,
@@ -73,18 +74,21 @@ fun HeroBanner(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .fillMaxWidth()
-                    .padding(start = 20.dp, end = 20.dp, bottom = 28.dp)
+                    .padding(
+                        start = 20.dp,
+                        end = 20.dp,
+                        bottom = 28.dp
+                    )
             ) {
+
                 Text(
-                    text = "✨ FEATURED WALLPAPER",
+                    text = "✨ ${stringResource(R.string.featured_wallpaper)}",
                     color = Color(0xFF90CAF9),
                     fontSize = 13.sp,
                     fontWeight = FontWeight.Bold
                 )
 
-                Spacer(
-                    modifier = Modifier.height(6.dp)
-                )
+                Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
                     text = wallpaper.name,
@@ -95,18 +99,15 @@ fun HeroBanner(
                     overflow = TextOverflow.Ellipsis
                 )
 
-                Spacer(
-                    modifier = Modifier.height(8.dp)
-                )
-                    Text(
-                        text = "Hand-picked for you",
-                        color = Color.White.copy(alpha = 0.78f),
-                        fontSize = 13.sp
-                    )
+                Spacer(modifier = Modifier.height(8.dp))
 
-                Spacer(
-                    modifier = Modifier.height(14.dp)
+                Text(
+                    text = stringResource(R.string.hand_picked_for_you),
+                    color = Color.White.copy(alpha = 0.78f),
+                    fontSize = 13.sp
                 )
+
+                Spacer(modifier = Modifier.height(14.dp))
 
                 Button(
                     onClick = onExploreClick,
@@ -117,14 +118,13 @@ fun HeroBanner(
                     ),
                     modifier = Modifier.height(44.dp)
                 ) {
+
                     Text(
-                        text = "EXPLORE",
+                        text = stringResource(R.string.explore).uppercase(),
                         fontWeight = FontWeight.Bold
                     )
 
-                    Spacer(
-                        modifier = Modifier.width(8.dp)
-                    )
+                    Spacer(modifier = Modifier.width(8.dp))
 
                     Icon(
                         imageVector = Icons.Default.ArrowForward,

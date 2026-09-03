@@ -22,7 +22,8 @@ import androidx.compose.ui.unit.dp
 import com.example.wallora.analytics.AnalyticsManager
 import com.example.wallora.ui.theme.WalloraAccent
 import com.example.wallora.ui.theme.WalloraSurface
-
+import androidx.compose.ui.res.stringResource
+import com.example.wallora.R
 @Composable
 fun SearchSection(
     searchText: String,
@@ -54,7 +55,7 @@ fun SearchSection(
         },
         placeholder = {
             Text(
-                text = "Search wallpapers...",
+                text = stringResource(R.string.search_wallpapers),
                 color = Color.White.copy(alpha = 0.65f)
             )
         },

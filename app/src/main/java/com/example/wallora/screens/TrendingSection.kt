@@ -17,7 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.wallora.ui.theme.WalloraAccent
-
+import androidx.compose.ui.res.stringResource
+import com.example.wallora.R
 @Composable
 fun TrendingSection(
     selectedTrending: String,
@@ -30,21 +31,21 @@ fun TrendingSection(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         TrendingChipButton(
-            text = "🔥 Popular",
+            text = "🔥 ${stringResource(R.string.filter_popular)}",
             value = "Popular",
             selected = selectedTrending == "Popular",
             onClick = onTrendingSelected
         )
 
         TrendingChipButton(
-            text = "🆕 New",
+            text = "🆕 ${stringResource(R.string.filter_new)}",
             value = "New",
             selected = selectedTrending == "New",
             onClick = onTrendingSelected
         )
 
         TrendingChipButton(
-            text = "⭐ Editor's Choice",
+            text = "⭐ ${stringResource(R.string.filter_editors_choice)}",
             value = "Editor's Choice",
             selected = selectedTrending == "Editor's Choice",
             onClick = onTrendingSelected

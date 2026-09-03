@@ -1,3 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
+
     <string name="app_name">Wallora</string>
+
+    <!-- Bottom menu -->
+    <string name="home">Home</string>
+    <string name="favorites">Favorites</string>
+    <string name="settings">Settings</string>
+
+    <!-- Search -->
+    <string name="search_wallpapers">Search wallpapers...</string>
+    <string name="search_results">Search results</string>
+    <string name="no_wallpapers_found">No wallpapers found</string>
+    <string name="try_another_keyword">Try another keyword</string>
+
+    <!-- Home -->
+    <string name="collections">Collections</string>
+    <string name="explore_wallpapers">Explore Wallpapers</string>
+    <string name="new_wallpapers_every_week">New wallpapers every week</string>
+
+    <string name="featured_wallpaper">Featured wallpaper</string>
+    <string name="hand_picked_for_you">Hand-picked for you</string>
+    <string name="explore">Explore</string>
+
+    <string name="growing_collection">Growing Collection</string>
+    <string name="new_this_week">NEW THIS WEEK</string>
+    <string name="autumn_cozy_is_here">Autumn Cozy is here</string>
+    <string name="autumn_cozy_subtitle">12 new wallpapers • warm autumn vibes</string>
+    <string name="explore_collection">Explore collection</string>
+
+    <!-- Wallpaper -->
+    <string name="rate_this_wallpaper">Rate this wallpaper</string>
+    <string name="your_rating">Your rating</string>
+    <string name="favorite">Favorite</string>
+    <string name="favorited">Favorited</string>
+    <string name="download">Download</string>
+    <string name="set_wallpaper">Set Wallpaper</string>
+
+    <!-- Favorites -->
+    <string name="wallpapers_saved">%1$d wallpapers saved</string>
+    <string name="no_favorites_yet">No favorites yet</string>
+    <string name="add_favorites_hint">Add wallpapers to favorites and they will appear here.</string>
+    <string name="no_favorites_found">No favorites found</string>
+
+    <!-- Settings -->
+    <string name="settings_title">⚙ Settings</string>
+
+    <string name="background_color">Background color</string>
+    <string name="choose_wallora_style">Choose your Wallora style</string>
+
+    <!-- Background colors -->
+    <string name="color_black">Black</string>
+    <string name="color_charcoal">Charcoal</string>
+    <string name="color_navy">Navy</string>
+    <string name="color_purple">Purple</string>
+    <string name="color_rose">Rose</string>
+    <string name="color_green">Green</string>
+
+    <!-- Rate -->
+    <string name="rate_wallora">Rate Wallora</string>
+    <string name="support_the_project">Support the project</string>
+    <string name="support_project">Support the project</string>
+
+    <!-- Share -->
+    <string name="share_wallora">Share Wallora</string>
+    <string name="invite_your_friends">Invite your friends</string>
+    <string name="invite_friends">Invite your friends</string>
+    <string name="share_wallora_message">Check out Wallora - Premium Wallpapers!</string>
+    <string name="share_wallora_chooser">Share Wallora</string>
+
+    <!-- Privacy -->
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="read_privacy_policy">Read our privacy policy</string>
+
+    <!-- Terms -->
+    <string name="terms_of_use">Terms of Use</string>
+    <string name="read_terms_of_use">Read our terms of use</string>
+
+    <!-- Contact -->
+    <string name="contact_developer">Contact Developer</string>
+    <string name="send_feedback">Send feedback</string>
+
+    <!-- About -->
+    <string name="about_wallora">About Wallora</string>
+    <string name="app_information">App information</string>
+
+    <string name="made_in_poland">Made with ❤ in Poland</string>
+
+    <string name="premium_wallpapers">Premium Wallpapers</string>
+    <string name="ai_crafted_wallpapers">✨ AI Crafted Wallpapers</string>
+    <string name="optimized_amoled">📱 Optimized for AMOLED Displays</string>
+    <string name="weekly_wallpaper_collections">🌍 Weekly Wallpaper Collections</string>
+    <string name="made_in_poland_short">❤️ Made in Poland</string>
+
+    <string name="developer">Developer</string>
+    <string name="close">Close</string>
+    <string name="filter_popular">Popular</string>
+    <string name="filter_new">New</string>
+    <string name="filter_editors_choice">Editor\'s Choice</string>
+    <string name="collection_autumn_cozy_subtitle">Warm Autumn Wallpapers</string>
+    <string name="collection_zodiac_subtitle">12 Original Zodiac Wallpapers</string>
+    <string name="collection_dream_animals_subtitle">12 Cinematic Animal Wallpapers</string>
+    <string name="collection_cute_animals_subtitle">12 Adorable Animal Wallpapers</string>
+    <string name="collection_polish_wonders_subtitle">10 Magical Places in Poland</string>
+    <string name="collection_fantasy_realms_subtitle">Magical Castles and Enchanted Worlds</string>
+    <string name="collection_chibi_dragons_subtitle">Cute Baby Dragons in Magical Worlds</string>
+    <string name="collection_funny_dinosaurs_subtitle">10 Funny Dinosaur Adventures</string>
+    <string name="collection_cosmic_dreams_subtitle">12 Exclusive Space Wallpapers</string>
+    <string name="collection_tropical_paradise_subtitle">12 Exclusive Tropical Wallpapers</string>
+    <string name="collection_hypercars_subtitle">12 Exclusive Hypercar Wallpapers</string>
+    <string name="collection_epic_mountains_subtitle">12 Exclusive Mountain Wallpapers</string>
+    <string name="collection_cyberpunk_cities_subtitle">12 Exclusive Cyberpunk Wallpapers</string>
+    <string name="collection_food_monsters_subtitle">10 Delicious Little Monsters</string>
+    <string name="back">Back</string>
+    <string name="category_all">All</string>
+    <string name="category_animals">Animals</string>
+    <string name="category_nature">Nature</string>
+    <string name="category_space">Space</string>
+    <string name="category_zodiac">Zodiac</string>
+    <string name="category_cyberpunk_cities">Cyberpunk Cities</string>
+    <string name="category_cars">Cars</string>
+    <string name="rate_dialog_message">Do you want to open Google Play and rate Wallora?</string>
+    <string name="cancel">Cancel</string>
+    <string name="rate">Rate</string>
 </resources>

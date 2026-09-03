@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="app_name">Wallora</string>
+
+    <!-- Bottom menu -->
+    <string name="home">Start</string>
+    <string name="favorites">Favoriten</string>
+    <string name="settings">Einstellungen</string>
+
+    <!-- Search -->
+    <string name="search_wallpapers">Hintergrundbilder suchen...</string>
+    <string name="search_results">Suchergebnisse</string>
+    <string name="no_wallpapers_found">Keine Hintergrundbilder gefunden</string>
+    <string name="try_another_keyword">Versuche einen anderen Suchbegriff</string>
+
+    <!-- Home -->
+    <string name="collections">Sammlungen</string>
+    <string name="explore_wallpapers">Hintergrundbilder entdecken</string>
+    <string name="new_wallpapers_every_week">Jede Woche neue Hintergrundbilder</string>
+
+    <string name="featured_wallpaper">Empfohlenes Hintergrundbild</string>
+    <string name="hand_picked_for_you">Für dich ausgewählt</string>
+    <string name="explore">Entdecken</string>
+
+    <string name="growing_collection">Wachsende Sammlung</string>
+    <string name="new_this_week">NEU DIESE WOCHE</string>
+    <string name="autumn_cozy_is_here">Autumn Cozy ist da</string>
+    <string name="autumn_cozy_subtitle">12 neue Hintergrundbilder • warme Herbststimmung</string>
+    <string name="explore_collection">Sammlung entdecken</string>
+
+    <!-- Wallpaper -->
+    <string name="rate_this_wallpaper">Dieses Hintergrundbild bewerten</string>
+    <string name="your_rating">Deine Bewertung</string>
+    <string name="favorite">Favorit</string>
+    <string name="favorited">Zu Favoriten hinzugefügt</string>
+    <string name="download">Herunterladen</string>
+    <string name="set_wallpaper">Als Hintergrund festlegen</string>
+
+    <!-- Favorites -->
+    <string name="wallpapers_saved">%1$d Hintergrundbilder gespeichert</string>
+    <string name="no_favorites_yet">Noch keine Favoriten</string>
+    <string name="add_favorites_hint">Füge Hintergrundbilder zu deinen Favoriten hinzu. Sie erscheinen dann hier.</string>
+    <string name="no_favorites_found">Keine Favoriten gefunden</string>
+
+    <!-- Settings -->
+    <string name="settings_title">⚙ Einstellungen</string>
+
+    <string name="background_color">Hintergrundfarbe</string>
+    <string name="choose_wallora_style">Wähle deinen Wallora-Stil</string>
+
+    <!-- Background colors -->
+    <string name="color_black">Schwarz</string>
+    <string name="color_charcoal">Anthrazit</string>
+    <string name="color_navy">Dunkelblau</string>
+    <string name="color_purple">Lila</string>
+    <string name="color_rose">Rosa</string>
+    <string name="color_green">Grün</string>
+
+    <!-- Rate -->
+    <string name="rate_wallora">Wallora bewerten</string>
+    <string name="support_the_project">Unterstütze das Projekt</string>
+    <string name="support_project">Unterstütze das Projekt</string>
+
+    <!-- Share -->
+    <string name="share_wallora">Wallora teilen</string>
+    <string name="invite_your_friends">Lade deine Freunde ein</string>
+    <string name="invite_friends">Lade deine Freunde ein</string>
+    <string name="share_wallora_message">Entdecke Wallora - Premium-Hintergrundbilder!</string>
+    <string name="share_wallora_chooser">Wallora teilen</string>
+
+    <!-- Privacy -->
+    <string name="privacy_policy">Datenschutzerklärung</string>
+    <string name="read_privacy_policy">Lies unsere Datenschutzerklärung</string>
+
+    <!-- Terms -->
+    <string name="terms_of_use">Nutzungsbedingungen</string>
+    <string name="read_terms_of_use">Lies unsere Nutzungsbedingungen</string>
+
+    <!-- Contact -->
+    <string name="contact_developer">Entwicklerin kontaktieren</string>
+    <string name="send_feedback">Feedback senden</string>
+
+    <!-- About -->
+    <string name="about_wallora">Über Wallora</string>
+    <string name="app_information">App-Informationen</string>
+
+    <string name="made_in_poland">Mit ❤ in Polen erstellt</string>
+
+    <string name="premium_wallpapers">Premium-Hintergrundbilder</string>
+    <string name="ai_crafted_wallpapers">✨ KI-erstellte Hintergrundbilder</string>
+    <string name="optimized_amoled">📱 Für AMOLED-Displays optimiert</string>
+    <string name="weekly_wallpaper_collections">🌍 Wöchentliche Hintergrundbild-Kollektionen</string>
+    <string name="made_in_poland_short">❤️ In Polen erstellt</string>
+
+    <string name="developer">Entwicklerin</string>
+    <string name="close">Schließen</string>
+    <string name="filter_popular">Beliebt</string>
+    <string name="filter_new">Neu</string>
+    <string name="filter_editors_choice">Empfehlung der Redaktion</string>
+    <string name="collection_autumn_cozy_subtitle">Warme Herbst-Hintergrundbilder</string>
+    <string name="collection_zodiac_subtitle">12 originelle Tierkreis-Hintergrundbilder</string>
+    <string name="collection_dream_animals_subtitle">12 filmreife Tier-Hintergrundbilder</string>
+    <string name="collection_cute_animals_subtitle">12 niedliche Tier-Hintergrundbilder</string>
+    <string name="collection_polish_wonders_subtitle">10 magische Orte in Polen</string>
+    <string name="collection_fantasy_realms_subtitle">Magische Schlösser und verzauberte Welten</string>
+    <string name="collection_chibi_dragons_subtitle">Niedliche kleine Drachen in magischen Welten</string>
+    <string name="collection_funny_dinosaurs_subtitle">10 lustige Dinosaurier-Abenteuer</string>
+    <string name="collection_cosmic_dreams_subtitle">12 exklusive Weltraum-Hintergrundbilder</string>
+    <string name="collection_tropical_paradise_subtitle">12 exklusive tropische Hintergrundbilder</string>
+    <string name="collection_hypercars_subtitle">12 exklusive Hypercar-Hintergrundbilder</string>
+    <string name="collection_epic_mountains_subtitle">12 exklusive Berg-Hintergrundbilder</string>
+    <string name="collection_cyberpunk_cities_subtitle">12 exklusive Cyberpunk-Hintergrundbilder</string>
+    <string name="collection_food_monsters_subtitle">10 köstliche kleine Monster</string>
+    <string name="back">Zurück</string>
+    <string name="category_all">Alle</string>
+    <string name="category_animals">Tiere</string>
+    <string name="category_nature">Natur</string>
+    <string name="category_space">Weltraum</string>
+    <string name="category_zodiac">Tierkreis</string>
+    <string name="category_cyberpunk_cities">Cyberpunk-Städte</string>
+    <string name="category_cars">Autos</string>
+    <string name="rate_dialog_message">Möchtest du Google Play öffnen und Wallora bewerten?</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="rate">Bewerten</string>
+</resources>

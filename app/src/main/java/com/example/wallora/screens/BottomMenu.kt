@@ -8,10 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.wallora.R
 import com.example.wallora.ui.theme.WalloraAccent
+
 @Composable
 fun BottomMenu(
     selectedTab: String,
@@ -21,26 +24,30 @@ fun BottomMenu(
         modifier = Modifier
             .fillMaxWidth()
             .background(Color(0xFF111111))
-            .padding(vertical = 12.dp),
+            .navigationBarsPadding()
+            .padding(vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
         MenuItem(
-            text = "🏠 Home",
+            text = "🏠 ${stringResource(R.string.home)}",
             selected = selectedTab == "home",
-            onClick = { onTabSelected("home") }
+            onClick = { onTabSelected("home") },
+            modifier = Modifier.weight(1f)
         )
 
         MenuItem(
-            text = "❤️ Favorites",
+            text = "❤️ ${stringResource(R.string.favorites)}",
             selected = selectedTab == "favorites",
-            onClick = { onTabSelected("favorites") }
+            onClick = { onTabSelected("favorites") },
+            modifier = Modifier.weight(1f)
         )
 
         MenuItem(
-            text = "⚙️ Settings",
+            text = "⚙️ ${stringResource(R.string.settings)}",
             selected = selectedTab == "settings",
-            onClick = { onTabSelected("settings") }
+            onClick = { onTabSelected("settings") },
+            modifier = Modifier.weight(1f)
         )
     }
 }
@@ -49,15 +56,21 @@ fun BottomMenu(
 fun MenuItem(
     text: String,
     selected: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Text(
-        text = text,
-        color = if (selected) WalloraAccent else Color.White,
-        fontSize = if (selected) 17.sp else 15.sp,
-        fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
-        modifier = Modifier
+    Box(
+        modifier = modifier
+            .heightIn(min = 56.dp)
             .clickable { onClick() }
-            .padding(8.dp)
-    )
+            .padding(horizontal = 6.dp, vertical = 10.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = text,
+            color = if (selected) WalloraAccent else Color.White,
+            fontSize = if (selected) 17.sp else 15.sp,
+            fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal
+        )
+    }
 }

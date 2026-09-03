@@ -29,7 +29,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.wallora.model.WallpaperCollection
-
+import androidx.compose.ui.res.stringResource
+import com.example.wallora.R
 @Composable
 fun FeaturedCollection(
     collection: WallpaperCollection,
@@ -78,7 +79,7 @@ fun FeaturedCollection(
             Spacer(modifier = Modifier.height(4.dp))
 
             Text(
-                text = collection.subtitle,
+                text = getLocalizedCollectionSubtitle(collection.subtitle),
                 color = Color.White.copy(alpha = 0.75f),
                 fontSize = 14.sp,
                 maxLines = 2,
@@ -92,7 +93,7 @@ fun FeaturedCollection(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Explore Collection",
+                    text = stringResource(R.string.explore_collection),
                     color = Color.White,
                     fontSize = 15.sp,
                     fontWeight = FontWeight.Bold

@@ -5,9 +5,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.wallora.R
 
 @Composable
 fun HomeHeader(
@@ -33,7 +35,7 @@ fun HomeHeader(
     )
 
     Text(
-        text = "Growing Collection",
+        text = stringResource(R.string.growing_collection),
         color = Color.White.copy(alpha = 0.85f),
         fontSize = 17.sp,
         lineHeight = 22.sp,
@@ -42,7 +44,7 @@ fun HomeHeader(
     )
 
     Text(
-        text = "✨ New Wallpapers Every Week",
+        text = "✨ ${stringResource(R.string.new_wallpapers_every_week)}",
         color = Color(0xFFFFC857),
         fontSize = 17.sp,
         fontWeight = FontWeight.Bold,

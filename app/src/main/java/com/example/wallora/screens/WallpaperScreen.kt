@@ -1,3 +1,4 @@
+
 package com.example.wallora.screens
 
 import android.app.WallpaperManager
@@ -67,8 +68,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.CircleShape
 import com.example.wallora.ui.theme.WalloraSurface
 import androidx.compose.foundation.verticalScroll
-
-
+import kotlinx.coroutines.delay
+import androidx.compose.ui.res.stringResource
+import com.example.wallora.R
 
 private fun downloadsToNumber(downloads: String): Int {
     val cleanValue = downloads
@@ -103,25 +105,106 @@ private fun matchesWallpaperSearch(
     wallpaper: Wallpaper,
     query: String
 ): Boolean {
-    val cleanQuery = query.trim().lowercase()
+    val cleanQuery = query
+        .trim()
+        .lowercase()
 
     if (cleanQuery.isBlank()) {
         return true
     }
 
-    fun matchesText(text: String): Boolean {
-        val normalizedText = text.trim().lowercase()
+    val translatedQueries = when (cleanQuery) {
 
-        if (normalizedText == cleanQuery) {
-            return true
-        }
+        "zwierzę",
+        "zwierze",
+        "zwierzęta",
+        "zwierzeta",
+        "animal",
+        "animals" ->
+            listOf("animal", "animals")
+
+        "kot",
+        "koty" ->
+            listOf("cat", "cats")
+
+        "pies",
+        "psy" ->
+            listOf("dog", "dogs")
+
+        "wilk",
+        "wilki" ->
+            listOf("wolf", "wolves")
+
+        "smok",
+        "smoki" ->
+            listOf("dragon", "dragons")
+
+        "dinozaur",
+        "dinozaury" ->
+            listOf("dinosaur", "dinosaurs")
+
+        "natura" ->
+            listOf("nature")
+
+        "las",
+        "lasy" ->
+            listOf("forest", "woods")
+
+        "góra",
+        "gora",
+        "góry",
+        "gory" ->
+            listOf("mountain", "mountains")
+
+        "wodospad",
+        "wodospady" ->
+            listOf("waterfall", "waterfalls")
+
+        "morze" ->
+            listOf("sea", "ocean")
+
+        "ocean" ->
+            listOf("ocean", "sea")
+
+        "kosmos" ->
+            listOf("space", "cosmic", "galaxy")
+
+        "galaktyka",
+        "galaktyki" ->
+            listOf("galaxy", "galaxies")
+
+        "samochód",
+        "samochod",
+        "samochody",
+        "auto",
+        "auta" ->
+            listOf("car", "cars")
+
+        "cyberpunk",
+        "cyberpunkowe miasta" ->
+            listOf("cyberpunk", "city", "cities")
+
+        "zodiak" ->
+            listOf("zodiac")
+
+        else ->
+            listOf(cleanQuery)
+    }
+
+    fun matchesText(text: String): Boolean {
+        val normalizedText = text
+            .trim()
+            .lowercase()
 
         val words = normalizedText
             .split(Regex("[^a-z0-9]+"))
             .filter { it.isNotBlank() }
 
-        return words.any { word ->
-            word == cleanQuery
+        return translatedQueries.any { translatedQuery ->
+            normalizedText == translatedQuery ||
+                    words.any { word ->
+                        word == translatedQuery
+                    }
         }
     }
 
@@ -144,6 +227,7 @@ private fun Context.findActivity(): Activity? {
 
     return currentContext as? Activity
 }
+
 @Composable
 fun WallpaperScreen() {
     val wallpapers = WallpaperRepository.wallpapers
@@ -384,7 +468,10 @@ fun WallpaperScreen() {
                             selectedTrending = selectedTrending,
                             categories = categories.map { it.name },
                             onSearchChange = { searchText = it },
-                            onCategoryClick = { selectedCategory = it },
+                            onCategoryClick = {
+                                selectedCategory = it
+                                searchText = ""
+                            },
                             onTrendingSelected = { selectedTrending = it },
                             onWallpaperClick = {
                                 openWallpaper(it, fromCollection = false)
@@ -418,8 +505,22 @@ fun WallpaperScreen() {
 
                         "settings" -> SettingsScreen(
                             onPrivacyPolicyClick = {
-                                legalPageUrl =
-                                    "https://nikoladev91.github.io/wallora-privacy-policy/"
+                                val language =
+                                    context.resources.configuration.locales[0].language
+
+                                legalPageUrl = when (language) {
+                                    "pl" ->
+                                        "https://nikoladev91.github.io/wallora-privacy-policy/privacy-policy-pl.html"
+
+                                    "de" ->
+                                        "https://nikoladev91.github.io/wallora-privacy-policy/privacy-policy-de.html"
+
+                                    "es" ->
+                                        "https://nikoladev91.github.io/wallora-privacy-policy/privacy-policy-es.html"
+
+                                    else ->
+                                        "https://nikoladev91.github.io/wallora-privacy-policy/privacy-policy.html"
+                                }
                             },
                             onTermsOfUseClick = {
                                 legalPageUrl =
@@ -523,7 +624,7 @@ fun FavoritesScreen(
     ) {
 
         Text(
-            text = "❤️ Favorites",
+            text = "❤️ ${stringResource(R.string.favorites)}",
             color = Color.White,
             fontSize = 34.sp,
             fontWeight = FontWeight.Bold
@@ -532,7 +633,10 @@ fun FavoritesScreen(
         Spacer(modifier = Modifier.height(6.dp))
 
         Text(
-            text = "${wallpapers.size} wallpapers saved",
+            text = stringResource(
+                R.string.wallpapers_saved,
+                wallpapers.size
+            ),
             color = Color.LightGray,
             fontSize = 14.sp
         )
@@ -566,7 +670,7 @@ fun FavoritesScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "No favorites yet",
+                    text = stringResource(R.string.no_favorites_yet),
                     color = Color.White,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold
@@ -575,7 +679,7 @@ fun FavoritesScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Add wallpapers to favorites and they will appear here.",
+                    text = stringResource(R.string.add_favorites_hint),
                     color = Color.LightGray,
                     fontSize = 16.sp
                 )
@@ -599,7 +703,7 @@ fun FavoritesScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "No favorites found",
+                    text = stringResource(R.string.no_favorites_found),
                     color = Color.White,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold
@@ -608,7 +712,7 @@ fun FavoritesScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Try another keyword",
+                    text = stringResource(R.string.try_another_keyword),
                     color = Color.LightGray,
                     fontSize = 14.sp
                 )
@@ -634,7 +738,12 @@ fun SettingsScreen(
 ) {
     val context = LocalContext.current
     val developerEmail = "wallora.support@gmail.com"
+
     var showAboutDialog by remember { mutableStateOf(false) }
+    var showRateDialog by remember { mutableStateOf(false) }
+
+    val shareMessage = stringResource(R.string.share_wallora_message)
+    val shareChooserTitle = stringResource(R.string.share_wallora_chooser)
 
     val preferences = remember {
         context.getSharedPreferences(
@@ -668,7 +777,7 @@ fun SettingsScreen(
     ) {
 
         Text(
-            text = "⚙ Settings",
+            text = stringResource(R.string.settings_title),
             color = Color.White,
             fontSize = 34.sp,
             fontWeight = FontWeight.Bold
@@ -677,7 +786,7 @@ fun SettingsScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Background color",
+            text = stringResource(R.string.background_color),
             color = Color.White,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
@@ -686,7 +795,7 @@ fun SettingsScreen(
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
-            text = "Choose your Wallora style",
+            text = stringResource(R.string.choose_wallora_style),
             color = Color.Gray,
             fontSize = 13.sp
         )
@@ -700,7 +809,7 @@ fun SettingsScreen(
         ) {
 
             BackgroundColorOption(
-                name = "Black",
+                name = stringResource(R.string.color_black),
                 color = Color(0xFF000000),
                 selected = WalloraBackground == Color(0xFF000000),
                 onClick = {
@@ -714,7 +823,7 @@ fun SettingsScreen(
             )
 
             BackgroundColorOption(
-                name = "Charcoal",
+                name = stringResource(R.string.color_charcoal),
                 color = Color(0xFF2B2B2B),
                 selected = WalloraBackground == Color(0xFF2B2B2B),
                 onClick = {
@@ -728,7 +837,7 @@ fun SettingsScreen(
             )
 
             BackgroundColorOption(
-                name = "Navy",
+                name = stringResource(R.string.color_navy),
                 color = Color(0xFF0F1F3A),
                 selected = WalloraBackground == Color(0xFF0F1F3A),
                 onClick = {
@@ -742,7 +851,7 @@ fun SettingsScreen(
             )
 
             BackgroundColorOption(
-                name = "Purple",
+                name = stringResource(R.string.color_purple),
                 color = Color(0xFF4B2E83),
                 selected = WalloraBackground == Color(0xFF4B2E83),
                 onClick = {
@@ -756,7 +865,7 @@ fun SettingsScreen(
             )
 
             BackgroundColorOption(
-                name = "Rose",
+                name = stringResource(R.string.color_rose),
                 color = Color(0xFF6A1E2E),
                 selected = WalloraBackground == Color(0xFF6A1E2E),
                 onClick = {
@@ -770,7 +879,7 @@ fun SettingsScreen(
             )
 
             BackgroundColorOption(
-                name = "Green",
+                name = stringResource(R.string.color_green),
                 color = Color(0xFF00A86B),
                 selected = WalloraBackground == Color(0xFF00A86B),
                 onClick = {
@@ -787,86 +896,71 @@ fun SettingsScreen(
         Spacer(modifier = Modifier.height(18.dp))
 
         SettingItem(
-            title = "⭐ Rate Wallora",
-            subtitle = "Support the project",
+            title = "⭐ ${stringResource(R.string.rate_wallora)}",
+            subtitle = stringResource(R.string.support_project),
             onClick = {
-                val appPackageName = context.packageName
-
-                val marketIntent = Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("market://details?id=$appPackageName")
-                )
-
-                val webIntent = Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(
-                        "https://play.google.com/store/apps/details?id=$appPackageName"
-                    )
-                )
-
-                try {
-                    context.startActivity(marketIntent)
-                } catch (exception: Exception) {
-                    context.startActivity(webIntent)
-                }
+                showRateDialog = true
             }
         )
 
         SettingItem(
-            title = "📤 Share Wallora",
-            subtitle = "Invite your friends",
+            title = "📤 ${stringResource(R.string.share_wallora)}",
+            subtitle = stringResource(R.string.invite_friends),
             onClick = {
                 val appPackageName = context.packageName
 
                 val sendIntent = Intent().apply {
                     action = Intent.ACTION_SEND
+
                     putExtra(
                         Intent.EXTRA_TEXT,
-                        "Check out Wallora - Premium Wallpapers!\n\n" +
+                        "$shareMessage\n\n" +
                                 "https://play.google.com/store/apps/details?id=$appPackageName"
                     )
+
                     type = "text/plain"
                 }
 
-                val shareIntent =
-                    Intent.createChooser(sendIntent, "Share Wallora")
+                val shareIntent = Intent.createChooser(
+                    sendIntent,
+                    shareChooserTitle
+                )
 
                 context.startActivity(shareIntent)
             }
         )
 
         SettingItem(
-            title = "📜 Privacy Policy",
-            subtitle = "Read our privacy policy",
+            title = "📜 ${stringResource(R.string.privacy_policy)}",
+            subtitle = stringResource(R.string.read_privacy_policy),
             onClick = onPrivacyPolicyClick
         )
 
         SettingItem(
-            title = "📄 Terms of Use",
-            subtitle = "Read our terms of use",
+            title = "📄 ${stringResource(R.string.terms_of_use)}",
+            subtitle = stringResource(R.string.read_terms_of_use),
             onClick = onTermsOfUseClick
         )
 
         SettingItem(
-            title = "📧 Contact Developer",
-            subtitle = "Send feedback",
+            title = "📧 ${stringResource(R.string.contact_developer)}",
+            subtitle = stringResource(R.string.send_feedback),
             onClick = {
-                val emailIntent =
-                    Intent(Intent.ACTION_SENDTO).apply {
-                        data = Uri.parse("mailto:$developerEmail")
-                        putExtra(
-                            Intent.EXTRA_SUBJECT,
-                            "Wallora Feedback"
-                        )
-                    }
+                val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:$developerEmail")
+                    putExtra(
+                        Intent.EXTRA_SUBJECT,
+                        "Wallora Feedback"
+                    )
+                }
 
                 context.startActivity(emailIntent)
             }
         )
 
         SettingItem(
-            title = "ℹ️ About Wallora",
-            subtitle = "App information",
+            title = "ℹ️ ${stringResource(R.string.about_wallora)}",
+            subtitle = stringResource(R.string.app_information),
             onClick = {
                 showAboutDialog = true
             }
@@ -887,22 +981,79 @@ fun SettingsScreen(
         )
 
         Text(
-            text = "Made with ❤ in Poland",
+            text = stringResource(R.string.made_in_poland),
             color = Color.White.copy(alpha = 0.75f),
             fontSize = 13.sp
         )
     }
 
-    if (showAboutDialog) {
+    if (showRateDialog) {
+        AlertDialog(
+            onDismissRequest = {
+                showRateDialog = false
+            },
+            title = {
+                Text(
+                    text = "⭐ ${stringResource(R.string.rate_wallora)}"
+                )
+            },
+            text = {
+                Text(
+                    text = stringResource(R.string.rate_dialog_message)
+                )
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showRateDialog = false
+                    }
+                ) {
+                    Text(
+                        text = stringResource(R.string.cancel)
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showRateDialog = false
 
+                        val appPackageName = context.packageName
+
+                        val marketIntent = Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("market://details?id=$appPackageName")
+                        )
+
+                        val webIntent = Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(
+                                "https://play.google.com/store/apps/details?id=$appPackageName"
+                            )
+                        )
+
+                        try {
+                            context.startActivity(marketIntent)
+                        } catch (exception: Exception) {
+                            context.startActivity(webIntent)
+                        }
+                    }
+                ) {
+                    Text(
+                        text = stringResource(R.string.rate)
+                    )
+                }
+            }
+        )
+    }
+
+    if (showAboutDialog) {
         AlertDialog(
             onDismissRequest = {
                 showAboutDialog = false
             },
-
             title = {
                 Column {
-
                     Text(
                         text = "Wallora",
                         fontWeight = FontWeight.Bold,
@@ -910,39 +1061,37 @@ fun SettingsScreen(
                     )
 
                     Text(
-                        text = "Premium Wallpapers",
+                        text = stringResource(R.string.premium_wallpapers),
                         color = Color.Gray,
                         fontSize = 14.sp
                     )
                 }
             },
-
             text = {
                 Column {
-
                     Text(
-                        text = "✨ AI Crafted Wallpapers",
+                        text = stringResource(R.string.ai_crafted_wallpapers),
                         fontWeight = FontWeight.SemiBold
                     )
 
                     Spacer(modifier = Modifier.height(6.dp))
 
                     Text(
-                        text = "📱 Optimized for AMOLED Displays",
+                        text = stringResource(R.string.optimized_amoled),
                         fontWeight = FontWeight.SemiBold
                     )
 
                     Spacer(modifier = Modifier.height(6.dp))
 
                     Text(
-                        text = "🌍 Weekly Wallpaper Collections",
+                        text = stringResource(R.string.weekly_wallpaper_collections),
                         fontWeight = FontWeight.SemiBold
                     )
 
                     Spacer(modifier = Modifier.height(6.dp))
 
                     Text(
-                        text = "❤️ Made in Poland",
+                        text = stringResource(R.string.made_in_poland_short),
                         fontWeight = FontWeight.SemiBold
                     )
 
@@ -953,12 +1102,12 @@ fun SettingsScreen(
                     Spacer(modifier = Modifier.height(12.dp))
 
                     Text(
-                        text = "Version 1.0.1",
+                        text = "Version 1.1.1",
                         color = Color.Gray
                     )
 
                     Text(
-                        text = "Developer",
+                        text = stringResource(R.string.developer),
                         fontWeight = FontWeight.Bold
                     )
 
@@ -969,7 +1118,7 @@ fun SettingsScreen(
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "wallora.support@gmail.com",
+                        text = developerEmail,
                         color = Color.Gray
                     )
 
@@ -984,19 +1133,21 @@ fun SettingsScreen(
                     )
                 }
             },
-
             confirmButton = {
                 TextButton(
                     onClick = {
                         showAboutDialog = false
                     }
                 ) {
-                    Text("Close")
+                    Text(
+                        text = stringResource(R.string.close)
+                    )
                 }
             }
         )
     }
 }
+
 @Composable
 fun LegalDocumentScreen(
     url: String,
@@ -1025,7 +1176,7 @@ fun LegalDocumentScreen(
             Spacer(modifier = Modifier.width(12.dp))
 
             Text(
-                text = "Back",
+                text = stringResource(R.string.back),
                 color = Color.White,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
@@ -1162,7 +1313,7 @@ fun NewWallpapersBanner(
     ) {
 
         Text(
-            text = "🍂  NEW THIS WEEK",
+            text = "🍂  ${stringResource(R.string.new_this_week)}",
             color = Color(0xFFFFC84A),
             fontSize = 13.sp,
             fontWeight = FontWeight.Bold
@@ -1188,14 +1339,13 @@ fun NewWallpapersBanner(
         Spacer(modifier = Modifier.height(12.dp))
 
         Text(
-            text = "Explore collection  →",
+            text = "${stringResource(R.string.explore_collection)}  →",
             color = Color(0xFFFFC84A),
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold
         )
     }
 }
-
 @Composable
 fun GalleryContent(
     title: String,
@@ -1237,7 +1387,16 @@ fun GalleryContent(
     }
 
     val displayedWallpapers = wallpapers
+    LaunchedEffect(searchText) {
+        if (searchText.isNotBlank()) {
+            delay(300)
 
+            listState.animateScrollToItem(
+                index = 3,
+                scrollOffset = -180
+            )
+        }
+    }
     LazyColumn(
         state = listState,
         modifier = Modifier
@@ -1257,8 +1416,8 @@ fun GalleryContent(
 
         item {
             NewWallpapersBanner(
-                title = "Autumn Cozy is here",
-                subtitle = "12 new wallpapers • warm autumn vibes",
+                title = stringResource(R.string.autumn_cozy_is_here),
+                subtitle = stringResource(R.string.autumn_cozy_subtitle),
                 onClick = onNewCollectionClick
             )
         }
@@ -1296,7 +1455,7 @@ fun GalleryContent(
         if (searchText.isBlank()) {
             item {
                 Text(
-                    text = "⭐ Collections",
+                    text = "⭐ ${stringResource(R.string.collections)}",
                     color = Color.White,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold
@@ -1327,7 +1486,7 @@ fun GalleryContent(
 
             item {
                 Text(
-                    text = "Explore Wallpapers",
+                    text = stringResource(R.string.explore_wallpapers),
                     color = Color.White,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold
@@ -1349,7 +1508,7 @@ fun GalleryContent(
         } else {
             item {
                 Text(
-                    text = "Search results",
+                    text = stringResource(R.string.search_results),
                     color = Color.White,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold
@@ -1374,7 +1533,7 @@ fun GalleryContent(
                         Spacer(modifier = Modifier.height(12.dp))
 
                         Text(
-                            text = "No wallpapers found",
+                            text = stringResource(R.string.no_wallpapers_found),
                             color = Color.White,
                             fontSize = 20.sp,
                             fontWeight = FontWeight.SemiBold
@@ -1383,7 +1542,7 @@ fun GalleryContent(
                         Spacer(modifier = Modifier.height(6.dp))
 
                         Text(
-                            text = "Try another keyword",
+                            text = stringResource(R.string.try_another_keyword),
                             color = Color.Gray,
                             fontSize = 14.sp
                         )

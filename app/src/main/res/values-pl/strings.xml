@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="app_name">Wallora</string>
+
+    <!-- Dolne menu -->
+    <string name="home">Start</string>
+    <string name="favorites">Ulubione</string>
+    <string name="settings">Ustawienia</string>
+
+    <!-- Wyszukiwanie -->
+    <string name="search_wallpapers">Szukaj tapet...</string>
+    <string name="search_results">Wyniki wyszukiwania</string>
+    <string name="no_wallpapers_found">Nie znaleziono tapet</string>
+    <string name="try_another_keyword">Spróbuj innego słowa</string>
+
+    <!-- Home -->
+    <string name="collections">Kolekcje</string>
+    <string name="explore_wallpapers">Przeglądaj tapety</string>
+    <string name="new_wallpapers_every_week">Nowe tapety co tydzień</string>
+
+    <string name="featured_wallpaper">Polecana tapeta</string>
+    <string name="hand_picked_for_you">Wybrane specjalnie dla Ciebie</string>
+    <string name="explore">Przeglądaj</string>
+
+    <string name="growing_collection">Rosnąca kolekcja</string>
+    <string name="new_this_week">NOWOŚĆ W TYM TYGODNIU</string>
+    <string name="autumn_cozy_is_here">Autumn Cozy już dostępna</string>
+    <string name="autumn_cozy_subtitle">12 nowych tapet • ciepły jesienny klimat</string>
+    <string name="explore_collection">Przeglądaj kolekcję</string>
+
+    <!-- Ekran tapety -->
+    <string name="rate_this_wallpaper">Oceń tę tapetę</string>
+    <string name="your_rating">Twoja ocena</string>
+    <string name="favorite">Ulubiona</string>
+    <string name="favorited">Dodano do ulubionych</string>
+    <string name="download">Pobierz</string>
+    <string name="set_wallpaper">Ustaw tapetę</string>
+
+    <!-- Ulubione -->
+    <string name="wallpapers_saved">Zapisane tapety: %1$d</string>
+    <string name="no_favorites_yet">Brak ulubionych</string>
+    <string name="add_favorites_hint">Dodaj tapety do ulubionych, a pojawią się tutaj.</string>
+    <string name="no_favorites_found">Nie znaleziono ulubionych</string>
+
+    <!-- Ustawienia -->
+    <string name="settings_title">⚙ Ustawienia</string>
+
+    <string name="background_color">Kolor tła</string>
+    <string name="choose_wallora_style">Wybierz styl Wallory</string>
+
+    <!-- Kolory tła -->
+    <string name="color_black">Czarny</string>
+    <string name="color_charcoal">Grafitowy</string>
+    <string name="color_navy">Granatowy</string>
+    <string name="color_purple">Fioletowy</string>
+    <string name="color_rose">Różany</string>
+    <string name="color_green">Zielony</string>
+
+    <!-- Ocena aplikacji -->
+    <string name="rate_wallora">Oceń Wallorę</string>
+    <string name="support_the_project">Wesprzyj projekt</string>
+    <string name="support_project">Wesprzyj projekt</string>
+
+    <!-- Udostępnianie -->
+    <string name="share_wallora">Udostępnij Wallorę</string>
+    <string name="invite_your_friends">Zaproś znajomych</string>
+    <string name="invite_friends">Zaproś znajomych</string>
+    <string name="share_wallora_message">Sprawdź Wallorę - tapety premium!</string>
+    <string name="share_wallora_chooser">Udostępnij Wallorę</string>
+
+    <!-- Prywatność -->
+    <string name="privacy_policy">Polityka prywatności</string>
+    <string name="read_privacy_policy">Przeczytaj naszą politykę prywatności</string>
+
+    <!-- Warunki korzystania -->
+    <string name="terms_of_use">Warunki korzystania</string>
+    <string name="read_terms_of_use">Przeczytaj nasze warunki korzystania</string>
+
+    <!-- Kontakt -->
+    <string name="contact_developer">Skontaktuj się z twórcą</string>
+    <string name="send_feedback">Wyślij opinię</string>
+
+    <!-- O aplikacji -->
+    <string name="about_wallora">O Wallorze</string>
+    <string name="app_information">Informacje o aplikacji</string>
+
+    <string name="made_in_poland">Stworzone z ❤ w Polsce</string>
+
+    <string name="premium_wallpapers">Tapety premium</string>
+    <string name="ai_crafted_wallpapers">✨ Tapety stworzone przez AI</string>
+    <string name="optimized_amoled">📱 Zoptymalizowane dla ekranów AMOLED</string>
+    <string name="weekly_wallpaper_collections">🌍 Cotygodniowe kolekcje tapet</string>
+    <string name="made_in_poland_short">❤️ Stworzone w Polsce</string>
+
+    <string name="developer">Twórca</string>
+    <string name="close">Zamknij</string>
+    <string name="filter_popular">Popularne</string>
+    <string name="filter_new">Nowe</string>
+    <string name="filter_editors_choice">Wybór redakcji</string>
+    <string name="collection_autumn_cozy_subtitle">Ciepłe jesienne tapety</string>
+    <string name="collection_zodiac_subtitle">12 oryginalnych tapet zodiakalnych</string>
+    <string name="collection_dream_animals_subtitle">12 filmowych tapet ze zwierzętami</string>
+    <string name="collection_cute_animals_subtitle">12 uroczych tapet ze zwierzętami</string>
+    <string name="collection_polish_wonders_subtitle">10 magicznych miejsc w Polsce</string>
+    <string name="collection_fantasy_realms_subtitle">Magiczne zamki i zaczarowane światy</string>
+    <string name="collection_chibi_dragons_subtitle">Urocze małe smoki w magicznych światach</string>
+    <string name="collection_funny_dinosaurs_subtitle">10 zabawnych przygód dinozaurów</string>
+    <string name="collection_cosmic_dreams_subtitle">12 wyjątkowych tapet kosmicznych</string>
+    <string name="collection_tropical_paradise_subtitle">12 wyjątkowych tropikalnych tapet</string>
+    <string name="collection_hypercars_subtitle">12 wyjątkowych tapet z hipersamochodami</string>
+    <string name="collection_epic_mountains_subtitle">12 wyjątkowych tapet górskich</string>
+    <string name="collection_cyberpunk_cities_subtitle">12 wyjątkowych tapet cyberpunkowych</string>
+    <string name="collection_food_monsters_subtitle">10 smakowitych małych potworów</string>
+    <string name="back">Wróć</string>
+    <string name="category_all">Wszystkie</string>
+    <string name="category_animals">Zwierzęta</string>
+    <string name="category_nature">Natura</string>
+    <string name="category_space">Kosmos</string>
+    <string name="category_zodiac">Zodiak</string>
+    <string name="category_cyberpunk_cities">Cyberpunkowe miasta</string>
+    <string name="category_cars">Samochody</string>
+    <string name="rate_dialog_message">Czy chcesz przejść do Google Play i ocenić Wallorę?</string>
+    <string name="cancel">Anuluj</string>
+    <string name="rate">Oceń</string>
+</resources>
