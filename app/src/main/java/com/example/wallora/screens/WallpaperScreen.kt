@@ -510,16 +510,16 @@ fun WallpaperScreen() {
 
                                 legalPageUrl = when (language) {
                                     "pl" ->
-                                        "https://nikoladev91.github.io/wallora-privacy-policy/privacy-policy-pl.html"
+                                        "https://nikoladev91.github.io/wallora-privacy-policy/privacy-policy-pl.html?v=3"
 
                                     "de" ->
-                                        "https://nikoladev91.github.io/wallora-privacy-policy/privacy-policy-de.html"
+                                        "https://nikoladev91.github.io/wallora-privacy-policy/privacy-policy-de.html?v=3"
 
                                     "es" ->
-                                        "https://nikoladev91.github.io/wallora-privacy-policy/privacy-policy-es.html"
+                                        "https://nikoladev91.github.io/wallora-privacy-policy/privacy-policy-es.html?v=3"
 
                                     else ->
-                                        "https://nikoladev91.github.io/wallora-privacy-policy/privacy-policy.html"
+                                        "https://nikoladev91.github.io/wallora-privacy-policy/privacy-policy.html?v=3"
                                 }
                             },
                             onTermsOfUseClick = {
