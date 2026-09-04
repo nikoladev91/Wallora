@@ -24,18 +24,36 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.wallora.model.WallpaperCollection
-import androidx.compose.ui.res.stringResource
 import com.example.wallora.R
+import com.example.wallora.model.WallpaperCollection
+
 @Composable
 fun FeaturedCollection(
     collection: WallpaperCollection,
     onClick: () -> Unit
 ) {
+
+    val localizedTitle = when (collection.id) {
+        "enchanted_forest_vol_1" ->
+            stringResource(R.string.enchanted_forest_title)
+
+        else ->
+            collection.title
+    }
+
+    val localizedSubtitle = when (collection.id) {
+        "enchanted_forest_vol_1" ->
+            stringResource(R.string.enchanted_forest_subtitle)
+
+        else ->
+            getLocalizedCollectionSubtitle(collection.subtitle)
+    }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -52,23 +70,31 @@ fun FeaturedCollection(
             .clickable { onClick() }
             .padding(20.dp)
     ) {
+
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
+
             Image(
-                painter = painterResource(id = collection.coverImage),
-                contentDescription = collection.title,
+                painter = painterResource(
+                    id = collection.coverImage
+                ),
+                contentDescription = localizedTitle,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(160.dp)
-                    .clip(RoundedCornerShape(18.dp)),
+                    .clip(
+                        RoundedCornerShape(18.dp)
+                    ),
                 contentScale = ContentScale.Crop
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(
+                modifier = Modifier.height(16.dp)
+            )
 
             Text(
-                text = collection.title,
+                text = localizedTitle,
                 color = Color.White,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
@@ -76,30 +102,41 @@ fun FeaturedCollection(
                 overflow = TextOverflow.Ellipsis
             )
 
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(
+                modifier = Modifier.height(4.dp)
+            )
 
             Text(
-                text = getLocalizedCollectionSubtitle(collection.subtitle),
-                color = Color.White.copy(alpha = 0.75f),
+                text = localizedSubtitle,
+                color = Color.White.copy(
+                    alpha = 0.75f
+                ),
                 fontSize = 14.sp,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.height(40.dp)
             )
 
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(
+                modifier = Modifier.weight(1f)
+            )
 
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
+
                 Text(
-                    text = stringResource(R.string.explore_collection),
+                    text = stringResource(
+                        R.string.explore_collection
+                    ),
                     color = Color.White,
                     fontSize = 15.sp,
                     fontWeight = FontWeight.Bold
                 )
 
-                Spacer(modifier = Modifier.width(6.dp))
+                Spacer(
+                    modifier = Modifier.width(6.dp)
+                )
 
                 Icon(
                     imageVector = Icons.Default.ArrowForward,

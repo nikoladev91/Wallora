@@ -124,4 +124,6 @@
     <string name="rate_dialog_message">Do you want to open Google Play and rate Wallora?</string>
     <string name="cancel">Cancel</string>
     <string name="rate">Rate</string>
+    <string name="enchanted_forest_title">Enchanted Forest</string>
+    <string name="enchanted_forest_subtitle">12 Magical Forest Wallpapers</string>
 </resources>

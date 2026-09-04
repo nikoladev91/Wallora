@@ -124,4 +124,6 @@
     <string name="rate_dialog_message">Czy chcesz przejść do Google Play i ocenić Wallorę?</string>
     <string name="cancel">Anuluj</string>
     <string name="rate">Oceń</string>
+    <string name="enchanted_forest_title">Zaczarowany Las</string>
+    <string name="enchanted_forest_subtitle">12 magicznych tapet leśnych</string>
 </resources>

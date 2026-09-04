@@ -124,4 +124,6 @@
     <string name="rate_dialog_message">¿Quieres abrir Google Play y valorar Wallora?</string>
     <string name="cancel">Cancelar</string>
     <string name="rate">Valorar</string>
+    <string name="enchanted_forest_title">Bosque Encantado</string>
+    <string name="enchanted_forest_subtitle">12 fondos de pantalla de bosques mágicos</string>
 </resources>
