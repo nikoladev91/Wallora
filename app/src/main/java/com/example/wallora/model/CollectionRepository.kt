@@ -7,7 +7,7 @@ import com.example.wallora.repository.collections.FantasyRealmsCollection
 import com.example.wallora.repository.collections.ChibiDragonsCollection
 import com.example.wallora.repository.collections.FunnyDinosaursCollection
 import com.example.wallora.repository.collections.FoodMonstersCollection
-
+import com.example.wallora.repository.collections.EnchantedForestCollection
 object CollectionRepository {
 
     private val neonAnimals = WallpaperRepository.wallpapers.filter {
@@ -137,6 +137,14 @@ object CollectionRepository {
             subtitle = "Warm Autumn Wallpapers",
             coverImage = AutumnCozyCollection.wallpapers.first().image,
             wallpapers = AutumnCozyCollection.wallpapers,
+            isPremium = false
+        ),
+        WallpaperCollection(
+            id = "enchanted_forest_vol_1",
+            title = "Enchanted Forest",
+            subtitle = "Magical Forest Wallpapers",
+            coverImage = EnchantedForestCollection.wallpapers.first().image,
+            wallpapers = EnchantedForestCollection.wallpapers,
             isPremium = false
         ),
 

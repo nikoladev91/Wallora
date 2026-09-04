@@ -1216,7 +1216,27 @@ object WallpaperRepository {
                         badge = "NEW",
                         isTopPick = true
                     ),
+                    Wallpaper(
+                        name = "Enchanted Autumn Cabin",
+                        image = R.drawable.autumn_magic_01,
+                        category = "Nature",
 
+                        tags = listOf(
+                            "autumn",
+                            "forest",
+                            "cabin",
+                            "waterfall",
+                            "moon",
+                            "cozy",
+                            "fantasy",
+                            "nature"
+                        ),
+
+                        rating = 5.0,
+                        downloads = "New",
+                        badge = "NEW",
+                        isTopPick = true
+                    ),
 
                     )
     fun getAllWallpapers(): List<Wallpaper> {
