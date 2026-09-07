@@ -6,6 +6,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DirectionsCar
+import androidx.compose.material.icons.filled.Forest
+import androidx.compose.material.icons.filled.Pets
+import androidx.compose.material.icons.filled.Public
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.ViewInAr
+import androidx.compose.material.icons.filled.Widgets
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,12 +27,7 @@ private fun localizedCategoryName(category: String): String {
         .substringAfter(" ")
         .trim()
 
-    val emoji = category
-        .substringBefore(" ")
-        .takeIf { it != category }
-        .orEmpty()
-
-    val localizedName = when (cleanCategory) {
+    return when (cleanCategory) {
 
         "All" ->
             stringResource(R.string.category_all)
@@ -49,12 +52,6 @@ private fun localizedCategoryName(category: String): String {
 
         else ->
             cleanCategory
-    }
-
-    return if (emoji.isNotBlank()) {
-        "$emoji $localizedName"
-    } else {
-        localizedName
     }
 }
 
@@ -84,13 +81,38 @@ fun CategorySection(
                 .substringAfter(" ")
                 .trim()
 
+            val icon = when (cleanCategory) {
+
+                "All" ->
+                    Icons.Default.Widgets
+
+                "Animals" ->
+                    Icons.Default.Pets
+
+                "Nature" ->
+                    Icons.Default.Forest
+
+                "Space" ->
+                    Icons.Default.Public
+
+                "Zodiac" ->
+                    Icons.Default.Star
+
+                "Cyberpunk Cities" ->
+                    Icons.Default.ViewInAr
+
+                "Cars" ->
+                    Icons.Default.DirectionsCar
+
+                else ->
+                    Icons.Default.Widgets
+            }
+
             CategoryButton(
                 name = localizedCategoryName(category),
+                icon = icon,
                 selected = cleanCategory == cleanSelectedCategory,
                 onClick = {
-                    // WAŻNE:
-                    // do filtrowania nadal przekazujemy
-                    // oryginalną angielską wartość
                     onCategoryClick(category)
                 }
             )

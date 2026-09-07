@@ -20,11 +20,28 @@ import com.example.wallora.model.WallpaperCollection
 import com.example.wallora.ui.theme.WalloraBackground
 
 @Composable
+fun getLocalizedCollectionTitle(
+    collection: WallpaperCollection
+): String {
+    return when (collection.id) {
+
+        "enchanted_forest_vol_1" ->
+            stringResource(R.string.enchanted_forest_title)
+
+        else ->
+            collection.title
+    }
+}
+
+@Composable
 fun getLocalizedCollectionSubtitle(subtitle: String): String {
     return when (subtitle) {
 
         "Warm Autumn Wallpapers" ->
             stringResource(R.string.collection_autumn_cozy_subtitle)
+
+        "12 Magical Forest Wallpapers" ->
+            stringResource(R.string.enchanted_forest_subtitle)
 
         "12 Original Zodiac Wallpapers" ->
             stringResource(R.string.collection_zodiac_subtitle)
@@ -65,7 +82,8 @@ fun getLocalizedCollectionSubtitle(subtitle: String): String {
         "10 Delicious Little Monsters" ->
             stringResource(R.string.collection_food_monsters_subtitle)
 
-        else -> subtitle
+        else ->
+            subtitle
     }
 }
 
@@ -116,7 +134,7 @@ fun CollectionScreen(
             Column {
 
                 Text(
-                    text = collection.title,
+                    text = getLocalizedCollectionTitle(collection),
                     color = Color.White,
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold

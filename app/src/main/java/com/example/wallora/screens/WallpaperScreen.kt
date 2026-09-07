@@ -71,7 +71,7 @@ import androidx.compose.foundation.verticalScroll
 import kotlinx.coroutines.delay
 import androidx.compose.ui.res.stringResource
 import com.example.wallora.R
-
+import androidx.compose.ui.graphics.vector.ImageVector
 private fun downloadsToNumber(downloads: String): Int {
     val cleanValue = downloads
         .uppercase()
@@ -101,7 +101,7 @@ private fun downloadsToNumber(downloads: String): Int {
     }
 }
 
-private fun matchesWallpaperSearch(
+fun matchesWallpaperSearch(
     wallpaper: Wallpaper,
     query: String
 ): Boolean {
@@ -493,7 +493,7 @@ fun WallpaperScreen() {
                             listState = homeListState
                         )
 
-                        "favorites" -> FavoritesScreen(
+                        "favorites" -> FavoritesScreenNew(
                             wallpapers = wallpapers.filter {
                                 favoriteNames.contains(it.name)
                             },
@@ -1584,14 +1584,11 @@ fun GalleryContent(
 @Composable
 fun CategoryButton(
     name: String,
+    icon: ImageVector,
     selected: Boolean,
     onClick: () -> Unit
 ) {
-    Text(
-        text = name,
-        color = if (selected) Color.Black else Color.White,
-        fontSize = 15.sp,
-        fontWeight = FontWeight.Bold,
+    Row(
         modifier = Modifier
             .padding(end = 8.dp)
             .background(
@@ -1599,10 +1596,160 @@ fun CategoryButton(
                 shape = RoundedCornerShape(18.dp)
             )
             .clickable { onClick() }
-            .padding(horizontal = 14.dp, vertical = 8.dp)
-    )
-}
+            .padding(horizontal = 14.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(6.dp)
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = if (selected) Color.Black else Color.White,
+            modifier = Modifier.size(18.dp)
+        )
 
+        Text(
+            text = name,
+            color = if (selected) Color.Black else Color.White,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Bold
+        )
+    }
+    fun saveWallpaperToGallery(
+        context: Context,
+        wallpaper: Wallpaper
+    ): Boolean {
+        var uri: Uri? = null
+
+        return try {
+            val safeName = wallpaper.name
+                .replace(" ", "_")
+                .replace("/", "_")
+                .replace("\\", "_")
+
+            val values = ContentValues().apply {
+                put(
+                    MediaStore.Images.Media.DISPLAY_NAME,
+                    "Wallora_${safeName}.png"
+                )
+
+                put(
+                    MediaStore.Images.Media.MIME_TYPE,
+                    "image/png"
+                )
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    put(
+                        MediaStore.Images.Media.RELATIVE_PATH,
+                        "Pictures/Wallora"
+                    )
+
+                    put(
+                        MediaStore.Images.Media.IS_PENDING,
+                        1
+                    )
+                }
+            }
+
+            val resolver = context.contentResolver
+
+            uri = resolver.insert(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                values
+            ) ?: return false
+
+            context.resources
+                .openRawResource(wallpaper.image)
+                .use { input ->
+
+                    resolver
+                        .openOutputStream(uri!!)
+                        ?.use { output ->
+                            input.copyTo(output)
+                        }
+                        ?: return false
+                }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                val completedValues = ContentValues().apply {
+                    put(
+                        MediaStore.Images.Media.IS_PENDING,
+                        0
+                    )
+                }
+
+                resolver.update(
+                    uri!!,
+                    completedValues,
+                    null,
+                    null
+                )
+            }
+
+            true
+
+        } catch (exception: Exception) {
+
+            uri?.let {
+                context.contentResolver.delete(
+                    it,
+                    null,
+                    null
+                )
+            }
+
+            exception.printStackTrace()
+            false
+        }
+    }
+
+    fun setWallpaper(
+        context: Context,
+        wallpaper: Wallpaper
+    ): Boolean {
+        return try {
+
+            val bitmap = BitmapFactory.decodeResource(
+                context.resources,
+                wallpaper.image
+            ) ?: return false
+
+            val wallpaperManager =
+                WallpaperManager.getInstance(context)
+
+            wallpaperManager.setBitmap(bitmap)
+
+            true
+
+        } catch (exception: Exception) {
+            exception.printStackTrace()
+            false
+        }
+    }
+
+    @Composable
+    fun TrendingChip(
+        text: String
+    ) {
+        Box(
+            modifier = Modifier
+                .background(
+                    color = Color(0xFF1E1E1E),
+                    shape = RoundedCornerShape(50.dp)
+                )
+                .padding(
+                    horizontal = 16.dp,
+                    vertical = 10.dp
+                )
+        ) {
+            Text(
+                text = text,
+                color = Color.White,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+}
 fun saveWallpaperToGallery(
     context: Context,
     wallpaper: Wallpaper
@@ -1620,14 +1767,22 @@ fun saveWallpaperToGallery(
                 MediaStore.Images.Media.DISPLAY_NAME,
                 "Wallora_${safeName}.png"
             )
-            put(MediaStore.Images.Media.MIME_TYPE, "image/png")
+
+            put(
+                MediaStore.Images.Media.MIME_TYPE,
+                "image/png"
+            )
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 put(
                     MediaStore.Images.Media.RELATIVE_PATH,
                     "Pictures/Wallora"
                 )
-                put(MediaStore.Images.Media.IS_PENDING, 1)
+
+                put(
+                    MediaStore.Images.Media.IS_PENDING,
+                    1
+                )
             }
         }
 
@@ -1638,15 +1793,24 @@ fun saveWallpaperToGallery(
             values
         ) ?: return false
 
-        context.resources.openRawResource(wallpaper.image).use { input ->
-            resolver.openOutputStream(uri!!)?.use { output ->
-                input.copyTo(output)
-            } ?: return false
-        }
+        context.resources
+            .openRawResource(wallpaper.image)
+            .use { input ->
+
+                resolver
+                    .openOutputStream(uri!!)
+                    ?.use { output ->
+                        input.copyTo(output)
+                    }
+                    ?: return false
+            }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             val completedValues = ContentValues().apply {
-                put(MediaStore.Images.Media.IS_PENDING, 0)
+                put(
+                    MediaStore.Images.Media.IS_PENDING,
+                    0
+                )
             }
 
             resolver.update(
@@ -1658,9 +1822,15 @@ fun saveWallpaperToGallery(
         }
 
         true
+
     } catch (exception: Exception) {
+
         uri?.let {
-            context.contentResolver.delete(it, null, null)
+            context.contentResolver.delete(
+                it,
+                null,
+                null
+            )
         }
 
         exception.printStackTrace()
@@ -1668,34 +1838,44 @@ fun saveWallpaperToGallery(
     }
 }
 
-fun setWallpaper(context: Context, wallpaper: Wallpaper): Boolean {
+fun setWallpaper(
+    context: Context,
+    wallpaper: Wallpaper
+): Boolean {
     return try {
+
         val bitmap = BitmapFactory.decodeResource(
             context.resources,
             wallpaper.image
         ) ?: return false
 
-        val wallpaperManager = WallpaperManager.getInstance(context)
+        val wallpaperManager =
+            WallpaperManager.getInstance(context)
+
         wallpaperManager.setBitmap(bitmap)
 
         true
+
     } catch (exception: Exception) {
         exception.printStackTrace()
         false
     }
 }
 
-
-
 @Composable
-fun TrendingChip(text: String) {
+fun TrendingChip(
+    text: String
+) {
     Box(
         modifier = Modifier
             .background(
-                Color(0xFF1E1E1E),
-                RoundedCornerShape(50.dp)
+                color = Color(0xFF1E1E1E),
+                shape = RoundedCornerShape(50.dp)
             )
-            .padding(horizontal = 16.dp, vertical = 10.dp)
+            .padding(
+                horizontal = 16.dp,
+                vertical = 10.dp
+            )
     ) {
         Text(
             text = text,
