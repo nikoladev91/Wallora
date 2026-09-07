@@ -27,14 +27,12 @@ import com.example.wallora.model.Wallpaper
 import com.example.wallora.ui.theme.WalloraBackground
 
 @Composable
-fun FavoritesScreenNew(
+fun FavoritesScreen(
     wallpapers: List<Wallpaper>,
     favoriteNames: List<String>,
     onWallpaperClick: (Wallpaper) -> Unit
 ) {
-    var searchText by remember {
-        mutableStateOf("")
-    }
+    var searchText by remember { mutableStateOf("") }
 
     val scrollState = rememberScrollState()
 
@@ -58,10 +56,7 @@ fun FavoritesScreenNew(
                 }
             )
     ) {
-
-        Spacer(
-            modifier = Modifier.height(24.dp)
-        )
+        Spacer(modifier = Modifier.height(24.dp))
 
         Text(
             text = "❤️ ${stringResource(R.string.favorites)}",
@@ -70,9 +65,7 @@ fun FavoritesScreenNew(
             fontWeight = FontWeight.Bold
         )
 
-        Spacer(
-            modifier = Modifier.height(6.dp)
-        )
+        Spacer(modifier = Modifier.height(6.dp))
 
         Text(
             text = stringResource(
@@ -83,25 +76,18 @@ fun FavoritesScreenNew(
             fontSize = 14.sp
         )
 
-        Spacer(
-            modifier = Modifier.height(16.dp)
-        )
+        Spacer(modifier = Modifier.height(16.dp))
 
         if (wallpapers.isNotEmpty()) {
             SearchSection(
                 searchText = searchText,
-                onSearchChange = {
-                    searchText = it
-                }
+                onSearchChange = { searchText = it }
             )
 
-            Spacer(
-                modifier = Modifier.height(16.dp)
-            )
+            Spacer(modifier = Modifier.height(16.dp))
         }
 
         if (wallpapers.isEmpty()) {
-
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -109,40 +95,29 @@ fun FavoritesScreenNew(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-
                 Text(
                     text = "❤️",
                     fontSize = 56.sp
                 )
 
-                Spacer(
-                    modifier = Modifier.height(16.dp)
-                )
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = stringResource(
-                        R.string.no_favorites_yet
-                    ),
+                    text = stringResource(R.string.no_favorites_yet),
                     color = Color.White,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold
                 )
 
-                Spacer(
-                    modifier = Modifier.height(8.dp)
-                )
+                Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = stringResource(
-                        R.string.add_favorites_hint
-                    ),
+                    text = stringResource(R.string.add_favorites_hint),
                     color = Color.LightGray,
                     fontSize = 16.sp
                 )
             }
-
         } else if (filteredFavorites.isEmpty()) {
-
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -150,49 +125,36 @@ fun FavoritesScreenNew(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-
                 Text(
                     text = "🔍",
                     fontSize = 48.sp
                 )
 
-                Spacer(
-                    modifier = Modifier.height(16.dp)
-                )
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = stringResource(
-                        R.string.no_favorites_found
-                    ),
+                    text = stringResource(R.string.no_favorites_found),
                     color = Color.White,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold
                 )
 
-                Spacer(
-                    modifier = Modifier.height(8.dp)
-                )
+                Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = stringResource(
-                        R.string.try_another_keyword
-                    ),
+                    text = stringResource(R.string.try_another_keyword),
                     color = Color.LightGray,
                     fontSize = 14.sp
                 )
             }
-
         } else {
-
             WallpaperGrid(
                 wallpapers = filteredFavorites,
                 favoriteNames = favoriteNames,
                 onWallpaperClick = onWallpaperClick
             )
 
-            Spacer(
-                modifier = Modifier.height(16.dp)
-            )
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
