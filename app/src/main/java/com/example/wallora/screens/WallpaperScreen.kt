@@ -447,7 +447,7 @@ fun WallpaperScreen() {
 
                 if (legalPageUrl != null) {
 
-                    LegalDocumentScreen(
+                    LegalDocumentScreenNew(
                         url = legalPageUrl!!,
                         onBack = {
                             legalPageUrl = null
@@ -521,9 +521,24 @@ fun WallpaperScreen() {
                                         "https://nikoladev91.github.io/wallora-privacy-policy/privacy-policy.html?v=3"
                                 }
                             },
+
                             onTermsOfUseClick = {
-                                legalPageUrl =
-                                    "https://nikoladev91.github.io/wallora-privacy-policy/terms.html?v=2"
+                                val language =
+                                    context.resources.configuration.locales[0].language
+
+                                legalPageUrl = when (language) {
+                                    "pl" ->
+                                        "https://nikoladev91.github.io/wallora-privacy-policy/terms-pl.html?v=1"
+
+                                    "de" ->
+                                        "https://nikoladev91.github.io/wallora-privacy-policy/terms-de.html?v=1"
+
+                                    "es" ->
+                                        "https://nikoladev91.github.io/wallora-privacy-policy/terms-es.html?v=1"
+
+                                    else ->
+                                        "https://nikoladev91.github.io/wallora-privacy-policy/terms.html?v=2"
+                                }
                             }
                         )
                     }
@@ -550,7 +565,6 @@ fun WallpaperScreen() {
         }
     }
 }
-
 @Composable
 fun HomeScreen(
     wallpapers: List<Wallpaper>,

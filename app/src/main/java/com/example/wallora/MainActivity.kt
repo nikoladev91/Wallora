@@ -1,22 +1,34 @@
 package com.example.wallora
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.ui.graphics.Color
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.wallora.analytics.AnalyticsManager
 import com.example.wallora.analytics.CrashlyticsManager
 import com.example.wallora.screens.WallpaperScreen
-import com.example.wallora.ui.theme.WalloraBackground
-import com.google.android.gms.ads.MobileAds
+import com.example.wallora.ui.theme.WalloraAccent
 import com.example.wallora.ui.theme.WalloraBackground
 import com.example.wallora.ui.theme.WalloraSurface
-import com.example.wallora.ui.theme.WalloraAccent
+import com.google.android.gms.ads.MobileAds
 
 class MainActivity : ComponentActivity() {
+
+    private val notificationPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) {
+            // Użytkownik sam decyduje,
+            // czy chce otrzymywać powiadomienia.
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -82,6 +94,26 @@ class MainActivity : ComponentActivity() {
                 colorScheme = darkColorScheme()
             ) {
                 WallpaperScreen()
+            }
+        }
+
+        requestNotificationPermission()
+    }
+
+    private fun requestNotificationPermission() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+
+            val permissionGranted =
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED
+
+            if (!permissionGranted) {
+                notificationPermissionLauncher.launch(
+                    Manifest.permission.POST_NOTIFICATIONS
+                )
             }
         }
     }
