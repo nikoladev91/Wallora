@@ -19,9 +19,18 @@ import com.example.wallora.ui.theme.WalloraAccent
 import com.example.wallora.ui.theme.WalloraBackground
 import com.example.wallora.ui.theme.WalloraSurface
 import com.google.android.gms.ads.MobileAds
-import android.util.Log
-import com.google.firebase.messaging.FirebaseMessaging
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.appupdate.AppUpdateOptions
+import com.google.android.play.core.install.InstallState
+import com.google.android.play.core.install.InstallStateUpdatedListener
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.InstallStatus
+import com.google.android.play.core.install.model.UpdateAvailability
+
 class MainActivity : ComponentActivity() {
+
+    private lateinit var appUpdateManager: AppUpdateManager
 
     private val notificationPermissionLauncher =
         registerForActivityResult(
@@ -29,6 +38,21 @@ class MainActivity : ComponentActivity() {
         ) {
             // Użytkownik sam decyduje,
             // czy chce otrzymywać powiadomienia.
+        }
+
+    private val updateLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartIntentSenderForResult()
+        ) {
+            // Wynik procesu aktualizacji obsługuje Google Play.
+        }
+
+    private val installStateUpdatedListener =
+        InstallStateUpdatedListener { state: InstallState ->
+
+            if (state.installStatus() == InstallStatus.DOWNLOADED) {
+                appUpdateManager.completeUpdate()
+            }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +63,13 @@ class MainActivity : ComponentActivity() {
         CrashlyticsManager.setUserId("developer")
 
         MobileAds.initialize(this)
+
+        appUpdateManager =
+            AppUpdateManagerFactory.create(this)
+
+        appUpdateManager.registerListener(
+            installStateUpdatedListener
+        )
 
         // Load the background color selected by the user
         val preferences = getSharedPreferences(
@@ -99,24 +130,35 @@ class MainActivity : ComponentActivity() {
         }
 
         requestNotificationPermission()
-        FirebaseMessaging.getInstance().token
-            .addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    Log.w(
-                        "WALLORA_FCM",
-                        "Fetching FCM registration token failed",
-                        task.exception
-                    )
-                    return@addOnCompleteListener
+        checkForAppUpdate()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (::appUpdateManager.isInitialized) {
+            appUpdateManager.appUpdateInfo
+                .addOnSuccessListener { appUpdateInfo ->
+
+                    if (
+                        appUpdateInfo.installStatus() ==
+                        InstallStatus.DOWNLOADED
+                    ) {
+                        appUpdateManager.completeUpdate()
+                    }
                 }
+        }
+    }
 
-                val token = task.result
+    override fun onDestroy() {
 
-                Log.d(
-                    "WALLORA_FCM",
-                    "FCM token: $token"
-                )
-            }
+        if (::appUpdateManager.isInitialized) {
+            appUpdateManager.unregisterListener(
+                installStateUpdatedListener
+            )
+        }
+
+        super.onDestroy()
     }
 
     private fun requestNotificationPermission() {
@@ -135,5 +177,35 @@ class MainActivity : ComponentActivity() {
                 )
             }
         }
+    }
+
+    private fun checkForAppUpdate() {
+
+        appUpdateManager.appUpdateInfo
+            .addOnSuccessListener { appUpdateInfo ->
+
+                val updateAvailable =
+                    appUpdateInfo.updateAvailability() ==
+                            UpdateAvailability.UPDATE_AVAILABLE
+
+                val flexibleUpdateAllowed =
+                    appUpdateInfo.isUpdateTypeAllowed(
+                        AppUpdateType.FLEXIBLE
+                    )
+
+                if (
+                    updateAvailable &&
+                    flexibleUpdateAllowed
+                ) {
+
+                    appUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        updateLauncher,
+                        AppUpdateOptions
+                            .newBuilder(AppUpdateType.FLEXIBLE)
+                            .build()
+                    )
+                }
+            }
     }
 }

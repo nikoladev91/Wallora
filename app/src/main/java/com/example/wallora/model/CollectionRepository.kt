@@ -8,6 +8,7 @@ import com.example.wallora.repository.collections.ChibiDragonsCollection
 import com.example.wallora.repository.collections.FunnyDinosaursCollection
 import com.example.wallora.repository.collections.FoodMonstersCollection
 import com.example.wallora.repository.collections.EnchantedForestCollection
+import com.example.wallora.repository.collections.TinyChaosCollection
 
 object CollectionRepository {
 
@@ -131,6 +132,15 @@ object CollectionRepository {
     }
 
     val collections = listOf(
+
+        WallpaperCollection(
+            id = "tiny_chaos_vol_1",
+            title = "Tiny Chaos",
+            subtitle = "Wild, Funny and Chaotic Wallpapers",
+            coverImage = TinyChaosCollection.wallpapers.first().image,
+            wallpapers = TinyChaosCollection.wallpapers,
+            isPremium = false
+        ),
 
         WallpaperCollection(
             id = "autumn_cozy_vol_1",

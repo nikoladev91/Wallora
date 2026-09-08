@@ -40,6 +40,7 @@ android {
             }
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -56,6 +57,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation("com.google.firebase:firebase-messaging")
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons.extended)
@@ -65,6 +67,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
     implementation("com.google.android.gms:play-services-ads:25.4.0")
+
+    implementation("com.google.android.play:app-update:2.1.0")
+    implementation("com.google.android.play:app-update-ktx:2.1.0")
+
     implementation("androidx.work:work-runtime:2.11.2")
     implementation("androidx.core:core-splashscreen:1.0.1")
 
@@ -77,6 +83,7 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.firebase.crashlytics)
 }
