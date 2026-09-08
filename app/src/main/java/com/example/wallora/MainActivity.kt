@@ -19,7 +19,8 @@ import com.example.wallora.ui.theme.WalloraAccent
 import com.example.wallora.ui.theme.WalloraBackground
 import com.example.wallora.ui.theme.WalloraSurface
 import com.google.android.gms.ads.MobileAds
-
+import android.util.Log
+import com.google.firebase.messaging.FirebaseMessaging
 class MainActivity : ComponentActivity() {
 
     private val notificationPermissionLauncher =
@@ -98,6 +99,24 @@ class MainActivity : ComponentActivity() {
         }
 
         requestNotificationPermission()
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w(
+                        "WALLORA_FCM",
+                        "Fetching FCM registration token failed",
+                        task.exception
+                    )
+                    return@addOnCompleteListener
+                }
+
+                val token = task.result
+
+                Log.d(
+                    "WALLORA_FCM",
+                    "FCM token: $token"
+                )
+            }
     }
 
     private fun requestNotificationPermission() {

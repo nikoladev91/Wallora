@@ -7,8 +7,8 @@ import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.example.wallora.MainActivity
-import com.example.wallora.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -26,6 +26,11 @@ class WalloraFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 
+        Log.d(
+            "WALLORA_FCM",
+            "MESSAGE RECEIVED!"
+        )
+
         val title = message.notification?.title
             ?: "Wallora"
 
@@ -42,19 +47,22 @@ class WalloraFirebaseMessagingService : FirebaseMessagingService() {
         title: String,
         body: String
     ) {
-        val channelId = "wallora_updates"
+        val channelId = "wallora_updates_v2"
 
         val notificationManager =
             getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
             val channel = NotificationChannel(
                 channelId,
                 "Wallora updates",
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_HIGH
             ).apply {
                 description =
                     "Notifications about new wallpapers and collections"
+
+                enableVibration(true)
             }
 
             notificationManager.createNotificationChannel(channel)
@@ -81,20 +89,36 @@ class WalloraFirebaseMessagingService : FirebaseMessagingService() {
             this,
             channelId
         )
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setContentTitle(title)
             .setContentText(body)
             .setStyle(
                 NotificationCompat.BigTextStyle()
                     .bigText(body)
             )
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .build()
 
+        val notificationsEnabled =
+            NotificationManagerCompat
+                .from(this)
+                .areNotificationsEnabled()
+
+        Log.d(
+            "WALLORA_FCM",
+            "Notifications enabled: $notificationsEnabled"
+        )
+
         notificationManager.notify(
             System.currentTimeMillis().toInt(),
             notification
+        )
+
+        Log.d(
+            "WALLORA_FCM",
+            "NOTIFICATION POSTED!"
         )
     }
 }
