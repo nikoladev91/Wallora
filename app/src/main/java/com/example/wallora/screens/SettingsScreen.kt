@@ -49,6 +49,15 @@ fun SettingsScreen(
 ) {
     val context = LocalContext.current
     val developerEmail = "wallora.support@gmail.com"
+    val appVersion = remember {
+        try {
+            context.packageManager
+                .getPackageInfo(context.packageName, 0)
+                .versionName ?: ""
+        } catch (exception: Exception) {
+            ""
+        }
+    }
 
     var showAboutDialog by remember { mutableStateOf(false) }
     var showRateDialog by remember { mutableStateOf(false) }
@@ -286,7 +295,7 @@ fun SettingsScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Version 1.1.1",
+            text = "Version $appVersion",
             color = Color.White.copy(alpha = 0.75f),
             fontSize = 14.sp
         )
@@ -413,7 +422,7 @@ fun SettingsScreen(
                     Spacer(modifier = Modifier.height(12.dp))
 
                     Text(
-                        text = "Version 1.1.1",
+                        text = "Version $appVersion",
                         color = Color.Gray
                     )
 

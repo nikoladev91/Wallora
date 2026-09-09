@@ -26,8 +26,13 @@
 
     <string name="growing_collection">Rosnąca kolekcja</string>
     <string name="new_this_week">NOWOŚĆ W TYM TYGODNIU</string>
+
     <string name="autumn_cozy_is_here">Autumn Cozy już dostępna</string>
     <string name="autumn_cozy_subtitle">12 nowych tapet • ciepły jesienny klimat</string>
+
+    <string name="tiny_chaos_is_here">Tiny Chaos już dostępna!</string>
+    <string name="tiny_chaos_banner_subtitle">12 nowych tapet • szalonych, zabawnych i pełnych chaosu</string>
+
     <string name="explore_collection">Przeglądaj kolekcję</string>
 
     <!-- Ekran tapety -->
@@ -96,9 +101,14 @@
 
     <string name="developer">Twórca</string>
     <string name="close">Zamknij</string>
+
+    <!-- Filtry -->
     <string name="filter_popular">Popularne</string>
     <string name="filter_new">Nowe</string>
     <string name="filter_editors_choice">Wybór redakcji</string>
+
+    <!-- Kolekcje -->
+    <string name="collection_tiny_chaos_subtitle">Szalone, zabawne i pełne chaosu tapety</string>
     <string name="collection_autumn_cozy_subtitle">Ciepłe jesienne tapety</string>
     <string name="collection_zodiac_subtitle">12 oryginalnych tapet zodiakalnych</string>
     <string name="collection_dream_animals_subtitle">12 filmowych tapet ze zwierzętami</string>
@@ -113,7 +123,10 @@
     <string name="collection_epic_mountains_subtitle">12 wyjątkowych tapet górskich</string>
     <string name="collection_cyberpunk_cities_subtitle">12 wyjątkowych tapet cyberpunkowych</string>
     <string name="collection_food_monsters_subtitle">10 smakowitych małych potworów</string>
+
     <string name="back">Wróć</string>
+
+    <!-- Kategorie -->
     <string name="category_all">Wszystkie</string>
     <string name="category_animals">Zwierzęta</string>
     <string name="category_nature">Natura</string>
@@ -121,9 +134,14 @@
     <string name="category_zodiac">Zodiak</string>
     <string name="category_cyberpunk_cities">Cyberpunkowe miasta</string>
     <string name="category_cars">Samochody</string>
+
+    <!-- Okno oceny -->
     <string name="rate_dialog_message">Czy chcesz przejść do Google Play i ocenić Wallorę?</string>
     <string name="cancel">Anuluj</string>
     <string name="rate">Oceń</string>
+
+    <!-- Zaczarowany Las -->
     <string name="enchanted_forest_title">Zaczarowany Las</string>
     <string name="enchanted_forest_subtitle">12 magicznych tapet leśnych</string>
+
 </resources>

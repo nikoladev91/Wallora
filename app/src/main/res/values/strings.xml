@@ -26,8 +26,13 @@
 
     <string name="growing_collection">Growing Collection</string>
     <string name="new_this_week">NEW THIS WEEK</string>
+
     <string name="autumn_cozy_is_here">Autumn Cozy is here</string>
     <string name="autumn_cozy_subtitle">12 new wallpapers • warm autumn vibes</string>
+
+    <string name="tiny_chaos_is_here">Tiny Chaos is here!</string>
+    <string name="tiny_chaos_banner_subtitle">12 new wallpapers • wild, funny &amp; chaotic</string>
+
     <string name="explore_collection">Explore collection</string>
 
     <!-- Wallpaper -->
@@ -46,7 +51,6 @@
 
     <!-- Settings -->
     <string name="settings_title">⚙ Settings</string>
-
     <string name="background_color">Background color</string>
     <string name="choose_wallora_style">Choose your Wallora style</string>
 
@@ -96,9 +100,14 @@
 
     <string name="developer">Developer</string>
     <string name="close">Close</string>
+
+    <!-- Filters -->
     <string name="filter_popular">Popular</string>
     <string name="filter_new">New</string>
     <string name="filter_editors_choice">Editor\'s Choice</string>
+
+    <!-- Collections -->
+    <string name="collection_tiny_chaos_subtitle">Wild, Funny and Chaotic Wallpapers</string>
     <string name="collection_autumn_cozy_subtitle">Warm Autumn Wallpapers</string>
     <string name="collection_zodiac_subtitle">12 Original Zodiac Wallpapers</string>
     <string name="collection_dream_animals_subtitle">12 Cinematic Animal Wallpapers</string>
@@ -113,7 +122,10 @@
     <string name="collection_epic_mountains_subtitle">12 Exclusive Mountain Wallpapers</string>
     <string name="collection_cyberpunk_cities_subtitle">12 Exclusive Cyberpunk Wallpapers</string>
     <string name="collection_food_monsters_subtitle">10 Delicious Little Monsters</string>
+
     <string name="back">Back</string>
+
+    <!-- Categories -->
     <string name="category_all">All</string>
     <string name="category_animals">Animals</string>
     <string name="category_nature">Nature</string>
@@ -121,9 +133,14 @@
     <string name="category_zodiac">Zodiac</string>
     <string name="category_cyberpunk_cities">Cyberpunk Cities</string>
     <string name="category_cars">Cars</string>
+
+    <!-- Rate dialog -->
     <string name="rate_dialog_message">Do you want to open Google Play and rate Wallora?</string>
     <string name="cancel">Cancel</string>
     <string name="rate">Rate</string>
+
+    <!-- Enchanted Forest -->
     <string name="enchanted_forest_title">Enchanted Forest</string>
     <string name="enchanted_forest_subtitle">12 Magical Forest Wallpapers</string>
+
 </resources>

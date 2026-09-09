@@ -26,8 +26,13 @@
 
     <string name="growing_collection">Wachsende Sammlung</string>
     <string name="new_this_week">NEU DIESE WOCHE</string>
+
     <string name="autumn_cozy_is_here">Autumn Cozy ist da</string>
     <string name="autumn_cozy_subtitle">12 neue Hintergrundbilder • warme Herbststimmung</string>
+
+    <string name="tiny_chaos_is_here">Tiny Chaos ist da!</string>
+    <string name="tiny_chaos_banner_subtitle">12 neue Hintergrundbilder • wild, lustig und chaotisch</string>
+
     <string name="explore_collection">Sammlung entdecken</string>
 
     <!-- Wallpaper -->
@@ -96,9 +101,14 @@
 
     <string name="developer">Entwicklerin</string>
     <string name="close">Schließen</string>
+
+    <!-- Filter -->
     <string name="filter_popular">Beliebt</string>
     <string name="filter_new">Neu</string>
     <string name="filter_editors_choice">Empfehlung der Redaktion</string>
+
+    <!-- Collections -->
+    <string name="collection_tiny_chaos_subtitle">Wilde, lustige und chaotische Hintergrundbilder</string>
     <string name="collection_autumn_cozy_subtitle">Warme Herbst-Hintergrundbilder</string>
     <string name="collection_zodiac_subtitle">12 originelle Tierkreis-Hintergrundbilder</string>
     <string name="collection_dream_animals_subtitle">12 filmreife Tier-Hintergrundbilder</string>
@@ -113,7 +123,10 @@
     <string name="collection_epic_mountains_subtitle">12 exklusive Berg-Hintergrundbilder</string>
     <string name="collection_cyberpunk_cities_subtitle">12 exklusive Cyberpunk-Hintergrundbilder</string>
     <string name="collection_food_monsters_subtitle">10 köstliche kleine Monster</string>
+
     <string name="back">Zurück</string>
+
+    <!-- Categories -->
     <string name="category_all">Alle</string>
     <string name="category_animals">Tiere</string>
     <string name="category_nature">Natur</string>
@@ -121,9 +134,14 @@
     <string name="category_zodiac">Tierkreis</string>
     <string name="category_cyberpunk_cities">Cyberpunk-Städte</string>
     <string name="category_cars">Autos</string>
+
+    <!-- Rate dialog -->
     <string name="rate_dialog_message">Möchtest du Google Play öffnen und Wallora bewerten?</string>
     <string name="cancel">Abbrechen</string>
     <string name="rate">Bewerten</string>
+
+    <!-- Enchanted Forest -->
     <string name="enchanted_forest_title">Verzauberter Wald</string>
     <string name="enchanted_forest_subtitle">12 magische Wald-Hintergrundbilder</string>
+
 </resources>

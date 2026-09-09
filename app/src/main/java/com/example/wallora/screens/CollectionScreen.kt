@@ -34,8 +34,12 @@ fun getLocalizedCollectionTitle(
 }
 
 @Composable
+
 fun getLocalizedCollectionSubtitle(subtitle: String): String {
     return when (subtitle) {
+
+        "Wild, Funny and Chaotic Wallpapers" ->
+            stringResource(R.string.collection_tiny_chaos_subtitle)
 
         "Warm Autumn Wallpapers" ->
             stringResource(R.string.collection_autumn_cozy_subtitle)

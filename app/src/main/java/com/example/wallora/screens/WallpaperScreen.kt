@@ -482,7 +482,7 @@ fun WallpaperScreen() {
                             },
                             onNewCollectionClick = {
                                 CollectionRepository.collections
-                                    .firstOrNull { it.id == "autumn_cozy_vol_1" }
+                                    .firstOrNull { it.id == "tiny_chaos_vol_1" }
                                     ?.let { collection ->
                                         selectedCollection = collection
                                         AnalyticsManager.logCollectionOpen(collection.title)
@@ -675,7 +675,7 @@ fun NewWallpapersBanner(
     ) {
 
         Text(
-            text = "🍂  ${stringResource(R.string.new_this_week)}",
+            text = "🔥  ${stringResource(R.string.new_this_week)}",
             color = Color(0xFFFFC84A),
             fontSize = 13.sp,
             fontWeight = FontWeight.Bold
@@ -778,8 +778,8 @@ fun GalleryContent(
 
         item {
             NewWallpapersBanner(
-                title = stringResource(R.string.autumn_cozy_is_here),
-                subtitle = stringResource(R.string.autumn_cozy_subtitle),
+                title = stringResource(R.string.tiny_chaos_is_here),
+                subtitle = stringResource(R.string.tiny_chaos_banner_subtitle),
                 onClick = onNewCollectionClick
             )
         }

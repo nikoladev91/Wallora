@@ -26,8 +26,13 @@
 
     <string name="growing_collection">Colección en crecimiento</string>
     <string name="new_this_week">NUEVO ESTA SEMANA</string>
+
     <string name="autumn_cozy_is_here">Autumn Cozy ya está aquí</string>
     <string name="autumn_cozy_subtitle">12 fondos nuevos • cálido ambiente otoñal</string>
+
+    <string name="tiny_chaos_is_here">¡Tiny Chaos ya está aquí!</string>
+    <string name="tiny_chaos_banner_subtitle">12 fondos nuevos • salvajes, divertidos y caóticos</string>
+
     <string name="explore_collection">Explorar colección</string>
 
     <!-- Wallpaper -->
@@ -96,9 +101,14 @@
 
     <string name="developer">Desarrolladora</string>
     <string name="close">Cerrar</string>
+
+    <!-- Filters -->
     <string name="filter_popular">Popular</string>
     <string name="filter_new">Nuevos</string>
     <string name="filter_editors_choice">Selección del editor</string>
+
+    <!-- Collections -->
+    <string name="collection_tiny_chaos_subtitle">Fondos salvajes, divertidos y caóticos</string>
     <string name="collection_autumn_cozy_subtitle">Fondos de pantalla otoñales y acogedores</string>
     <string name="collection_zodiac_subtitle">12 fondos originales del zodiaco</string>
     <string name="collection_dream_animals_subtitle">12 fondos cinematográficos de animales</string>
@@ -113,7 +123,10 @@
     <string name="collection_epic_mountains_subtitle">12 fondos exclusivos de montañas</string>
     <string name="collection_cyberpunk_cities_subtitle">12 fondos cyberpunk exclusivos</string>
     <string name="collection_food_monsters_subtitle">10 deliciosos pequeños monstruos</string>
+
     <string name="back">Volver</string>
+
+    <!-- Categories -->
     <string name="category_all">Todos</string>
     <string name="category_animals">Animales</string>
     <string name="category_nature">Naturaleza</string>
@@ -121,9 +134,14 @@
     <string name="category_zodiac">Zodiaco</string>
     <string name="category_cyberpunk_cities">Ciudades cyberpunk</string>
     <string name="category_cars">Coches</string>
+
+    <!-- Rate dialog -->
     <string name="rate_dialog_message">¿Quieres abrir Google Play y valorar Wallora?</string>
     <string name="cancel">Cancelar</string>
     <string name="rate">Valorar</string>
+
+    <!-- Enchanted Forest -->
     <string name="enchanted_forest_title">Bosque Encantado</string>
     <string name="enchanted_forest_subtitle">12 fondos de pantalla de bosques mágicos</string>
+
 </resources>
