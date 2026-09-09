@@ -9,6 +9,7 @@ import com.example.wallora.repository.collections.FunnyDinosaursCollection
 import com.example.wallora.repository.collections.FoodMonstersCollection
 import com.example.wallora.repository.collections.EnchantedForestCollection
 import com.example.wallora.repository.collections.TinyChaosCollection
+import com.example.wallora.repository.collections.UnicornOverloadCollection
 
 object CollectionRepository {
 
@@ -132,6 +133,15 @@ object CollectionRepository {
     }
 
     val collections = listOf(
+
+        WallpaperCollection(
+            id = "unicorn_overload_vol_1",
+            title = "Unicorn Overload",
+            subtitle = "Wild, Colorful and Magical Unicorn Wallpapers",
+            coverImage = UnicornOverloadCollection.wallpapers.first().image,
+            wallpapers = UnicornOverloadCollection.wallpapers,
+            isPremium = false
+        ),
 
         WallpaperCollection(
             id = "tiny_chaos_vol_1",
