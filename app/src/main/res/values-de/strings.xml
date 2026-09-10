@@ -143,5 +143,6 @@
     <!-- Enchanted Forest -->
     <string name="enchanted_forest_title">Verzauberter Wald</string>
     <string name="enchanted_forest_subtitle">12 magische Wald-Hintergrundbilder</string>
-
+    <string name="collection_unicorn_overload_title">Unicorn Overload</string>
+    <string name="collection_unicorn_overload_subtitle">12 verrückte, farbenfrohe und magische Einhorn-Hintergrundbilder</string>
 </resources>

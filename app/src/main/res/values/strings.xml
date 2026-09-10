@@ -142,5 +142,6 @@
     <!-- Enchanted Forest -->
     <string name="enchanted_forest_title">Enchanted Forest</string>
     <string name="enchanted_forest_subtitle">12 Magical Forest Wallpapers</string>
-
+    <string name="collection_unicorn_overload_title">Unicorn Overload</string>
+    <string name="collection_unicorn_overload_subtitle">12 Wild, Colorful and Magical Unicorn Wallpapers</string>
 </resources>

@@ -28,18 +28,25 @@ fun getLocalizedCollectionTitle(
         "enchanted_forest_vol_1" ->
             stringResource(R.string.enchanted_forest_title)
 
+        "unicorn_overload_vol_1" ->
+            stringResource(R.string.collection_unicorn_overload_title)
+
         else ->
             collection.title
     }
 }
 
 @Composable
-
-fun getLocalizedCollectionSubtitle(subtitle: String): String {
+fun getLocalizedCollectionSubtitle(
+    subtitle: String
+): String {
     return when (subtitle) {
 
         "Wild, Funny and Chaotic Wallpapers" ->
             stringResource(R.string.collection_tiny_chaos_subtitle)
+
+        "Wild, Colorful and Magical Unicorn Wallpapers" ->
+            stringResource(R.string.collection_unicorn_overload_subtitle)
 
         "Warm Autumn Wallpapers" ->
             stringResource(R.string.collection_autumn_cozy_subtitle)
