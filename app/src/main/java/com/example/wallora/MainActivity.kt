@@ -1,6 +1,7 @@
 package com.example.wallora
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +10,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -31,6 +35,8 @@ import com.google.android.play.core.install.model.UpdateAvailability
 class MainActivity : ComponentActivity() {
 
     private lateinit var appUpdateManager: AppUpdateManager
+
+    private var notificationCollectionId by mutableStateOf<String?>(null)
 
     private val notificationPermissionLauncher =
         registerForActivityResult(
@@ -71,7 +77,9 @@ class MainActivity : ComponentActivity() {
             installStateUpdatedListener
         )
 
-        // Load the background color selected by the user
+        notificationCollectionId =
+            intent.getStringExtra("collection_id")
+
         val preferences = getSharedPreferences(
             "wallora_preferences",
             MODE_PRIVATE
@@ -125,12 +133,26 @@ class MainActivity : ComponentActivity() {
             MaterialTheme(
                 colorScheme = darkColorScheme()
             ) {
-                WallpaperScreen()
+                WallpaperScreen(
+                    notificationCollectionId = notificationCollectionId,
+                    onNotificationCollectionHandled = {
+                        notificationCollectionId = null
+                    }
+                )
             }
         }
 
         requestNotificationPermission()
         checkForAppUpdate()
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+
+        setIntent(intent)
+
+        notificationCollectionId =
+            intent.getStringExtra("collection_id")
     }
 
     override fun onResume() {

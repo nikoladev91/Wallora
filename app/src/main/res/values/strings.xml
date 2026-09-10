@@ -33,6 +33,9 @@
     <string name="tiny_chaos_is_here">Tiny Chaos is here!</string>
     <string name="tiny_chaos_banner_subtitle">12 new wallpapers • wild, funny &amp; chaotic</string>
 
+    <string name="unicorn_overload_is_here">Unicorn Overload is here!</string>
+    <string name="unicorn_overload_banner_subtitle">12 new wallpapers • wild, colorful &amp; magical</string>
+
     <string name="explore_collection">Explore collection</string>
 
     <!-- Wallpaper -->
@@ -142,6 +145,9 @@
     <!-- Enchanted Forest -->
     <string name="enchanted_forest_title">Enchanted Forest</string>
     <string name="enchanted_forest_subtitle">12 Magical Forest Wallpapers</string>
+
+    <!-- Unicorn Overload -->
     <string name="collection_unicorn_overload_title">Unicorn Overload</string>
     <string name="collection_unicorn_overload_subtitle">12 Wild, Colorful and Magical Unicorn Wallpapers</string>
+
 </resources>

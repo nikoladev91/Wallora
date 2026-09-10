@@ -21,15 +21,20 @@ class WalloraFirebaseMessagingService : FirebaseMessagingService() {
         val body = message.notification?.body
             ?: "New wallpapers are now available ✨"
 
+        val collectionId =
+            message.data["collection_id"]
+
         showNotification(
             title = title,
-            body = body
+            body = body,
+            collectionId = collectionId
         )
     }
 
     private fun showNotification(
         title: String,
-        body: String
+        body: String,
+        collectionId: String?
     ) {
         val channelId = "wallora_updates_v2"
 
@@ -59,6 +64,13 @@ class WalloraFirebaseMessagingService : FirebaseMessagingService() {
             flags =
                 Intent.FLAG_ACTIVITY_CLEAR_TOP or
                         Intent.FLAG_ACTIVITY_SINGLE_TOP
+
+            if (!collectionId.isNullOrBlank()) {
+                putExtra(
+                    "collection_id",
+                    collectionId
+                )
+            }
         }
 
         val pendingIntent = PendingIntent.getActivity(

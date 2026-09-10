@@ -24,12 +24,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.wallora.R
+import com.example.wallora.model.CollectionRepository
 import com.example.wallora.model.WallpaperCollection
 
 @Composable
@@ -38,21 +37,17 @@ fun FeaturedCollection(
     onClick: () -> Unit
 ) {
 
-    val localizedTitle = when (collection.id) {
-        "enchanted_forest_vol_1" ->
-            stringResource(R.string.enchanted_forest_title)
+    val localizedTitle =
+        getLocalizedCollectionTitle(collection)
 
-        else ->
-            collection.title
-    }
+    val localizedSubtitle =
+        getLocalizedCollectionSubtitle(collection.subtitle)
 
-    val localizedSubtitle = when (collection.id) {
-        "enchanted_forest_vol_1" ->
-            stringResource(R.string.enchanted_forest_subtitle)
-
-        else ->
-            getLocalizedCollectionSubtitle(collection.subtitle)
-    }
+    val isNewestCollection =
+        collection.id ==
+                CollectionRepository.collections
+                    .firstOrNull()
+                    ?.id
 
     Box(
         modifier = Modifier
@@ -75,19 +70,47 @@ fun FeaturedCollection(
             modifier = Modifier.fillMaxWidth()
         ) {
 
-            Image(
-                painter = painterResource(
-                    id = collection.coverImage
-                ),
-                contentDescription = localizedTitle,
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(160.dp)
-                    .clip(
-                        RoundedCornerShape(18.dp)
+            ) {
+
+                Image(
+                    painter = painterResource(
+                        id = collection.coverImage
                     ),
-                contentScale = ContentScale.Crop
-            )
+                    contentDescription = localizedTitle,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(160.dp)
+                        .clip(
+                            RoundedCornerShape(18.dp)
+                        ),
+                    contentScale = ContentScale.Crop
+                )
+
+                if (isNewestCollection) {
+
+                    Text(
+                        text = "NEW",
+                        color = Color.Black,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        modifier = Modifier
+                            .align(Alignment.TopEnd)
+                            .padding(10.dp)
+                            .background(
+                                color = Color(0xFFFFC84A),
+                                shape = RoundedCornerShape(50.dp)
+                            )
+                            .padding(
+                                horizontal = 12.dp,
+                                vertical = 6.dp
+                            )
+                    )
+                }
+            }
 
             Spacer(
                 modifier = Modifier.height(16.dp)
@@ -126,8 +149,8 @@ fun FeaturedCollection(
             ) {
 
                 Text(
-                    text = stringResource(
-                        R.string.explore_collection
+                    text = androidx.compose.ui.res.stringResource(
+                        com.example.wallora.R.string.explore_collection
                     ),
                     color = Color.White,
                     fontSize = 15.sp,

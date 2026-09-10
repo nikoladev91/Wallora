@@ -71,148 +71,10 @@ import kotlinx.coroutines.delay
 import androidx.compose.ui.res.stringResource
 import com.example.wallora.R
 import androidx.compose.ui.graphics.vector.ImageVector
-private fun downloadsToNumber(downloads: String): Int {
-    val cleanValue = downloads
-        .uppercase()
-        .replace(",", ".")
-        .trim()
+import androidx.compose.ui.platform.LocalConfiguration
+import com.example.wallora.storage.saveWallpaperToGallery
+import com.example.wallora.storage.setWallpaper
 
-    return when {
-        cleanValue.endsWith("K") -> {
-            cleanValue
-                .removeSuffix("K")
-                .toDoubleOrNull()
-                ?.times(1000)
-                ?.toInt()
-                ?: 0
-        }
-
-        cleanValue.endsWith("M") -> {
-            cleanValue
-                .removeSuffix("M")
-                .toDoubleOrNull()
-                ?.times(1_000_000)
-                ?.toInt()
-                ?: 0
-        }
-
-        else -> cleanValue.toIntOrNull() ?: 0
-    }
-}
-
-fun matchesWallpaperSearch(
-    wallpaper: Wallpaper,
-    query: String
-): Boolean {
-    val cleanQuery = query
-        .trim()
-        .lowercase()
-
-    if (cleanQuery.isBlank()) {
-        return true
-    }
-
-    val translatedQueries = when (cleanQuery) {
-
-        "zwierzę",
-        "zwierze",
-        "zwierzęta",
-        "zwierzeta",
-        "animal",
-        "animals" ->
-            listOf("animal", "animals")
-
-        "kot",
-        "koty" ->
-            listOf("cat", "cats")
-
-        "pies",
-        "psy" ->
-            listOf("dog", "dogs")
-
-        "wilk",
-        "wilki" ->
-            listOf("wolf", "wolves")
-
-        "smok",
-        "smoki" ->
-            listOf("dragon", "dragons")
-
-        "dinozaur",
-        "dinozaury" ->
-            listOf("dinosaur", "dinosaurs")
-
-        "natura" ->
-            listOf("nature")
-
-        "las",
-        "lasy" ->
-            listOf("forest", "woods")
-
-        "góra",
-        "gora",
-        "góry",
-        "gory" ->
-            listOf("mountain", "mountains")
-
-        "wodospad",
-        "wodospady" ->
-            listOf("waterfall", "waterfalls")
-
-        "morze" ->
-            listOf("sea", "ocean")
-
-        "ocean" ->
-            listOf("ocean", "sea")
-
-        "kosmos" ->
-            listOf("space", "cosmic", "galaxy")
-
-        "galaktyka",
-        "galaktyki" ->
-            listOf("galaxy", "galaxies")
-
-        "samochód",
-        "samochod",
-        "samochody",
-        "auto",
-        "auta" ->
-            listOf("car", "cars")
-
-        "cyberpunk",
-        "cyberpunkowe miasta" ->
-            listOf("cyberpunk", "city", "cities")
-
-        "zodiak" ->
-            listOf("zodiac")
-
-        else ->
-            listOf(cleanQuery)
-    }
-
-    fun matchesText(text: String): Boolean {
-        val normalizedText = text
-            .trim()
-            .lowercase()
-
-        val words = normalizedText
-            .split(Regex("[^a-z0-9]+"))
-            .filter { it.isNotBlank() }
-
-        return translatedQueries.any { translatedQuery ->
-            normalizedText == translatedQuery ||
-                    words.any { word ->
-                        word == translatedQuery
-                    }
-        }
-    }
-
-    return matchesText(wallpaper.name) ||
-            matchesText(wallpaper.category) ||
-            wallpaper.tags.any { tag ->
-                matchesText(tag)
-            }
-}
 private fun Context.findActivity(): Activity? {
     var currentContext = this
 
@@ -228,10 +90,14 @@ private fun Context.findActivity(): Activity? {
 }
 
 @Composable
-fun WallpaperScreen() {
+fun WallpaperScreen(
+    notificationCollectionId: String? = null,
+    onNotificationCollectionHandled: () -> Unit = {}
+) {
     val wallpapers = WallpaperRepository.wallpapers
     val categories = CategoryRepository.categories
     val context = LocalContext.current
+    val configuration = LocalConfiguration.current
     val coroutineScope = rememberCoroutineScope()
     val preferences = remember {
         context.getSharedPreferences(
@@ -260,6 +126,24 @@ fun WallpaperScreen() {
     var selectedCategory by remember { mutableStateOf("All") }
     var selectedTrending by remember { mutableStateOf("Popular") }
     val homeListState = rememberLazyListState()
+    LaunchedEffect(notificationCollectionId) {
+
+        val collectionId = notificationCollectionId
+            ?: return@LaunchedEffect
+
+        CollectionRepository.collections
+            .firstOrNull { it.id == collectionId }
+            ?.let { collection ->
+                selectedCollection = collection
+                selectedWallpaper = null
+                showCollectionScreen = true
+                selectedTab = "home"
+
+                AnalyticsManager.logCollectionOpen(collection.title)
+            }
+
+        onNotificationCollectionHandled()
+    }
 
     val favoriteNames = remember {
         mutableStateListOf<String>().apply {
@@ -267,35 +151,16 @@ fun WallpaperScreen() {
         }
     }
 
-    val filteredWallpapers = wallpapers.filter { wallpaper ->
-        val cleanCategory = selectedCategory.substringAfter(" ").trim()
+    val filteredWallpapers = filterWallpapers(
+        wallpapers = wallpapers,
+        searchText = searchText,
+        selectedCategory = selectedCategory
+    )
 
-        val matchesSearch =
-            matchesWallpaperSearch(
-                wallpaper = wallpaper,
-                query = searchText
-            )
-
-        val matchesCategory =
-            cleanCategory == "All" ||
-                    wallpaper.category == cleanCategory
-
-        matchesSearch && matchesCategory
-    }
-
-    val displayedWallpapers = when (selectedTrending) {
-        "Popular" -> filteredWallpapers.sortedByDescending {
-            downloadsToNumber(it.downloads)
-        }
-
-        "New" -> filteredWallpapers.reversed()
-
-        "Editor's Choice" -> filteredWallpapers.filter {
-            it.isTopPick
-        }
-
-        else -> filteredWallpapers
-    }
+    val displayedWallpapers = sortWallpapers(
+        wallpapers = filteredWallpapers,
+        selectedTrending = selectedTrending
+    )
 
     fun openWallpaper(
         wallpaper: Wallpaper,
@@ -482,7 +347,7 @@ fun WallpaperScreen() {
                             },
                             onNewCollectionClick = {
                                 CollectionRepository.collections
-                                    .firstOrNull { it.id == "tiny_chaos_vol_1" }
+                                    .firstOrNull { it.id == "unicorn_overload_vol_1" }
                                     ?.let { collection ->
                                         selectedCollection = collection
                                         AnalyticsManager.logCollectionOpen(collection.title)
@@ -505,7 +370,7 @@ fun WallpaperScreen() {
                         "settings" -> SettingsScreen(
                             onPrivacyPolicyClick = {
                                 val language =
-                                    context.resources.configuration.locales[0].language
+                                    configuration.locales[0].language
 
                                 legalPageUrl = when (language) {
                                     "pl" ->
@@ -524,7 +389,7 @@ fun WallpaperScreen() {
 
                             onTermsOfUseClick = {
                                 val language =
-                                    context.resources.configuration.locales[0].language
+                                    configuration.locales[0].language
 
                                 legalPageUrl = when (language) {
                                     "pl" ->
@@ -671,7 +536,10 @@ fun NewWallpapersBanner(
             .clip(RoundedCornerShape(22.dp))
             .background(Color(0xFF211B2E))
             .clickable { onClick() }
-            .padding(horizontal = 20.dp, vertical = 18.dp)
+            .padding(
+                horizontal = 20.dp,
+                vertical = 18.dp
+            )
     ) {
 
         Text(
@@ -681,7 +549,9 @@ fun NewWallpapersBanner(
             fontWeight = FontWeight.Bold
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(
+            modifier = Modifier.height(8.dp)
+        )
 
         Text(
             text = title,
@@ -690,7 +560,9 @@ fun NewWallpapersBanner(
             fontWeight = FontWeight.Bold
         )
 
-        Spacer(modifier = Modifier.height(5.dp))
+        Spacer(
+            modifier = Modifier.height(5.dp)
+        )
 
         Text(
             text = subtitle,
@@ -698,7 +570,9 @@ fun NewWallpapersBanner(
             fontSize = 14.sp
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
 
         Text(
             text = "${stringResource(R.string.explore_collection)}  →",
@@ -978,117 +852,7 @@ fun CategoryButton(
     }
 }
 
-fun saveWallpaperToGallery(
-    context: Context,
-    wallpaper: Wallpaper
-): Boolean {
-    var uri: Uri? = null
 
-    return try {
-        val safeName = wallpaper.name
-            .replace(" ", "_")
-            .replace("/", "_")
-            .replace("\\", "_")
-
-        val values = ContentValues().apply {
-            put(
-                MediaStore.Images.Media.DISPLAY_NAME,
-                "Wallora_${safeName}.png"
-            )
-
-            put(
-                MediaStore.Images.Media.MIME_TYPE,
-                "image/png"
-            )
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                put(
-                    MediaStore.Images.Media.RELATIVE_PATH,
-                    "Pictures/Wallora"
-                )
-
-                put(
-                    MediaStore.Images.Media.IS_PENDING,
-                    1
-                )
-            }
-        }
-
-        val resolver = context.contentResolver
-
-        uri = resolver.insert(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            values
-        ) ?: return false
-
-        context.resources
-            .openRawResource(wallpaper.image)
-            .use { input ->
-
-                resolver
-                    .openOutputStream(uri!!)
-                    ?.use { output ->
-                        input.copyTo(output)
-                    }
-                    ?: return false
-            }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val completedValues = ContentValues().apply {
-                put(
-                    MediaStore.Images.Media.IS_PENDING,
-                    0
-                )
-            }
-
-            resolver.update(
-                uri!!,
-                completedValues,
-                null,
-                null
-            )
-        }
-
-        true
-
-    } catch (exception: Exception) {
-
-        uri?.let {
-            context.contentResolver.delete(
-                it,
-                null,
-                null
-            )
-        }
-
-        exception.printStackTrace()
-        false
-    }
-}
-
-fun setWallpaper(
-    context: Context,
-    wallpaper: Wallpaper
-): Boolean {
-    return try {
-
-        val bitmap = BitmapFactory.decodeResource(
-            context.resources,
-            wallpaper.image
-        ) ?: return false
-
-        val wallpaperManager =
-            WallpaperManager.getInstance(context)
-
-        wallpaperManager.setBitmap(bitmap)
-
-        true
-
-    } catch (exception: Exception) {
-        exception.printStackTrace()
-        false
-    }
-}
 
 @Composable
 fun TrendingChip(
