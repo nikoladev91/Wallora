@@ -18,7 +18,9 @@ import com.example.wallora.R
 import com.example.wallora.model.Wallpaper
 import com.example.wallora.model.WallpaperCollection
 import com.example.wallora.ui.theme.WalloraBackground
-
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Icon
 @Composable
 fun getLocalizedCollectionTitle(
     collection: WallpaperCollection
@@ -132,12 +134,27 @@ fun CollectionScreen(
                     ),
                 contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = "← ${stringResource(R.string.back)}",
-                    color = Color.White,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.size(20.dp)
+                    )
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    Text(
+                        text = stringResource(R.string.back),
+                        color = Color.White,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+
             }
         }
 

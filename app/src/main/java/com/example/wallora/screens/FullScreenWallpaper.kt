@@ -239,7 +239,7 @@ fun FullScreenWallpaper(
                             modifier = Modifier.weight(1f)
                         ) {
                             PremiumActionButton(
-                                text = "⬇ ${stringResource(R.string.download)}",
+                                text = "↓ ${stringResource(R.string.download)}",
                                 primary = false,
                                 onClick = onDownloadClick
                             )
@@ -272,7 +272,7 @@ fun PremiumActionButton(
             .height(44.dp)
             .background(
                 color = if (primary) {
-                    WalloraAccent
+                    Color(0xFF7C5CFC)
                 } else {
                     Color.Black.copy(alpha = 0.68f)
                 },
@@ -286,11 +286,7 @@ fun PremiumActionButton(
 
         Text(
             text = text,
-            color = if (primary) {
-                Color.Black
-            } else {
-                Color.White
-            },
+            color = Color.White,
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold
         )
