@@ -12,6 +12,7 @@ import com.example.wallora.repository.collections.TinyChaosCollection
 import com.example.wallora.repository.collections.AutumnCozyCollection
 import com.example.wallora.repository.collections.EnchantedForestCollection
 import com.example.wallora.repository.collections.UnicornOverloadCollection
+import com.example.wallora.repository.collections.MysticCatsCollection
 object WallpaperRepository {
 
     val wallpapers =
@@ -26,6 +27,7 @@ object WallpaperRepository {
                 AutumnCozyCollection.wallpapers +
                 EnchantedForestCollection.wallpapers +
                 UnicornOverloadCollection.wallpapers +
+                MysticCatsCollection.wallpapers +
                 listOf(
 
                     Wallpaper(

@@ -113,7 +113,7 @@ fun HeroBanner(
                     onClick = onExploreClick,
                     shape = RoundedCornerShape(50.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = WalloraAccent,
+                        containerColor = Color(0xFFFFC857),
                         contentColor = Color.Black
                     ),
                     modifier = Modifier.height(44.dp)

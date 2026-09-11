@@ -33,6 +33,13 @@
     <string name="tiny_chaos_is_here">Tiny Chaos już dostępna!</string>
     <string name="tiny_chaos_banner_subtitle">12 nowych tapet • szalonych, zabawnych i pełnych chaosu</string>
 
+    <string name="unicorn_overload_is_here">Unicorn Overload już dostępna!</string>
+    <string name="unicorn_overload_banner_subtitle">12 nowych tapet • szalonych, kolorowych i magicznych</string>
+
+    <!-- Mystic Cats banner -->
+    <string name="mystic_cats_is_here">Mystic Cats już dostępna!</string>
+    <string name="mystic_cats_banner_subtitle">12 nowych tapet • mistycznych, magicznych i pełnych kotów</string>
+
     <string name="explore_collection">Przeglądaj kolekcję</string>
 
     <!-- Ekran tapety -->
@@ -124,6 +131,10 @@
     <string name="collection_cyberpunk_cities_subtitle">12 wyjątkowych tapet cyberpunkowych</string>
     <string name="collection_food_monsters_subtitle">10 smakowitych małych potworów</string>
 
+    <!-- Mystic Cats -->
+    <string name="collection_mystic_cats_title">Mystic Cats</string>
+    <string name="collection_mystic_cats_subtitle">12 magicznych i tajemniczych tapet z kotami</string>
+
     <string name="back">Wróć</string>
 
     <!-- Kategorie -->
@@ -143,6 +154,9 @@
     <!-- Zaczarowany Las -->
     <string name="enchanted_forest_title">Zaczarowany Las</string>
     <string name="enchanted_forest_subtitle">12 magicznych tapet leśnych</string>
+
+    <!-- Unicorn Overload -->
     <string name="collection_unicorn_overload_title">Unicorn Overload</string>
     <string name="collection_unicorn_overload_subtitle">12 szalonych, kolorowych i magicznych tapet z jednorożcami</string>
+
 </resources>

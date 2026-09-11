@@ -36,6 +36,10 @@
     <string name="unicorn_overload_is_here">Unicorn Overload is here!</string>
     <string name="unicorn_overload_banner_subtitle">12 new wallpapers • wild, colorful &amp; magical</string>
 
+    <!-- Mystic Cats banner -->
+    <string name="mystic_cats_is_here">Mystic Cats is here!</string>
+    <string name="mystic_cats_banner_subtitle">12 new wallpapers • mystical, magical &amp; full of cats</string>
+
     <string name="explore_collection">Explore collection</string>
 
     <!-- Wallpaper -->
@@ -125,6 +129,10 @@
     <string name="collection_epic_mountains_subtitle">12 Exclusive Mountain Wallpapers</string>
     <string name="collection_cyberpunk_cities_subtitle">12 Exclusive Cyberpunk Wallpapers</string>
     <string name="collection_food_monsters_subtitle">10 Delicious Little Monsters</string>
+
+    <!-- Mystic Cats -->
+    <string name="collection_mystic_cats_title">Mystic Cats</string>
+    <string name="collection_mystic_cats_subtitle">12 Mystical and Magical Cat Wallpapers</string>
 
     <string name="back">Back</string>
 

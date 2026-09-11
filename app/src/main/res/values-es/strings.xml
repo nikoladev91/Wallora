@@ -33,6 +33,13 @@
     <string name="tiny_chaos_is_here">¡Tiny Chaos ya está aquí!</string>
     <string name="tiny_chaos_banner_subtitle">12 fondos nuevos • salvajes, divertidos y caóticos</string>
 
+    <string name="unicorn_overload_is_here">¡Unicorn Overload ya está aquí!</string>
+    <string name="unicorn_overload_banner_subtitle">12 fondos nuevos • alocados, coloridos y mágicos</string>
+
+    <!-- Mystic Cats banner -->
+    <string name="mystic_cats_is_here">¡Mystic Cats ya está aquí!</string>
+    <string name="mystic_cats_banner_subtitle">12 fondos nuevos • místicos, mágicos y llenos de gatos</string>
+
     <string name="explore_collection">Explorar colección</string>
 
     <!-- Wallpaper -->
@@ -124,6 +131,10 @@
     <string name="collection_cyberpunk_cities_subtitle">12 fondos cyberpunk exclusivos</string>
     <string name="collection_food_monsters_subtitle">10 deliciosos pequeños monstruos</string>
 
+    <!-- Mystic Cats -->
+    <string name="collection_mystic_cats_title">Mystic Cats</string>
+    <string name="collection_mystic_cats_subtitle">12 fondos de gatos místicos y mágicos</string>
+
     <string name="back">Volver</string>
 
     <!-- Categories -->
@@ -143,6 +154,9 @@
     <!-- Enchanted Forest -->
     <string name="enchanted_forest_title">Bosque Encantado</string>
     <string name="enchanted_forest_subtitle">12 fondos de pantalla de bosques mágicos</string>
+
+    <!-- Unicorn Overload -->
     <string name="collection_unicorn_overload_title">Unicorn Overload</string>
     <string name="collection_unicorn_overload_subtitle">12 fondos de unicornios alocados, coloridos y mágicos</string>
+
 </resources>

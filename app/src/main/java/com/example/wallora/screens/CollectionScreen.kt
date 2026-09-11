@@ -49,7 +49,8 @@ fun getLocalizedCollectionSubtitle(
 
         "Wild, Colorful and Magical Unicorn Wallpapers" ->
             stringResource(R.string.collection_unicorn_overload_subtitle)
-
+        "12 Mystical and Magical Cat Wallpapers" ->
+            stringResource(R.string.collection_mystic_cats_subtitle)
         "Warm Autumn Wallpapers" ->
             stringResource(R.string.collection_autumn_cozy_subtitle)
 

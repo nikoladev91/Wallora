@@ -33,6 +33,10 @@
     <string name="tiny_chaos_is_here">Tiny Chaos ist da!</string>
     <string name="tiny_chaos_banner_subtitle">12 neue Hintergrundbilder • wild, lustig und chaotisch</string>
 
+    <!-- Mystic Cats banner -->
+    <string name="mystic_cats_is_here">Mystic Cats ist da!</string>
+    <string name="mystic_cats_banner_subtitle">12 neue mystische und magische Katzen-Hintergrundbilder</string>
+
     <string name="explore_collection">Sammlung entdecken</string>
 
     <!-- Wallpaper -->
@@ -124,6 +128,9 @@
     <string name="collection_cyberpunk_cities_subtitle">12 exklusive Cyberpunk-Hintergrundbilder</string>
     <string name="collection_food_monsters_subtitle">10 köstliche kleine Monster</string>
 
+    <string name="collection_mystic_cats_title">Mystic Cats</string>
+    <string name="collection_mystic_cats_subtitle">12 mystische und magische Katzen-Hintergrundbilder</string>
+
     <string name="back">Zurück</string>
 
     <!-- Categories -->
@@ -143,6 +150,9 @@
     <!-- Enchanted Forest -->
     <string name="enchanted_forest_title">Verzauberter Wald</string>
     <string name="enchanted_forest_subtitle">12 magische Wald-Hintergrundbilder</string>
+
+    <!-- Unicorn Overload -->
     <string name="collection_unicorn_overload_title">Unicorn Overload</string>
     <string name="collection_unicorn_overload_subtitle">12 verrückte, farbenfrohe und magische Einhorn-Hintergrundbilder</string>
+
 </resources>

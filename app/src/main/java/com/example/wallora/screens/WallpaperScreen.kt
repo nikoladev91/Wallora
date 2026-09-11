@@ -347,12 +347,13 @@ fun WallpaperScreen(
                             },
                             onNewCollectionClick = {
                                 CollectionRepository.collections
-                                    .firstOrNull { it.id == "unicorn_overload_vol_1" }
+                                    .firstOrNull { it.id == "mystic_cats_vol_1" }
                                     ?.let { collection ->
                                         selectedCollection = collection
                                         AnalyticsManager.logCollectionOpen(collection.title)
                                         showCollectionScreen = true
                                     }
+
                             },
                             listState = homeListState
                         )
@@ -652,8 +653,8 @@ fun GalleryContent(
 
         item {
             NewWallpapersBanner(
-                title = stringResource(R.string.tiny_chaos_is_here),
-                subtitle = stringResource(R.string.tiny_chaos_banner_subtitle),
+                title = stringResource(R.string.mystic_cats_is_here),
+                subtitle = stringResource(R.string.mystic_cats_banner_subtitle),
                 onClick = onNewCollectionClick
             )
         }
@@ -828,7 +829,7 @@ fun CategoryButton(
         modifier = Modifier
             .padding(end = 8.dp)
             .background(
-                color = if (selected) WalloraAccent else Color(0xFF222222),
+                color = if (selected) Color(0xFFFFC857) else Color(0xFF222222),
                 shape = RoundedCornerShape(18.dp)
             )
             .clickable { onClick() }
