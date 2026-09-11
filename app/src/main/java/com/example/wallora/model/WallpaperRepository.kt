@@ -8,6 +8,10 @@ import com.example.wallora.repository.collections.FantasyRealmsCollection
 import com.example.wallora.repository.collections.ChibiDragonsCollection
 import com.example.wallora.repository.collections.FoodMonstersCollection
 import com.example.wallora.repository.collections.FunnyDinosaursCollection
+import com.example.wallora.repository.collections.TinyChaosCollection
+import com.example.wallora.repository.collections.AutumnCozyCollection
+import com.example.wallora.repository.collections.EnchantedForestCollection
+import com.example.wallora.repository.collections.UnicornOverloadCollection
 object WallpaperRepository {
 
     val wallpapers =
@@ -18,6 +22,10 @@ object WallpaperRepository {
                 ChibiDragonsCollection.wallpapers +
                 FoodMonstersCollection.wallpapers +
                 FunnyDinosaursCollection.wallpapers +
+                TinyChaosCollection.wallpapers +
+                AutumnCozyCollection.wallpapers +
+                EnchantedForestCollection.wallpapers +
+                UnicornOverloadCollection.wallpapers +
                 listOf(
 
                     Wallpaper(

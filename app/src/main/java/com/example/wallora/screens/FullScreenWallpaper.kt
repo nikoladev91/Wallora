@@ -36,6 +36,12 @@ import kotlinx.coroutines.delay
 import androidx.activity.compose.BackHandler
 import androidx.compose.ui.res.stringResource
 import com.example.wallora.R
+import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Wallpaper
+import androidx.compose.material3.Icon
+import androidx.compose.ui.graphics.vector.ImageVector
 @Composable
 fun FullScreenWallpaper(
     wallpaper: Wallpaper,
@@ -226,9 +232,14 @@ fun FullScreenWallpaper(
                         ) {
                             PremiumActionButton(
                                 text = if (isFavorite) {
-                                    "❤️ ${stringResource(R.string.favorited)}"
+                                    stringResource(R.string.favorited)
                                 } else {
-                                    "🤍 ${stringResource(R.string.favorite)}"
+                                    stringResource(R.string.favorite)
+                                },
+                                icon = if (isFavorite) {
+                                    Icons.Default.Favorite
+                                } else {
+                                    Icons.Default.FavoriteBorder
                                 },
                                 primary = false,
                                 onClick = onFavoriteClick
@@ -239,7 +250,8 @@ fun FullScreenWallpaper(
                             modifier = Modifier.weight(1f)
                         ) {
                             PremiumActionButton(
-                                text = "↓ ${stringResource(R.string.download)}",
+                                text = stringResource(R.string.download),
+                                icon = Icons.Default.Download,
                                 primary = false,
                                 onClick = onDownloadClick
                             )
@@ -248,24 +260,27 @@ fun FullScreenWallpaper(
 
                     Spacer(modifier = Modifier.height(9.dp))
 
-                    // Set wallpaper
+// Set wallpaper
                     PremiumActionButton(
-                        text = "🖼 ${stringResource(R.string.set_wallpaper)}",
+                        text = stringResource(R.string.set_wallpaper),
+                        icon = Icons.Default.Wallpaper,
                         primary = true,
                         onClick = onSetWallpaperClick
                     )
+
                 }
             }
         }
     }
 }
+
 @Composable
 fun PremiumActionButton(
     text: String,
+    icon: ImageVector,
     primary: Boolean,
     onClick: () -> Unit
 ) {
-
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -283,13 +298,26 @@ fun PremiumActionButton(
             },
         contentAlignment = Alignment.Center
     ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier.size(20.dp)
+            )
 
-        Text(
-            text = text,
-            color = Color.White,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Bold
-        )
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Text(
+                text = text,
+                color = Color.White,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
 }
 
@@ -297,7 +325,6 @@ fun PremiumActionButton(
 fun InfoChip(
     text: String
 ) {
-
     Box(
         modifier = Modifier
             .background(
@@ -309,7 +336,6 @@ fun InfoChip(
                 vertical = 6.dp
             )
     ) {
-
         Text(
             text = text,
             color = Color.White,
