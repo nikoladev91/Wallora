@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -31,6 +32,7 @@ import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : ComponentActivity() {
 
@@ -143,6 +145,27 @@ class MainActivity : ComponentActivity() {
         }
 
         requestNotificationPermission()
+
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener { task ->
+
+                if (!task.isSuccessful) {
+                    Log.w(
+                        "FCM_TOKEN",
+                        "Fetching FCM token failed",
+                        task.exception
+                    )
+                    return@addOnCompleteListener
+                }
+
+                val token = task.result
+
+                Log.d(
+                    "FCM_TOKEN",
+                    "Token received successfully: $token"
+                )
+            }
+
         checkForAppUpdate()
     }
 
