@@ -1,5 +1,5 @@
 package com.example.wallora.screens
-
+import android.util.Log
 import android.app.WallpaperManager
 import android.content.ContentValues
 import android.content.Context
@@ -623,7 +623,106 @@ fun GalleryContent(
         }
     }
 
-    val displayedWallpapers = wallpapers
+    val searchAliases = mapOf(
+        // Cats
+        "kot" to "cat",
+        "koty" to "cat",
+        "kotek" to "cat",
+        "kotki" to "cat",
+        "kociak" to "cat",
+        "kociaki" to "cat",
+        "katze" to "cat",
+        "katzen" to "cat",
+        "gato" to "cat",
+        "gatos" to "cat",
+
+        // Cars
+        "samochod" to "car",
+        "samochody" to "car",
+        "auto" to "car",
+        "auta" to "car",
+        "wagen" to "car",
+        "coche" to "car",
+        "coches" to "car",
+
+        // Space
+        "kosmos" to "space",
+        "kosmiczny" to "space",
+        "kosmiczne" to "space",
+        "weltall" to "space",
+        "espacio" to "space",
+
+        // Nature
+        "natura" to "nature",
+        "przyroda" to "nature",
+        "natur" to "nature",
+        "naturaleza" to "nature",
+
+        // Forest
+        "las" to "forest",
+        "lasy" to "forest",
+        "wald" to "forest",
+        "bosque" to "forest",
+
+        // Autumn
+        "jesien" to "autumn",
+        "herbst" to "autumn",
+        "otono" to "autumn"
+    )
+    val displayedWallpapers = wallpapers.filter { wallpaper ->
+
+        val rawQuery = searchText.trim().lowercase()
+
+        val normalizedQuery = java.text.Normalizer
+            .normalize(rawQuery, java.text.Normalizer.Form.NFD)
+            .replace("\\p{Mn}+".toRegex(), "")
+        println("SEARCH raw=[$rawQuery] normalized=[$normalizedQuery]")
+        val cleanQuery = when {
+            normalizedQuery.startsWith("jesien") -> "autumn"
+            normalizedQuery in listOf(
+                "kot", "koty", "kotek", "kotki", "kociak", "kociaki",
+                "katze", "katzen", "gato", "gatos"
+            ) -> "cat"
+
+            normalizedQuery in listOf(
+                "samochod", "samochody", "auto", "auta",
+                "wagen", "coche", "coches"
+            ) -> "car"
+
+            normalizedQuery in listOf(
+                "kosmos", "kosmiczny", "kosmiczne", "weltall", "espacio"
+            ) -> "space"
+
+            normalizedQuery in listOf(
+                "natura", "przyroda", "natur", "naturaleza"
+            ) -> "nature"
+
+            normalizedQuery in listOf(
+                "las", "lasy", "wald", "bosque"
+            ) -> "forest"
+
+            normalizedQuery in listOf(
+                "herbst", "otono"
+            ) -> "autumn"
+
+            else -> normalizedQuery
+        }
+
+        val matchesSearch =
+            cleanQuery.isBlank() ||
+                    wallpaper.name.contains(cleanQuery, ignoreCase = true) ||
+                    wallpaper.category.contains(cleanQuery, ignoreCase = true) ||
+                    wallpaper.tags.any { tag ->
+                        tag.contains(cleanQuery, ignoreCase = true)
+                    }
+
+        val matchesCategory =
+            selectedCategory == "All" ||
+                    wallpaper.category == selectedCategory
+
+        matchesSearch && matchesCategory
+    }
+
     LaunchedEffect(searchText) {
         if (searchText.isNotBlank()) {
             delay(300)
