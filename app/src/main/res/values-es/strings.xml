@@ -40,6 +40,10 @@
     <string name="mystic_cats_is_here">¡Mystic Cats ya está aquí!</string>
     <string name="mystic_cats_banner_subtitle">12 fondos nuevos • místicos, mágicos y llenos de gatos</string>
 
+    <!-- New collections banner -->
+    <string name="new_collections_are_here">¡Ya están aquí dos nuevas colecciones!</string>
+    <string name="new_collections_banner_subtitle">24 fondos nuevos • Rainy Nights y Rainbow Chaos</string>
+
     <string name="explore_collection">Explorar colección</string>
 
     <!-- Wallpaper -->
@@ -58,7 +62,6 @@
 
     <!-- Settings -->
     <string name="settings_title">⚙ Ajustes</string>
-
     <string name="background_color">Color de fondo</string>
     <string name="choose_wallora_style">Elige tu estilo de Wallora</string>
 
@@ -97,7 +100,6 @@
     <!-- About -->
     <string name="about_wallora">Acerca de Wallora</string>
     <string name="app_information">Información de la aplicación</string>
-
     <string name="made_in_poland">Creado con ❤ en Polonia</string>
 
     <string name="premium_wallpapers">Fondos de pantalla premium</string>
@@ -135,6 +137,22 @@
     <string name="collection_mystic_cats_title">Mystic Cats</string>
     <string name="collection_mystic_cats_subtitle">12 fondos de gatos místicos y mágicos</string>
 
+    <!-- Enchanted Forest -->
+    <string name="enchanted_forest_title">Bosque Encantado</string>
+    <string name="enchanted_forest_subtitle">12 fondos de pantalla de bosques mágicos</string>
+
+    <!-- Unicorn Overload -->
+    <string name="collection_unicorn_overload_title">Unicorn Overload</string>
+    <string name="collection_unicorn_overload_subtitle">12 fondos de unicornios alocados, coloridos y mágicos</string>
+
+    <!-- Rainy Nights -->
+    <string name="collection_rainy_nights_title">Noches Lluviosas</string>
+    <string name="collection_rainy_nights_subtitle">12 fondos atmosféricos para noches lluviosas</string>
+
+    <!-- Rainbow Chaos -->
+    <string name="collection_rainbow_chaos_title">Caos Arcoíris</string>
+    <string name="collection_rainbow_chaos_subtitle">12 fondos locos, coloridos y llenos de dulces</string>
+
     <string name="back">Volver</string>
 
     <!-- Categories -->
@@ -150,13 +168,5 @@
     <string name="rate_dialog_message">¿Quieres abrir Google Play y valorar Wallora?</string>
     <string name="cancel">Cancelar</string>
     <string name="rate">Valorar</string>
-
-    <!-- Enchanted Forest -->
-    <string name="enchanted_forest_title">Bosque Encantado</string>
-    <string name="enchanted_forest_subtitle">12 fondos de pantalla de bosques mágicos</string>
-
-    <!-- Unicorn Overload -->
-    <string name="collection_unicorn_overload_title">Unicorn Overload</string>
-    <string name="collection_unicorn_overload_subtitle">12 fondos de unicornios alocados, coloridos y mágicos</string>
 
 </resources>

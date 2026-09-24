@@ -12,6 +12,8 @@ import com.example.wallora.repository.collections.TinyChaosCollection
 import com.example.wallora.repository.collections.UnicornOverloadCollection
 import com.example.wallora.repository.collections.MysticCatsCollection
 import com.example.wallora.repository.collections.FunnyHalloweenCollection
+import com.example.wallora.repository.collections.RainyNightsCollection
+import com.example.wallora.repository.collections.RainbowChaosCollection
 object CollectionRepository {
 
     private val neonAnimals = WallpaperRepository.wallpapers.filter {
@@ -135,11 +137,19 @@ object CollectionRepository {
 
     val collections = listOf(
         WallpaperCollection(
-            id = "funny_halloween_vol_1",
-            title = "Funny Halloween",
-            subtitle = "Funny, Cute and Spooky Halloween Wallpapers",
-            coverImage = FunnyHalloweenCollection.wallpapers.first().image,
-            wallpapers = FunnyHalloweenCollection.wallpapers,
+            id = "rainbow_chaos_vol_1",
+            title = "Rainbow Chaos",
+            subtitle = "Wild, Colorful and Sweet Fantasy Wallpapers",
+            coverImage = RainbowChaosCollection.wallpapers.first().image,
+            wallpapers = RainbowChaosCollection.wallpapers,
+            isPremium = false
+        ),
+        WallpaperCollection(
+            id = "rainy_nights_vol_1",
+            title = "Rainy Nights",
+            subtitle = "Atmospheric Rainy Night Wallpapers",
+            coverImage = RainyNightsCollection.wallpapers.first().image,
+            wallpapers = RainyNightsCollection.wallpapers,
             isPremium = false
         ),
 

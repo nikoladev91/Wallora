@@ -2,9 +2,21 @@ package com.example.wallora.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,20 +30,27 @@ import com.example.wallora.R
 import com.example.wallora.model.Wallpaper
 import com.example.wallora.model.WallpaperCollection
 import com.example.wallora.ui.theme.WalloraBackground
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Icon
+
 @Composable
 fun getLocalizedCollectionTitle(
     collection: WallpaperCollection
 ): String {
     return when (collection.id) {
 
+        "rainbow_chaos_vol_1" ->
+            stringResource(R.string.collection_rainbow_chaos_title)
+
+        "rainy_nights_vol_1" ->
+            stringResource(R.string.collection_rainy_nights_title)
+
         "enchanted_forest_vol_1" ->
             stringResource(R.string.enchanted_forest_title)
 
         "unicorn_overload_vol_1" ->
             stringResource(R.string.collection_unicorn_overload_title)
+
+        "mystic_cats_vol_1" ->
+            stringResource(R.string.collection_mystic_cats_title)
 
         else ->
             collection.title
@@ -44,13 +63,21 @@ fun getLocalizedCollectionSubtitle(
 ): String {
     return when (subtitle) {
 
+        "Wild, Colorful and Sweet Fantasy Wallpapers" ->
+            stringResource(R.string.collection_rainbow_chaos_subtitle)
+
+        "Atmospheric Rainy Night Wallpapers" ->
+            stringResource(R.string.collection_rainy_nights_subtitle)
+
         "Wild, Funny and Chaotic Wallpapers" ->
             stringResource(R.string.collection_tiny_chaos_subtitle)
 
         "Wild, Colorful and Magical Unicorn Wallpapers" ->
             stringResource(R.string.collection_unicorn_overload_subtitle)
+
         "12 Mystical and Magical Cat Wallpapers" ->
             stringResource(R.string.collection_mystic_cats_subtitle)
+
         "Warm Autumn Wallpapers" ->
             stringResource(R.string.collection_autumn_cozy_subtitle)
 
@@ -128,17 +155,21 @@ fun CollectionScreen(
                         color = Color(0xFF1E1E1E),
                         shape = RoundedCornerShape(50.dp)
                     )
-                    .clickable { onBackClick() }
+                    .clickable {
+                        onBackClick()
+                    }
                     .padding(
                         horizontal = 16.dp,
                         vertical = 10.dp
                     ),
                 contentAlignment = Alignment.Center
             ) {
+
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
+
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = null,
@@ -146,7 +177,9 @@ fun CollectionScreen(
                         modifier = Modifier.size(20.dp)
                     )
 
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(
+                        modifier = Modifier.width(8.dp)
+                    )
 
                     Text(
                         text = stringResource(R.string.back),
@@ -155,7 +188,6 @@ fun CollectionScreen(
                         fontWeight = FontWeight.Bold
                     )
                 }
-
             }
         }
 

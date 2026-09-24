@@ -40,6 +40,10 @@
     <string name="mystic_cats_is_here">Mystic Cats is here!</string>
     <string name="mystic_cats_banner_subtitle">12 new wallpapers • mystical, magical &amp; full of cats</string>
 
+    <!-- New collections banner -->
+    <string name="new_collections_are_here">Two new collections are here!</string>
+    <string name="new_collections_banner_subtitle">24 new wallpapers • Rainy Nights and Rainbow Chaos</string>
+
     <string name="explore_collection">Explore collection</string>
 
     <!-- Wallpaper -->
@@ -96,7 +100,6 @@
     <!-- About -->
     <string name="about_wallora">About Wallora</string>
     <string name="app_information">App information</string>
-
     <string name="made_in_poland">Made with ❤ in Poland</string>
 
     <string name="premium_wallpapers">Premium Wallpapers</string>
@@ -134,6 +137,22 @@
     <string name="collection_mystic_cats_title">Mystic Cats</string>
     <string name="collection_mystic_cats_subtitle">12 Mystical and Magical Cat Wallpapers</string>
 
+    <!-- Enchanted Forest -->
+    <string name="enchanted_forest_title">Enchanted Forest</string>
+    <string name="enchanted_forest_subtitle">12 Magical Forest Wallpapers</string>
+
+    <!-- Unicorn Overload -->
+    <string name="collection_unicorn_overload_title">Unicorn Overload</string>
+    <string name="collection_unicorn_overload_subtitle">12 Wild, Colorful and Magical Unicorn Wallpapers</string>
+
+    <!-- Rainy Nights -->
+    <string name="collection_rainy_nights_title">Rainy Nights</string>
+    <string name="collection_rainy_nights_subtitle">12 atmospheric wallpapers for rainy nights</string>
+
+    <!-- Rainbow Chaos -->
+    <string name="collection_rainbow_chaos_title">Rainbow Chaos</string>
+    <string name="collection_rainbow_chaos_subtitle">12 wild, colorful and candy-filled wallpapers</string>
+
     <string name="back">Back</string>
 
     <!-- Categories -->
@@ -149,13 +168,5 @@
     <string name="rate_dialog_message">Do you want to open Google Play and rate Wallora?</string>
     <string name="cancel">Cancel</string>
     <string name="rate">Rate</string>
-
-    <!-- Enchanted Forest -->
-    <string name="enchanted_forest_title">Enchanted Forest</string>
-    <string name="enchanted_forest_subtitle">12 Magical Forest Wallpapers</string>
-
-    <!-- Unicorn Overload -->
-    <string name="collection_unicorn_overload_title">Unicorn Overload</string>
-    <string name="collection_unicorn_overload_subtitle">12 Wild, Colorful and Magical Unicorn Wallpapers</string>
 
 </resources>

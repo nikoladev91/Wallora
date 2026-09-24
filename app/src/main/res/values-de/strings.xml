@@ -154,5 +154,16 @@
     <!-- Unicorn Overload -->
     <string name="collection_unicorn_overload_title">Unicorn Overload</string>
     <string name="collection_unicorn_overload_subtitle">12 verrückte, farbenfrohe und magische Einhorn-Hintergrundbilder</string>
+    <!-- Rainy Nights -->
+    <!-- Rainbow Chaos -->
+    <string name="collection_rainbow_chaos_title">Regenbogen-Chaos</string>
+    <string name="collection_rainbow_chaos_subtitle">12 verrückte, farbenfrohe und zuckersüße Hintergrundbilder</string>
 
+    <!-- Rainy Nights -->
+    <string name="collection_rainy_nights_title">Regnerische Nächte</string>
+    <string name="collection_rainy_nights_subtitle">12 stimmungsvolle Hintergrundbilder für regnerische Nächte</string>
+
+    <!-- Banner -->
+    <string name="new_collections_are_here">Zwei neue Kollektionen sind da!</string>
+    <string name="new_collections_banner_subtitle">24 neue Hintergrundbilder • Rainy Nights und Rainbow Chaos</string>
 </resources>

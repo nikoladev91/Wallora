@@ -40,6 +40,10 @@
     <string name="mystic_cats_is_here">Mystic Cats już dostępna!</string>
     <string name="mystic_cats_banner_subtitle">12 nowych tapet • mistycznych, magicznych i pełnych kotów</string>
 
+    <!-- Banner nowych kolekcji -->
+    <string name="new_collections_are_here">Dwie nowe kolekcje już dostępne!</string>
+    <string name="new_collections_banner_subtitle">24 nowe tapety • Rainy Nights i Rainbow Chaos</string>
+
     <string name="explore_collection">Przeglądaj kolekcję</string>
 
     <!-- Ekran tapety -->
@@ -58,7 +62,6 @@
 
     <!-- Ustawienia -->
     <string name="settings_title">⚙ Ustawienia</string>
-
     <string name="background_color">Kolor tła</string>
     <string name="choose_wallora_style">Wybierz styl Wallory</string>
 
@@ -97,7 +100,6 @@
     <!-- O aplikacji -->
     <string name="about_wallora">O Wallorze</string>
     <string name="app_information">Informacje o aplikacji</string>
-
     <string name="made_in_poland">Stworzone z ❤ w Polsce</string>
 
     <string name="premium_wallpapers">Tapety premium</string>
@@ -135,6 +137,22 @@
     <string name="collection_mystic_cats_title">Mystic Cats</string>
     <string name="collection_mystic_cats_subtitle">12 magicznych i tajemniczych tapet z kotami</string>
 
+    <!-- Zaczarowany Las -->
+    <string name="enchanted_forest_title">Zaczarowany Las</string>
+    <string name="enchanted_forest_subtitle">12 magicznych tapet leśnych</string>
+
+    <!-- Unicorn Overload -->
+    <string name="collection_unicorn_overload_title">Unicorn Overload</string>
+    <string name="collection_unicorn_overload_subtitle">12 szalonych, kolorowych i magicznych tapet z jednorożcami</string>
+
+    <!-- Rainy Nights -->
+    <string name="collection_rainy_nights_title">Deszczowe Noce</string>
+    <string name="collection_rainy_nights_subtitle">12 klimatycznych tapet na deszczowe noce</string>
+
+    <!-- Rainbow Chaos -->
+    <string name="collection_rainbow_chaos_title">Tęczowy Chaos</string>
+    <string name="collection_rainbow_chaos_subtitle">12 szalonych, kolorowych i cukierkowych tapet</string>
+
     <string name="back">Wróć</string>
 
     <!-- Kategorie -->
@@ -150,13 +168,5 @@
     <string name="rate_dialog_message">Czy chcesz przejść do Google Play i ocenić Wallorę?</string>
     <string name="cancel">Anuluj</string>
     <string name="rate">Oceń</string>
-
-    <!-- Zaczarowany Las -->
-    <string name="enchanted_forest_title">Zaczarowany Las</string>
-    <string name="enchanted_forest_subtitle">12 magicznych tapet leśnych</string>
-
-    <!-- Unicorn Overload -->
-    <string name="collection_unicorn_overload_title">Unicorn Overload</string>
-    <string name="collection_unicorn_overload_subtitle">12 szalonych, kolorowych i magicznych tapet z jednorożcami</string>
 
 </resources>

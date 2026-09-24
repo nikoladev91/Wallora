@@ -346,13 +346,17 @@ fun WallpaperScreen(
                                 showCollectionScreen = true
                             },
                             onNewCollectionClick = {
-                                CollectionRepository.collections
-                                    .firstOrNull { it.id == "mystic_cats_vol_1" }
-                                    ?.let { collection ->
-                                        selectedCollection = collection
-                                        AnalyticsManager.logCollectionOpen(collection.title)
-                                        showCollectionScreen = true
-                                    }
+                                searchText = ""
+                                selectedCategory = "All"
+
+                                coroutineScope.launch {
+                                    delay(100)
+
+                                    homeListState.animateScrollToItem(
+                                        index = 5,
+                                        scrollOffset = -40
+                                    )
+                                }
 
                             },
                             listState = homeListState
@@ -432,6 +436,7 @@ fun WallpaperScreen(
     }
 }
 @Composable
+
 fun HomeScreen(
     wallpapers: List<Wallpaper>,
     allWallpapersCount: Int,
@@ -469,7 +474,6 @@ fun HomeScreen(
         listState = listState
     )
 }
-
 @Composable
 fun LegalDocumentScreen(
     url: String,
@@ -669,6 +673,7 @@ fun GalleryContent(
         "herbst" to "autumn",
         "otono" to "autumn"
     )
+
     val displayedWallpapers = wallpapers.filter { wallpaper ->
 
         val rawQuery = searchText.trim().lowercase()
@@ -676,9 +681,12 @@ fun GalleryContent(
         val normalizedQuery = java.text.Normalizer
             .normalize(rawQuery, java.text.Normalizer.Form.NFD)
             .replace("\\p{Mn}+".toRegex(), "")
+
         println("SEARCH raw=[$rawQuery] normalized=[$normalizedQuery]")
+
         val cleanQuery = when {
             normalizedQuery.startsWith("jesien") -> "autumn"
+
             normalizedQuery in listOf(
                 "kot", "koty", "kotek", "kotki", "kociak", "kociaki",
                 "katze", "katzen", "gato", "gatos"
@@ -733,6 +741,7 @@ fun GalleryContent(
             )
         }
     }
+
     LazyColumn(
         state = listState,
         modifier = Modifier
@@ -741,6 +750,7 @@ fun GalleryContent(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+
         item {
             HomeHeader(
                 title = title,
@@ -752,8 +762,8 @@ fun GalleryContent(
 
         item {
             NewWallpapersBanner(
-                title = stringResource(R.string.mystic_cats_is_here),
-                subtitle = stringResource(R.string.mystic_cats_banner_subtitle),
+                title = stringResource(R.string.new_collections_are_here),
+                subtitle = stringResource(R.string.new_collections_banner_subtitle),
                 onClick = onNewCollectionClick
             )
         }
@@ -789,6 +799,7 @@ fun GalleryContent(
         }
 
         if (searchText.isBlank()) {
+
             item {
                 Text(
                     text = "⭐ ${stringResource(R.string.collections)}",
@@ -841,7 +852,9 @@ fun GalleryContent(
                     modifier = Modifier.height(20.dp)
                 )
             }
+
         } else {
+
             item {
                 Text(
                     text = stringResource(R.string.search_results),
@@ -890,10 +903,12 @@ fun GalleryContent(
         items(
             items = displayedWallpapers.chunked(2)
         ) { rowWallpapers ->
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(18.dp)
             ) {
+
                 rowWallpapers.forEach { wallpaper ->
                     Box(
                         modifier = Modifier.weight(1f)
