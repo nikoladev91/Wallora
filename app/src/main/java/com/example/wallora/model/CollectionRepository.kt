@@ -137,6 +137,14 @@ object CollectionRepository {
 
     val collections = listOf(
         WallpaperCollection(
+            id = "funny_halloween_vol_1",
+            title = "Funny Halloween",
+            subtitle = "12 Funny, Cute and Spooky Halloween Wallpapers",
+            coverImage = FunnyHalloweenCollection.wallpapers.first().image,
+            wallpapers = FunnyHalloweenCollection.wallpapers,
+            isPremium = false
+        ),
+        WallpaperCollection(
             id = "rainbow_chaos_vol_1",
             title = "Rainbow Chaos",
             subtitle = "Wild, Colorful and Sweet Fantasy Wallpapers",

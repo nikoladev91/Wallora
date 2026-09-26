@@ -40,9 +40,9 @@
     <string name="mystic_cats_is_here">Mystic Cats już dostępna!</string>
     <string name="mystic_cats_banner_subtitle">12 nowych tapet • mistycznych, magicznych i pełnych kotów</string>
 
-    <!-- Banner nowych kolekcji -->
-    <string name="new_collections_are_here">Dwie nowe kolekcje już dostępne!</string>
-    <string name="new_collections_banner_subtitle">24 nowe tapety • Rainy Nights i Rainbow Chaos</string>
+    <!-- Halloween banner -->
+    <string name="new_collections_are_here">Funny Halloween już dostępne! 🎃</string>
+    <string name="new_collections_banner_subtitle">12 nowych, zabawnie strasznych tapet 👻</string>
 
     <string name="explore_collection">Przeglądaj kolekcję</string>
 
@@ -137,6 +137,10 @@
     <string name="collection_mystic_cats_title">Mystic Cats</string>
     <string name="collection_mystic_cats_subtitle">12 magicznych i tajemniczych tapet z kotami</string>
 
+    <!-- Funny Halloween -->
+    <string name="collection_funny_halloween_title">Funny Halloween</string>
+    <string name="collection_funny_halloween_subtitle">12 zabawnych, uroczych i strasznych tapet halloweenowych</string>
+
     <!-- Zaczarowany Las -->
     <string name="enchanted_forest_title">Zaczarowany Las</string>
     <string name="enchanted_forest_subtitle">12 magicznych tapet leśnych</string>
@@ -153,6 +157,7 @@
     <string name="collection_rainbow_chaos_title">Tęczowy Chaos</string>
     <string name="collection_rainbow_chaos_subtitle">12 szalonych, kolorowych i cukierkowych tapet</string>
 
+    <!-- Nawigacja -->
     <string name="back">Wróć</string>
 
     <!-- Kategorie -->

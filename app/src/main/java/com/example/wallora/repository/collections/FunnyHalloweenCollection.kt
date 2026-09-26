@@ -7,6 +7,7 @@ object FunnyHalloweenCollection {
 
     val wallpapers = listOf(
 
+
         Wallpaper(
             name = "Pumpkin Party",
             image = R.drawable.halloween_fun_01,

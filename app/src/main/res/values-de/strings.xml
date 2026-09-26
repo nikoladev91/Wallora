@@ -37,6 +37,10 @@
     <string name="mystic_cats_is_here">Mystic Cats ist da!</string>
     <string name="mystic_cats_banner_subtitle">12 neue mystische und magische Katzen-Hintergrundbilder</string>
 
+    <!-- Halloween banner -->
+    <string name="new_collections_are_here">Funny Halloween ist da! 🎃</string>
+    <string name="new_collections_banner_subtitle">12 neue süße, lustige &amp; gruselige Hintergrundbilder 👻</string>
+
     <string name="explore_collection">Sammlung entdecken</string>
 
     <!-- Wallpaper -->
@@ -128,9 +132,31 @@
     <string name="collection_cyberpunk_cities_subtitle">12 exklusive Cyberpunk-Hintergrundbilder</string>
     <string name="collection_food_monsters_subtitle">10 köstliche kleine Monster</string>
 
+    <!-- Mystic Cats -->
     <string name="collection_mystic_cats_title">Mystic Cats</string>
     <string name="collection_mystic_cats_subtitle">12 mystische und magische Katzen-Hintergrundbilder</string>
 
+    <!-- Funny Halloween -->
+    <string name="collection_funny_halloween_title">Funny Halloween</string>
+    <string name="collection_funny_halloween_subtitle">12 lustige, süße und gruselige Halloween-Hintergrundbilder</string>
+
+    <!-- Enchanted Forest -->
+    <string name="enchanted_forest_title">Verzauberter Wald</string>
+    <string name="enchanted_forest_subtitle">12 magische Wald-Hintergrundbilder</string>
+
+    <!-- Unicorn Overload -->
+    <string name="collection_unicorn_overload_title">Unicorn Overload</string>
+    <string name="collection_unicorn_overload_subtitle">12 verrückte, farbenfrohe und magische Einhorn-Hintergrundbilder</string>
+
+    <!-- Rainbow Chaos -->
+    <string name="collection_rainbow_chaos_title">Regenbogen-Chaos</string>
+    <string name="collection_rainbow_chaos_subtitle">12 verrückte, farbenfrohe und zuckersüße Hintergrundbilder</string>
+
+    <!-- Rainy Nights -->
+    <string name="collection_rainy_nights_title">Regnerische Nächte</string>
+    <string name="collection_rainy_nights_subtitle">12 stimmungsvolle Hintergrundbilder für regnerische Nächte</string>
+
+    <!-- Navigation -->
     <string name="back">Zurück</string>
 
     <!-- Categories -->
@@ -147,23 +173,4 @@
     <string name="cancel">Abbrechen</string>
     <string name="rate">Bewerten</string>
 
-    <!-- Enchanted Forest -->
-    <string name="enchanted_forest_title">Verzauberter Wald</string>
-    <string name="enchanted_forest_subtitle">12 magische Wald-Hintergrundbilder</string>
-
-    <!-- Unicorn Overload -->
-    <string name="collection_unicorn_overload_title">Unicorn Overload</string>
-    <string name="collection_unicorn_overload_subtitle">12 verrückte, farbenfrohe und magische Einhorn-Hintergrundbilder</string>
-    <!-- Rainy Nights -->
-    <!-- Rainbow Chaos -->
-    <string name="collection_rainbow_chaos_title">Regenbogen-Chaos</string>
-    <string name="collection_rainbow_chaos_subtitle">12 verrückte, farbenfrohe und zuckersüße Hintergrundbilder</string>
-
-    <!-- Rainy Nights -->
-    <string name="collection_rainy_nights_title">Regnerische Nächte</string>
-    <string name="collection_rainy_nights_subtitle">12 stimmungsvolle Hintergrundbilder für regnerische Nächte</string>
-
-    <!-- Banner -->
-    <string name="new_collections_are_here">Zwei neue Kollektionen sind da!</string>
-    <string name="new_collections_banner_subtitle">24 neue Hintergrundbilder • Rainy Nights und Rainbow Chaos</string>
 </resources>

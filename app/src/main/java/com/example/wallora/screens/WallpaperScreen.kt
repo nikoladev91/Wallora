@@ -346,17 +346,14 @@ fun WallpaperScreen(
                                 showCollectionScreen = true
                             },
                             onNewCollectionClick = {
-                                searchText = ""
-                                selectedCategory = "All"
+                                CollectionRepository.collections
+                                    .firstOrNull { it.id == "funny_halloween_vol_1" }
+                                    ?.let { collection ->
+                                        selectedCollection = collection
+                                        AnalyticsManager.logCollectionOpen(collection.title)
+                                        showCollectionScreen = true
+                                    }
 
-                                coroutineScope.launch {
-                                    delay(100)
-
-                                    homeListState.animateScrollToItem(
-                                        index = 5,
-                                        scrollOffset = -40
-                                    )
-                                }
 
                             },
                             listState = homeListState

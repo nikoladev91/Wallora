@@ -40,9 +40,9 @@
     <string name="mystic_cats_is_here">¡Mystic Cats ya está aquí!</string>
     <string name="mystic_cats_banner_subtitle">12 fondos nuevos • místicos, mágicos y llenos de gatos</string>
 
-    <!-- New collections banner -->
-    <string name="new_collections_are_here">¡Ya están aquí dos nuevas colecciones!</string>
-    <string name="new_collections_banner_subtitle">24 fondos nuevos • Rainy Nights y Rainbow Chaos</string>
+    <!-- Halloween banner -->
+    <string name="new_collections_are_here">¡Funny Halloween ya está aquí! 🎃</string>
+    <string name="new_collections_banner_subtitle">12 fondos nuevos, adorables, divertidos y espeluznantes 👻</string>
 
     <string name="explore_collection">Explorar colección</string>
 
@@ -137,6 +137,10 @@
     <string name="collection_mystic_cats_title">Mystic Cats</string>
     <string name="collection_mystic_cats_subtitle">12 fondos de gatos místicos y mágicos</string>
 
+    <!-- Funny Halloween -->
+    <string name="collection_funny_halloween_title">Funny Halloween</string>
+    <string name="collection_funny_halloween_subtitle">12 fondos de Halloween divertidos, adorables y espeluznantes</string>
+
     <!-- Enchanted Forest -->
     <string name="enchanted_forest_title">Bosque Encantado</string>
     <string name="enchanted_forest_subtitle">12 fondos de pantalla de bosques mágicos</string>
@@ -153,6 +157,7 @@
     <string name="collection_rainbow_chaos_title">Caos Arcoíris</string>
     <string name="collection_rainbow_chaos_subtitle">12 fondos locos, coloridos y llenos de dulces</string>
 
+    <!-- Navigation -->
     <string name="back">Volver</string>
 
     <!-- Categories -->
