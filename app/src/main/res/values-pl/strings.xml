@@ -40,9 +40,9 @@
     <string name="mystic_cats_is_here">Mystic Cats już dostępna!</string>
     <string name="mystic_cats_banner_subtitle">12 nowych tapet • mistycznych, magicznych i pełnych kotów</string>
 
-    <!-- Halloween banner -->
-    <string name="new_collections_are_here">Funny Halloween już dostępne! 🎃</string>
-    <string name="new_collections_banner_subtitle">12 nowych, zabawnie strasznych tapet 👻</string>
+    <!-- Nowy banner -->
+    <string name="new_collections_are_here">Ocean Dreams już dostępne! 🌊</string>
+    <string name="new_collections_banner_subtitle">12 nowych magicznych podwodnych tapet ✨</string>
 
     <string name="explore_collection">Przeglądaj kolekcję</string>
 
@@ -140,6 +140,10 @@
     <!-- Funny Halloween -->
     <string name="collection_funny_halloween_title">Funny Halloween</string>
     <string name="collection_funny_halloween_subtitle">12 zabawnych, uroczych i strasznych tapet halloweenowych</string>
+
+    <!-- Ocean Dreams -->
+    <string name="collection_ocean_dreams_title">Ocean Dreams</string>
+    <string name="collection_ocean_dreams_subtitle">12 magicznych podwodnych tapet</string>
 
     <!-- Zaczarowany Las -->
     <string name="enchanted_forest_title">Zaczarowany Las</string>

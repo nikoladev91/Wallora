@@ -14,6 +14,7 @@ import com.example.wallora.repository.collections.MysticCatsCollection
 import com.example.wallora.repository.collections.FunnyHalloweenCollection
 import com.example.wallora.repository.collections.RainyNightsCollection
 import com.example.wallora.repository.collections.RainbowChaosCollection
+import com.example.wallora.repository.collections.OceanDreamsCollection
 object CollectionRepository {
 
     private val neonAnimals = WallpaperRepository.wallpapers.filter {
@@ -136,6 +137,14 @@ object CollectionRepository {
     }
 
     val collections = listOf(
+        WallpaperCollection(
+            id = "ocean_dreams_vol_1",
+            title = "Ocean Dreams",
+            subtitle = "12 Magical Underwater Wallpapers",
+            coverImage = OceanDreamsCollection.wallpapers.first().image,
+            wallpapers = OceanDreamsCollection.wallpapers,
+            isPremium = false
+        ),
         WallpaperCollection(
             id = "funny_halloween_vol_1",
             title = "Funny Halloween",

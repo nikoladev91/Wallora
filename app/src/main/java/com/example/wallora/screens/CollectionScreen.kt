@@ -37,6 +37,9 @@ fun getLocalizedCollectionTitle(
 ): String {
     return when (collection.id) {
 
+        "ocean_dreams_vol_1" ->
+            stringResource(R.string.collection_ocean_dreams_title)
+
         "funny_halloween_vol_1" ->
             stringResource(R.string.collection_funny_halloween_title)
 
@@ -65,6 +68,9 @@ fun getLocalizedCollectionSubtitle(
     subtitle: String
 ): String {
     return when (subtitle) {
+
+        "12 Magical Underwater Wallpapers" ->
+            stringResource(R.string.collection_ocean_dreams_subtitle)
 
         "12 Funny, Cute and Spooky Halloween Wallpapers" ->
             stringResource(R.string.collection_funny_halloween_subtitle)

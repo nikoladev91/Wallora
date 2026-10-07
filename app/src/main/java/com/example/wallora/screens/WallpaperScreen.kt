@@ -347,7 +347,7 @@ fun WallpaperScreen(
                             },
                             onNewCollectionClick = {
                                 CollectionRepository.collections
-                                    .firstOrNull { it.id == "funny_halloween_vol_1" }
+                                    .firstOrNull { it.id == "ocean_dreams_vol_1" }
                                     ?.let { collection ->
                                         selectedCollection = collection
                                         AnalyticsManager.logCollectionOpen(collection.title)

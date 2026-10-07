@@ -40,9 +40,9 @@
     <string name="mystic_cats_is_here">Mystic Cats is here!</string>
     <string name="mystic_cats_banner_subtitle">12 new wallpapers • mystical, magical &amp; full of cats</string>
 
-    <!-- Halloween banner -->
-    <string name="new_collections_are_here">Funny Halloween is here! 🎃</string>
-    <string name="new_collections_banner_subtitle">12 new cute, funny &amp; spooky wallpapers 👻</string>
+    <!-- New Ocean Dreams banner -->
+    <string name="new_collections_are_here">Ocean Dreams is here! 🌊</string>
+    <string name="new_collections_banner_subtitle">12 new magical underwater wallpapers ✨</string>
 
     <string name="explore_collection">Explore collection</string>
 
@@ -140,6 +140,10 @@
     <!-- Funny Halloween -->
     <string name="collection_funny_halloween_title">Funny Halloween</string>
     <string name="collection_funny_halloween_subtitle">12 Funny, Cute and Spooky Halloween Wallpapers</string>
+
+    <!-- Ocean Dreams -->
+    <string name="collection_ocean_dreams_title">Ocean Dreams</string>
+    <string name="collection_ocean_dreams_subtitle">12 Magical Underwater Wallpapers</string>
 
     <!-- Enchanted Forest -->
     <string name="enchanted_forest_title">Enchanted Forest</string>

@@ -32,14 +32,15 @@
 
     <string name="tiny_chaos_is_here">Tiny Chaos ist da!</string>
     <string name="tiny_chaos_banner_subtitle">12 neue Hintergrundbilder • wild, lustig und chaotisch</string>
-
+    <string name="unicorn_overload_is_here">Unicorn Overload ist da!</string>
+    <string name="unicorn_overload_banner_subtitle">12 neue Hintergrundbilder • verrückt, farbenfroh und magisch</string>
     <!-- Mystic Cats banner -->
     <string name="mystic_cats_is_here">Mystic Cats ist da!</string>
     <string name="mystic_cats_banner_subtitle">12 neue mystische und magische Katzen-Hintergrundbilder</string>
 
-    <!-- Halloween banner -->
-    <string name="new_collections_are_here">Funny Halloween ist da! 🎃</string>
-    <string name="new_collections_banner_subtitle">12 neue süße, lustige &amp; gruselige Hintergrundbilder 👻</string>
+    <!-- Ocean Dreams banner -->
+    <string name="new_collections_are_here">Ocean Dreams ist da! 🌊</string>
+    <string name="new_collections_banner_subtitle">12 neue magische Unterwasser-Hintergrundbilder ✨</string>
 
     <string name="explore_collection">Sammlung entdecken</string>
 
@@ -59,7 +60,6 @@
 
     <!-- Settings -->
     <string name="settings_title">⚙ Einstellungen</string>
-
     <string name="background_color">Hintergrundfarbe</string>
     <string name="choose_wallora_style">Wähle deinen Wallora-Stil</string>
 
@@ -98,7 +98,6 @@
     <!-- About -->
     <string name="about_wallora">Über Wallora</string>
     <string name="app_information">App-Informationen</string>
-
     <string name="made_in_poland">Mit ❤ in Polen erstellt</string>
 
     <string name="premium_wallpapers">Premium-Hintergrundbilder</string>
@@ -139,6 +138,10 @@
     <!-- Funny Halloween -->
     <string name="collection_funny_halloween_title">Funny Halloween</string>
     <string name="collection_funny_halloween_subtitle">12 lustige, süße und gruselige Halloween-Hintergrundbilder</string>
+
+    <!-- Ocean Dreams -->
+    <string name="collection_ocean_dreams_title">Ocean Dreams</string>
+    <string name="collection_ocean_dreams_subtitle">12 magische Unterwasser-Hintergrundbilder</string>
 
     <!-- Enchanted Forest -->
     <string name="enchanted_forest_title">Verzauberter Wald</string>

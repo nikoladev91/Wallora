@@ -40,9 +40,9 @@
     <string name="mystic_cats_is_here">¡Mystic Cats ya está aquí!</string>
     <string name="mystic_cats_banner_subtitle">12 fondos nuevos • místicos, mágicos y llenos de gatos</string>
 
-    <!-- Halloween banner -->
-    <string name="new_collections_are_here">¡Funny Halloween ya está aquí! 🎃</string>
-    <string name="new_collections_banner_subtitle">12 fondos nuevos, adorables, divertidos y espeluznantes 👻</string>
+    <!-- Ocean Dreams banner -->
+    <string name="new_collections_are_here">¡Ocean Dreams ya está aquí! 🌊</string>
+    <string name="new_collections_banner_subtitle">12 nuevos fondos submarinos mágicos ✨</string>
 
     <string name="explore_collection">Explorar colección</string>
 
@@ -140,6 +140,10 @@
     <!-- Funny Halloween -->
     <string name="collection_funny_halloween_title">Funny Halloween</string>
     <string name="collection_funny_halloween_subtitle">12 fondos de Halloween divertidos, adorables y espeluznantes</string>
+
+    <!-- Ocean Dreams -->
+    <string name="collection_ocean_dreams_title">Ocean Dreams</string>
+    <string name="collection_ocean_dreams_subtitle">12 fondos de pantalla submarinos mágicos</string>
 
     <!-- Enchanted Forest -->
     <string name="enchanted_forest_title">Bosque Encantado</string>
